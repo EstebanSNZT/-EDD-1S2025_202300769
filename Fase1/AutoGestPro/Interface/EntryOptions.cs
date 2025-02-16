@@ -1,0 +1,77 @@
+using Gtk;
+
+namespace Interface
+{
+    public class EntryOptions : Window
+    {
+        public EntryOptions() : base("AutoGest Pro - Opciones de Ingreso Indivual")
+        {
+            SetSizeRequest(350, 315); //(ancho, alto)
+            SetPosition(WindowPosition.Center);
+
+            Fixed fixedContainer = new Fixed();
+
+            Label optionsLabel1 = new Label();
+            optionsLabel1.Markup = "<span font='Arial 18' weight='bold'>Selecciona que desea</span>";
+            optionsLabel1.Halign = Align.Center;
+            fixedContainer.Put(optionsLabel1, 50, 15);
+
+            Label optionsLabel2 = new Label();
+            optionsLabel2.Markup = "<span font='Arial 18' weight='bold'>ingresar:</span>";
+            optionsLabel2.Halign = Align.Center;
+            fixedContainer.Put(optionsLabel2, 125, 40);
+
+            Button usersButton = new Button("Usuarios");
+            usersButton.SetSizeRequest(280, 35);
+            usersButton.Clicked += OnUsersButtonClicked;
+            fixedContainer.Put(usersButton, 35, 93);
+
+            Button vehiclesButton = new Button("Vehiculos");
+            vehiclesButton.SetSizeRequest(280, 35);
+            vehiclesButton.Clicked += OnVehiclesButtonClicked;
+            fixedContainer.Put(vehiclesButton, 35, 148);
+
+            Button partsButton = new Button("Repuestos");
+            partsButton.SetSizeRequest(280, 35);
+            partsButton.Clicked += OnPartsButtonClicked;
+            fixedContainer.Put(partsButton, 35, 203);
+
+            Button returnButton = new Button("Volver");
+            returnButton.SetSizeRequest(50, 20);
+            returnButton.Clicked += OnReturnButtonClicked;
+            fixedContainer.Put(returnButton, 20, 260);
+
+            Add(fixedContainer);
+
+            DeleteEvent += (o, args) => Application.Quit();
+        }
+
+        private void OnReturnButtonClicked(object? sender, EventArgs e)
+        {
+            this.Destroy();
+            Menu menu = new Menu();
+            menu.ShowAll();
+        }
+
+        private void OnUsersButtonClicked(object? sender, EventArgs e)
+        {
+            this.Destroy();
+            UserEntry userEntry = new UserEntry();
+            userEntry.ShowAll();
+        }
+
+        private void OnVehiclesButtonClicked(object? sender, EventArgs e)
+        {
+            this.Destroy();
+            VehicleEntry vehicleEntry = new VehicleEntry();
+            vehicleEntry.ShowAll();
+        }
+
+        private void OnPartsButtonClicked(object? sender, EventArgs e)
+        {
+            this.Destroy();
+            PartEntry partEntry = new PartEntry();
+            partEntry.ShowAll();
+        }
+    }
+}
