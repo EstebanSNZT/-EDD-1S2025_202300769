@@ -1,10 +1,25 @@
 using Gtk;
+using Lists;
+using Locals;
+using Newtonsoft.Json;
 
 namespace Interface
 {
     public class BulkUpload : Window
     {
+        private ComboBoxText comboBox = new ComboBoxText();
+
         public BulkUpload() : base("AutoGest Pro - Carga Masiva")
+        {
+            InitializeComponents();
+        }
+
+        public BulkUpload(IntPtr raw) : base(raw)
+        {
+            InitializeComponents();
+        }
+
+        private void InitializeComponents()
         {
             SetSizeRequest(350, 245); //(ancho, alto)
             SetPosition(WindowPosition.Center);
@@ -15,7 +30,6 @@ namespace Interface
             bulkUploadLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Carga Masiva</span>";
             fixedContainer.Put(bulkUploadLabel, 80, 15);
 
-            ComboBoxText comboBox = new ComboBoxText();
             comboBox.AppendText("Usuarios");
             comboBox.AppendText("Vehículos");
             comboBox.AppendText("Repuestos");
@@ -40,27 +54,78 @@ namespace Interface
 
         private void OnUploadButtonClicked(object? sender, EventArgs e)
         {
+            FileChooserDialog fileChooser = new FileChooserDialog(
+            "Seleccione un archivo JSON",
+            this,
+            FileChooserAction.Open,
+            "Cancelar", ResponseType.Cancel,
+            "Abrir", ResponseType.Accept);
+
+            FileFilter filter = new FileFilter();
+            filter.Name = "Archivos JSON";
+            filter.AddPattern("*.json");
+            fileChooser.AddFilter(filter);
+
+            // Si el usuario selecciona un archivo
+            if (fileChooser.Run() == (int)ResponseType.Accept)
             {
-                FileChooserDialog fileChooser = new FileChooserDialog(
-                    "Seleccionar Archivo",
-                    this,
-                    FileChooserAction.Open,
-                    "Cancelar", ResponseType.Cancel,
-                    "Abrir", ResponseType.Accept
-                );
+                string filePath = fileChooser.Filename;
+                LoadJSON(filePath);
+            }
 
-                FileFilter filter = new FileFilter();
-                filter.AddPattern("*.json");
-                filter.Name = "Archivos JSON";
-                fileChooser.AddFilter(filter);
+            fileChooser.Destroy();
+        }
 
-                if (fileChooser.Run() == (int)ResponseType.Accept)
+        private void LoadJSON(string filePath)
+        {
+            string selectedText = comboBox.ActiveText;
+
+            try
+            {
+                string jsonContent = File.ReadAllText(filePath);
+
+                if (selectedText == "Usuarios")
                 {
-                    string filePath = fileChooser.Filename;
-                    Console.WriteLine("Archivo seleccionado: " + filePath);
-                }
+                    var localUsers = JsonConvert.DeserializeObject<LocalUser[]>(jsonContent);
+                    if (localUsers != null)
+                    {
+                        foreach (var localUser in localUsers)
+                        {
+                            GlobalLists.linkedList.Insert(localUser.ID, localUser.Nombres, localUser.Apellidos, localUser.Correo, localUser.Contrasenia);
+                        }
+                        GlobalLists.linkedList.Print();
+                    }
 
-                fileChooser.Destroy();
+                }
+                else if (selectedText == "Vehículos")
+                {
+                    var localVehicles = JsonConvert.DeserializeObject<LocalVehicles[]>(jsonContent);
+                    if (localVehicles != null)
+                    {
+                        foreach (var localVehicle in localVehicles)
+                        {
+                            GlobalLists.doubleList.Insert(localVehicle.ID, localVehicle.ID_Usuario, localVehicle.Marca, localVehicle.Modelo, localVehicle.Placa);
+                        }
+                        GlobalLists.doubleList.Print();
+                    }
+                }
+                else if (selectedText == "Repuestos")
+                {
+                    var localParts = JsonConvert.DeserializeObject<LocalPart[]>(jsonContent);
+                    if (localParts != null)
+                    {
+                        foreach (var localPart in localParts)
+                        {
+                            GlobalLists.circularList.Insert(localPart.ID, localPart.Repuesto, localPart.Detalles, localPart.Costo);
+                        }
+                        GlobalLists.circularList.Print();
+                    }
+                }
+                Menu.ShowDialog(this, MessageType.Info, "Archivo JSON cargado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                Menu.ShowDialog(this, MessageType.Error, $"Error al cargar el archivo JSON: {ex.Message}");
             }
         }
 

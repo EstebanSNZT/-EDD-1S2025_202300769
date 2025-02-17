@@ -12,6 +12,16 @@ namespace Interface
 
         public GenerateService() : base("AutoGest Pro - Generar Servicio")
         {
+            InitializeComponents();
+        }
+
+        public GenerateService(IntPtr raw) : base(raw)
+        {
+            InitializeComponents();
+        }
+
+        private void InitializeComponents()
+        {
             SetSizeRequest(400, 461); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
@@ -45,14 +55,14 @@ namespace Interface
             Label detailsLabel = new Label();
             detailsLabel.Markup = "<span font='Arial 12' weight='bold'>Detalles:</span>";
             fixedContainer.Put(detailsLabel, 67, 247);
-            
+
             detailsEntry.SetSizeRequest(140, 35);
             fixedContainer.Put(detailsEntry, 182, 241);
 
             Label costLabel = new Label();
             costLabel.Markup = "<span font='Arial 12' weight='bold'>Costo:</span>";
             fixedContainer.Put(costLabel, 75, 302);
-            
+
             costEntry.SetSizeRequest(140, 35);
             fixedContainer.Put(costEntry, 182, 296);
 

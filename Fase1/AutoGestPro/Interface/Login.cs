@@ -4,10 +4,20 @@ namespace Interface
 {
     public class Login : Window
     {
-        private Entry userEntry;
-        private Entry passwordEntry;
+        private Entry userEntry = new Entry();
+        private Entry passwordEntry = new Entry();
 
         public Login() : base("AutoGest Pro - Inicio de Sesión")
+        {
+            InitializeComponents();
+        }
+
+        public Login(IntPtr raw) : base(raw)
+        {
+            InitializeComponents();
+        }
+
+        private void InitializeComponents()
         {
             SetSizeRequest(450, 310); //(ancho, alto)
             SetPosition(WindowPosition.Center);
@@ -26,7 +36,6 @@ namespace Interface
             userLabel.Markup = "<span font='Arial 16'>Usuario:</span>";
             fixedContainer.Put(userLabel, 60, 125);
 
-            userEntry = new Entry();
             userEntry.SetSizeRequest(200, 20);
             fixedContainer.Put(userEntry, 190, 120);
 
@@ -34,7 +43,6 @@ namespace Interface
             passwordLabel.Markup = "<span font='Arial 16'>Contraseña:</span>";
             fixedContainer.Put(passwordLabel, 60, 185);
 
-            passwordEntry = new Entry();
             passwordEntry.SetSizeRequest(200, 20);
             passwordEntry.Visibility = false;
             fixedContainer.Put(passwordEntry, 190, 180);

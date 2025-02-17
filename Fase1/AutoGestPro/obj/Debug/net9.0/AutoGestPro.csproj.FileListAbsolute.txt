@@ -22,3 +22,4 @@ C:\Users\Esteban Sánchez\Documents\GitHub\EDD\-EDD-1S2025_202300769\Fase1\AutoG
 C:\Users\Esteban Sánchez\Documents\GitHub\EDD\-EDD-1S2025_202300769\Fase1\AutoGestPro\obj\Debug\net9.0\AutoGestPro.pdb
 C:\Users\Esteban Sánchez\Documents\GitHub\EDD\-EDD-1S2025_202300769\Fase1\AutoGestPro\obj\Debug\net9.0\AutoGestPro.genruntimeconfig.cache
 C:\Users\Esteban Sánchez\Documents\GitHub\EDD\-EDD-1S2025_202300769\Fase1\AutoGestPro\obj\Debug\net9.0\ref\AutoGestPro.dll
+C:\Users\Esteban Sánchez\Documents\GitHub\EDD\-EDD-1S2025_202300769\Fase1\AutoGestPro\bin\Debug\net9.0\Newtonsoft.Json.dll

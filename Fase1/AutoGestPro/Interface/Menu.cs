@@ -6,6 +6,16 @@ namespace Interface
     {
         public Menu() : base("AutoGest Pro - Menú")
         {
+            InitializeComponents();
+        }
+
+        public Menu(IntPtr raw) : base(raw)
+        {
+            InitializeComponents();
+        }
+
+        private void InitializeComponents()
+        {
             SetSizeRequest(350, 385); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
@@ -27,6 +37,7 @@ namespace Interface
 
             Button userManagementButton = new Button("Gestión de Usuarios");
             userManagementButton.SetSizeRequest(280, 35);
+            userManagementButton.Clicked += OnButtonUserManagementClicked;
             fixedContainer.Put(userManagementButton, 35, 175);
 
             Button generateServiceButton = new Button("Generar Servicio");
@@ -66,6 +77,20 @@ namespace Interface
             this.Destroy();
             GenerateService generateService = new GenerateService();
             generateService.ShowAll();
+        }
+
+        private void OnButtonUserManagementClicked(object? sender, EventArgs e)
+        {
+            this.Destroy();
+            UserManagement userManagement = new UserManagement();
+            userManagement.ShowAll();
+        }
+
+        public static void ShowDialog(Window window, MessageType messageType, string message)
+        {
+            MessageDialog dialog = new MessageDialog(window, DialogFlags.Modal, messageType, ButtonsType.Ok, message);
+            dialog.Run();
+            dialog.Destroy();
         }
     }
 }

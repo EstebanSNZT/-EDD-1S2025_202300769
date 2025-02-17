@@ -6,6 +6,16 @@ namespace Interface
     {
         public EntryOptions() : base("AutoGest Pro - Opciones de Ingreso Indivual")
         {
+            InitializeComponents();
+        }
+
+        public EntryOptions(IntPtr raw) : base(raw)
+        {
+            InitializeComponents();
+        }
+
+        private void InitializeComponents()
+        {
             SetSizeRequest(350, 315); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
