@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Lists 
+namespace Lists
 {
     public unsafe struct LinkedNode 
     {
@@ -30,11 +30,16 @@ namespace Lists
             if (Password != IntPtr.Zero) Marshal.FreeHGlobal(Password);
         }
 
+        public string ToGraph()
+        {
+            return $"[label = \"{{<data> ID: {Id} \\n Nombre: {GetNames() + GetLastNames()} \\n Correo: {GetEmail()} \\n Contraseña: {GetPassword()}}}\"];";
+        }
+
         public string? GetNames() => Marshal.PtrToStringUni(Names);
         public string? GetLastNames() => Marshal.PtrToStringUni(LastNames);
         public string? GetEmail() => Marshal.PtrToStringUni(Email);
         public string? GetPassword() => Marshal.PtrToStringUni(Password);
 
-        public override string ToString() => $"Id: {Id}, Names: {GetNames()}, Last Names: {GetLastNames()}, Email: {GetEmail()}, Password: {GetPassword()}";
+        public override string ToString() => $"Id: {Id}, Nombres: {GetNames()}, Apellidos: {GetLastNames()}, Correo: {GetEmail()}, Contraseña: {GetPassword()}";
     }
 }

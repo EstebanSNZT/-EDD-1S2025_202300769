@@ -3,19 +3,19 @@ using Lists;
 
 namespace Interface
 {
-    public class PartEntry : Window
+    public class SparePartEntry : Window
     {
         private Entry idEntry = new Entry();
-        private Entry partEntry = new Entry();
+        private Entry sparePartEntry = new Entry();
         private Entry detailsEntry = new Entry();
         private Entry costEntry = new Entry();
 
-        public PartEntry() : base("AutoGest Pro - Ingreso de Repuesto")
+        public SparePartEntry() : base("AutoGest Pro - Ingreso de Repuesto")
         {
             InitializeComponents();
         }
 
-        public PartEntry(IntPtr raw) : base(raw)
+        public SparePartEntry(IntPtr raw) : base(raw)
         {
             InitializeComponents();
         }
@@ -38,12 +38,12 @@ namespace Interface
             idEntry.SetSizeRequest(140, 35);
             fixedContainer.Put(idEntry, 182, 76);
 
-            Label partLabel = new Label();
-            partLabel.Markup = "<span font='Arial 12' weight='bold'>Repuesto:</span>";
-            fixedContainer.Put(partLabel, 51, 137);
+            Label sparePartLabel = new Label();
+            sparePartLabel.Markup = "<span font='Arial 12' weight='bold'>Repuesto:</span>";
+            fixedContainer.Put(sparePartLabel, 51, 137);
 
-            partEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(partEntry, 182, 131);
+            sparePartEntry.SetSizeRequest(140, 35);
+            fixedContainer.Put(sparePartEntry, 182, 131);
 
             Label detailsLabel = new Label();
             detailsLabel.Markup = "<span font='Arial 12' weight='bold'>Detalles:</span>";
@@ -83,7 +83,7 @@ namespace Interface
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(idEntry.Text) || string.IsNullOrEmpty(partEntry.Text) ||
+            if (string.IsNullOrEmpty(idEntry.Text) || string.IsNullOrEmpty(sparePartEntry.Text) ||
                 string.IsNullOrEmpty(detailsEntry.Text) || string.IsNullOrEmpty(costEntry.Text))
             {
                 Menu.ShowDialog(this, MessageType.Error, "Por favor, llene todos los campos.");
@@ -102,13 +102,13 @@ namespace Interface
                 return;
             }
 
-            GlobalLists.circularList.Insert(id, partEntry.Text, detailsEntry.Text, cost);
+            GlobalLists.circularList.Insert(id, sparePartEntry.Text, detailsEntry.Text, cost);
             GlobalLists.circularList.Print();
 
             Menu.ShowDialog(this, MessageType.Info, "Repuesto guardado con éxito.");
 
             idEntry.Text = "";
-            partEntry.Text = "";
+            sparePartEntry.Text = "";
             detailsEntry.Text = "";
             costEntry.Text = "";
         }

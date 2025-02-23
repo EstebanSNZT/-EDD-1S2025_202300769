@@ -6,15 +6,15 @@ namespace Lists
     public unsafe struct CircularNode 
     {
         public int Id;
-        public IntPtr Part;
+        public IntPtr SparePart;
         public IntPtr Details;
         public double Cost;
         public CircularNode* Next;
 
-        public CircularNode(int id, string part, string details, double cost)
+        public CircularNode(int id, string sparePart, string details, double cost)
         {
             Id = id;
-            Part = Marshal.StringToHGlobalUni(part);
+            SparePart = Marshal.StringToHGlobalUni(sparePart);
             Details = Marshal.StringToHGlobalUni(details);
             Cost = cost;
             Next = null;
@@ -22,13 +22,18 @@ namespace Lists
 
         public void FreeData()
         {
-            if (Part != IntPtr.Zero) Marshal.FreeHGlobal(Part);
+            if (SparePart != IntPtr.Zero) Marshal.FreeHGlobal(SparePart);
             if (Details!= IntPtr.Zero) Marshal.FreeHGlobal(Details);
         }
 
-        public string? GetPart() => Marshal.PtrToStringUni(Part);
+        public string ToGraph()
+        {
+            return $"[label = \"{{<data> ID: {Id} \\n Repuesto: {GetSparePart()} \\n Detalles: {GetDetails()} \\n Costos: {Cost}}}\"];";
+        }
+
+        public string? GetSparePart() => Marshal.PtrToStringUni(SparePart);
         public string? GetDetails() => Marshal.PtrToStringUni(Details);
 
-        public override string ToString() => $"Id: {Id}, Repuesto: {GetPart()}, Detalles: {GetDetails()}, Costo: {Cost}";
+        public override string ToString() => $"Id: {Id}, Repuesto: {GetSparePart()}, Detalles: {GetDetails()}, Costo: {Cost}";
     }
 }

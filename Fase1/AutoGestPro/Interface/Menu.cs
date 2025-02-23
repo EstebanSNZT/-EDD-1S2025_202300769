@@ -16,7 +16,7 @@ namespace Interface
 
         private void InitializeComponents()
         {
-            SetSizeRequest(350, 385); //(ancho, alto)
+            SetSizeRequest(350, 400); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
             Fixed fixedContainer = new Fixed();
@@ -43,15 +43,16 @@ namespace Interface
             Button generateServiceButton = new Button("Generar Servicio");
             generateServiceButton.SetSizeRequest(280, 35);
             generateServiceButton.Clicked += OnButtonGenerateServiceClicked;
-            fixedContainer.Put(generateServiceButton, 35, 225);
+            fixedContainer.Put(generateServiceButton, 35, 230);
 
             Button cancelInvoiceButton = new Button("Cancelar factura");
             cancelInvoiceButton.SetSizeRequest(280, 35);
-            fixedContainer.Put(cancelInvoiceButton, 35, 275);
+            fixedContainer.Put(cancelInvoiceButton, 35, 285);
 
             Button reportsButton = new Button("Reportes");
-            reportsButton.SetSizeRequest(280, 30);
-            fixedContainer.Put(reportsButton, 35, 330);
+            reportsButton.SetSizeRequest(280, 35);
+            reportsButton.Clicked += OnButtonReportsClicked;
+            fixedContainer.Put(reportsButton, 35, 340);
 
             Add(fixedContainer);
 
@@ -84,6 +85,13 @@ namespace Interface
             this.Destroy();
             UserManagement userManagement = new UserManagement();
             userManagement.ShowAll();
+        }
+
+        private void OnButtonReportsClicked(object? sender, EventArgs e)
+        {
+            this.Destroy();
+            ReportsMenu reportsMenu = new ReportsMenu();
+            reportsMenu.ShowAll();
         }
 
         public static void ShowDialog(Window window, MessageType messageType, string message)

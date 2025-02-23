@@ -12,10 +12,10 @@ namespace Lists
             head = null;
         }
 
-        public void Insert(int id, string part, string details, double cost)
+        public void Insert(int id, string sparePart, string details, double cost)
         {
             CircularNode* newNode = (CircularNode*)NativeMemory.Alloc((nuint)sizeof(CircularNode));
-            *newNode = new CircularNode(id, part, details, cost);
+            *newNode = new CircularNode(id, sparePart, details, cost);
 
             if (head == null)
             {
@@ -83,6 +83,47 @@ namespace Lists
                 Console.WriteLine(current->ToString());
                 current = current->Next;
             } while (current != head);
+        }
+
+        public string GenerateGraph()
+        {
+            var graph = "digraph G {\n";
+            graph += "    node [shape=record];\n";
+            graph += "    rankdir=LR;\n";
+            graph += "    subgraph cluster_0 {\n";
+            graph += "        label = \"Lista Circular\";\n";
+
+            CircularNode* current = head;
+            int index = 0;
+
+            do
+            {
+                graph += $"        n{index} {current->ToGraph()}\n";
+                current = current->Next;
+                index++;
+            } while (current != head);
+
+            for (int i = 0; i < index; i++)
+            {
+                graph += $"        n{i} -> n{(i + 1) % index};\n";
+            }
+
+            graph += "    }\n";
+            graph += "}\n";
+            return graph;
+
+        }
+
+        public bool IsEmpty()
+        {
+            if (head == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         ~CircularList()

@@ -1,9 +1,11 @@
 using Gtk;
+using Lists;
 
 namespace Interface
 {
-    public class UserManagement : Window
+    public unsafe class UserManagement : Window
     {
+        private bool found = false;
         private Entry idEntry = new Entry();
         private Entry newNamesEntry = new Entry();
         private Entry newLastNamesEntry = new Entry();
@@ -42,6 +44,7 @@ namespace Interface
 
             Button searchButton = new Button("Buscar");
             searchButton.SetSizeRequest(120, 30);
+            searchButton.Clicked += OnSearchButtonClicked;
             fixedContainer.Put(searchButton, 403, 78);
 
             Label currentDataLabel = new Label();
@@ -87,6 +90,7 @@ namespace Interface
 
             Button deleteButton = new Button("Eliminar");
             deleteButton.SetSizeRequest(120, 30);
+            deleteButton.Clicked += OnDeleteButtonClicked;
             fixedContainer.Put(deleteButton, 51, 331);
 
             Button updateButton = new Button("Actualizar");
@@ -102,16 +106,6 @@ namespace Interface
             returnButton.Clicked += OnReturnButtonClicked;
             fixedContainer.Put(returnButton, 20, 385);
 
-            Label coordsLabel = new Label("Coordenadas: X = 0, Y = 0");
-            fixedContainer.Put(coordsLabel, 0, 0);
-
-            MotionNotifyEvent += (o, args) =>
-            {
-                int x = (int)args.Event.X;
-                int y = (int)args.Event.Y;
-                coordsLabel.Text = $"Coordenadas: X = {x}, Y = {y}";
-            };
-
             Add(fixedContainer);
 
             DeleteEvent += (o, args) => Application.Quit();
@@ -122,6 +116,62 @@ namespace Interface
             this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+        }
+
+        private void OnSearchButtonClicked(object? sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(idEntry.Text))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "Debe ingresar un ID de usuario.");
+                return;
+            }
+
+            if (!int.TryParse(idEntry.Text, out int id))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "ID inválido.");
+                return;
+            }
+
+            if (GlobalLists.linkedList.IsEmpty())
+            {
+                Menu.ShowDialog(this, MessageType.Warning, "La lista se encuentra actualmente vacía. Ingrese usuarios antes de continuar.");
+                return;
+            }
+
+            LinkedNode* userSearched = GlobalLists.linkedList.GetUser(id);
+
+            if (userSearched == null)
+            {
+                Menu.ShowDialog(this, MessageType.Warning, "No se encontró un usuario con ese ID.");
+                return;
+            }
+            else
+            {
+                Menu.ShowDialog(this, MessageType.Info, "Usuario Encontrado.");
+                found = true;
+                currentNamesEntry.Text = userSearched->GetNames();
+                currentLastNamesEntry.Text = userSearched->GetLastNames();
+                currentEmailEntry.Text = userSearched->GetEmail();                
+            }
+        }
+
+        private void OnDeleteButtonClicked(object? sender, EventArgs e)
+        {
+            if (!found)
+            {
+                Menu.ShowDialog(this, MessageType.Warning, "Busque un usuario que eliminar.");
+                return;
+            }
+
+            int id = int.Parse(idEntry.Text);
+            GlobalLists.linkedList.Delete(id);
+            Menu.ShowDialog(this, MessageType.Info, "Usuario Eliminado Correctamente.");
+
+            found = false;
+            idEntry.Text = "";
+            currentNamesEntry.Text = "";
+            currentLastNamesEntry.Text = "";
+            currentEmailEntry.Text = "";
         }
     }
 }

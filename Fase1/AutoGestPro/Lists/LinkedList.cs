@@ -71,6 +71,60 @@ namespace Lists
             }
         }
 
+        public LinkedNode* GetUser(int id)
+        {
+            LinkedNode* current = head;
+            while (current != null)
+            {
+                if (current->Id == id)
+                {
+                    return current;
+                }
+                current = current->Next;
+            }
+            return null;
+        }
+
+        public bool IsEmpty()
+        {
+            if (head == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string GenerateGraph()
+        {
+            var graph = "digraph G {\n";
+            graph += "    node [shape=record];\n";
+            graph += "    rankdir=LR;\n";
+            graph += "    subgraph cluster_0 {\n";
+            graph += "        label = \"Lista Simple Enlazada\";\n";
+            
+            LinkedNode* current = head;
+            int index = 0;
+
+            while (current != null)
+            {
+                graph += $"        n{index} {current->ToGraph()}\n";
+                current = current->Next;
+                index++;
+            }
+
+            for (int i = 0; i < index; i++)
+            {
+                graph += $"        n{i} -> n{i + 1};\n";
+            }
+
+            graph += "    }\n";
+            graph += "}\n";
+            return graph;
+        }
+
         ~LinkedList()
         {
             while (head != null)

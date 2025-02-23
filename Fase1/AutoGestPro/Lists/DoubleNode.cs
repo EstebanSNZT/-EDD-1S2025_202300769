@@ -30,6 +30,11 @@ namespace Lists
             if (Plate != IntPtr.Zero) Marshal.FreeHGlobal(Plate);
         }
 
+        public string ToGraph()
+        {
+            return $"[label = \"{{<data> ID: {Id} \\n ID_Usuario: {UserId} \\n Marca: {GetBrand()} \\n Model: {Model} \\n Placa: {GetPlate()}}}\"];";
+        }
+
         public string? GetBrand() => Marshal.PtrToStringUni(Brand);
         public string? GetPlate() => Marshal.PtrToStringUni(Plate);
 

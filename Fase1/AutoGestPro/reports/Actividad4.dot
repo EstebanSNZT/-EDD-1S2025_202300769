@@ -1,0 +1,13 @@
+digraph G {
+    node [shape=record];
+    rankdir=LR;
+    subgraph cluster_0 {
+        label = "Esteban Sánchez";
+        n0 [label = "{<data> ID: 1 \n Repuesto: Freno \n Detalles: Freno delantero \n Costos: 50.75}"];
+        n1 [label = "{<data> ID: 2 \n Repuesto: Aceite \n Detalles: Aceite de motor \n Costos: 30.5}"];
+        n2 [label = "{<data> ID: 3 \n Repuesto: Bujías \n Detalles: Bujías para motor \n Costos: 12.99}"];
+        n0 -> n1;
+        n1 -> n2;
+        n2 -> n0;
+    }
+}

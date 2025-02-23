@@ -31,6 +31,41 @@ namespace Lists
             }
         }
 
+        public string GenerateGraph()
+        {
+            var graph = "digraph G {\n";
+            graph += "    node [shape=record];\n";
+            graph += "    rankdir=LR;\n";
+            graph += "    subgraph cluster_0 {\n";
+            graph += "        label = \"Lista Doblemente Enlazada\";\n";
+
+            DoubleNode* current = head;
+            int index = 0;
+
+            while (current != null)
+            {
+                graph += $"        n{index} {current->ToGraph()}\n";
+                current = current->Next;
+                index++;
+            }
+
+            for (int i = 0; i < index; i++)
+            {
+                if (i < index - 1)
+                {
+                    graph += $"        n{i} -> n{i + 1};\n";
+                }
+                if (i > 0)
+                {
+                    graph += $"        n{i} -> n{i - 1};\n";
+                }
+            }
+
+            graph += "    }\n";
+            graph += "}\n";
+            return graph;
+        }
+
         public void Delete(int id)
         {
             if (head == null) return;
@@ -60,12 +95,12 @@ namespace Lists
         public void Print()
         {
             DoubleNode* current = head;
-            while (current!= null)
+            while (current != null)
             {
                 Console.WriteLine(current->ToString());
                 current = current->Next;
             }
-            
+
         }
 
         ~DoubleList()

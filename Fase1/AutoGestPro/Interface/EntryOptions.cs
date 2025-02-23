@@ -41,10 +41,10 @@ namespace Interface
             vehiclesButton.Clicked += OnVehiclesButtonClicked;
             fixedContainer.Put(vehiclesButton, 35, 148);
 
-            Button partsButton = new Button("Repuestos");
-            partsButton.SetSizeRequest(280, 35);
-            partsButton.Clicked += OnPartsButtonClicked;
-            fixedContainer.Put(partsButton, 35, 203);
+            Button sparePartsButton = new Button("Repuestos");
+            sparePartsButton.SetSizeRequest(280, 35);
+            sparePartsButton.Clicked += OnPartsButtonClicked;
+            fixedContainer.Put(sparePartsButton, 35, 203);
 
             Button returnButton = new Button("Volver");
             returnButton.SetSizeRequest(50, 20);
@@ -80,8 +80,8 @@ namespace Interface
         private void OnPartsButtonClicked(object? sender, EventArgs e)
         {
             this.Destroy();
-            PartEntry partEntry = new PartEntry();
-            partEntry.ShowAll();
+            SparePartEntry sparePartEntry = new SparePartEntry();
+            sparePartEntry.ShowAll();
         }
     }
 }

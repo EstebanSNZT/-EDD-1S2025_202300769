@@ -68,6 +68,7 @@ namespace Interface
 
             Button saveButton = new Button("Guardar");
             saveButton.SetSizeRequest(120, 30);
+            saveButton.Clicked += OnSaveButtonClicked;
             fixedContainer.Put(saveButton, 140, 351);
 
             Button returnButton = new Button("Volver");
@@ -95,6 +96,11 @@ namespace Interface
             this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+        }
+
+        private void OnSaveButtonClicked(object? sender, EventArgs e)
+        {
+            
         }
     }
 }

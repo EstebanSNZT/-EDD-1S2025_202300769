@@ -111,7 +111,7 @@ namespace Interface
                 }
                 else if (selectedText == "Repuestos")
                 {
-                    var localParts = JsonConvert.DeserializeObject<LocalPart[]>(jsonContent);
+                    var localParts = JsonConvert.DeserializeObject<LocalSparePart[]>(jsonContent);
                     if (localParts != null)
                     {
                         foreach (var localPart in localParts)
