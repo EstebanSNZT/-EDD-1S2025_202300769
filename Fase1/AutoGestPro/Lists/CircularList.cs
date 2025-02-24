@@ -34,6 +34,23 @@ namespace Lists
             }
         }
 
+        public CircularNode* GetSparePart(int id)
+        {
+            if (head == null) return null;
+
+            CircularNode* current = head;
+            do
+            {
+                if (current->Id == id)
+                {
+                    return current;
+                }
+                current = current->Next;
+            } while (current!= head);
+            
+            return null;
+        }
+
         public void Delete(int id)
         {
             if (head == null) return;
@@ -77,6 +94,7 @@ namespace Lists
 
         public void Print()
         {
+            Console.WriteLine("-------------------------------------------------------------------------------");
             CircularNode* current = head;
             do
             {

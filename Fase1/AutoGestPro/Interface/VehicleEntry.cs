@@ -107,7 +107,7 @@ namespace Interface
 
             if (!int.TryParse(idUserEntry.Text, out int idUser))
             {
-                Menu.ShowDialog(this, MessageType.Error, "ID Usuario inválido.");
+                Menu.ShowDialog(this, MessageType.Error, "ID de usuario inválido.");
                 return;
             }
 

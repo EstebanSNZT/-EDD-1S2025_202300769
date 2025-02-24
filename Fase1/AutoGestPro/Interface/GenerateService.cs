@@ -1,12 +1,13 @@
 using Gtk;
+using Lists;
 
 namespace Interface
 {
-    public class GenerateService : Window
+    public unsafe class GenerateService : Window
     {
         private Entry idEntry = new Entry();
-        private Entry idPartEntry = new Entry();
-        private Entry idVehicleEntry = new Entry();
+        private Entry sparePartIdEntry = new Entry();
+        private Entry vehicleIdEntry = new Entry();
         private Entry detailsEntry = new Entry();
         private Entry costEntry = new Entry();
 
@@ -27,9 +28,9 @@ namespace Interface
 
             Fixed fixedContainer = new Fixed();
 
-            Label menuLabel = new Label();
-            menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Generar Servicio</span>";
-            fixedContainer.Put(menuLabel, 85, 15);
+            Label generateServiceLabel = new Label();
+            generateServiceLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Generar Servicio</span>";
+            fixedContainer.Put(generateServiceLabel, 85, 15);
 
             Label idLabel = new Label();
             idLabel.Markup = "<span font='Arial 12' weight='bold'>ID:</span>";
@@ -38,19 +39,19 @@ namespace Interface
             idEntry.SetSizeRequest(140, 35);
             fixedContainer.Put(idEntry, 182, 76);
 
-            Label idPartLabel = new Label();
-            idPartLabel.Markup = "<span font='Arial 12' weight='bold'>ID Repuesto:</span>";
-            fixedContainer.Put(idPartLabel, 51, 137);
+            Label sparePartIdLabel = new Label();
+            sparePartIdLabel.Markup = "<span font='Arial 12' weight='bold'>ID Repuesto:</span>";
+            fixedContainer.Put(sparePartIdLabel, 51, 137);
 
-            idPartEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(idPartEntry, 182, 131);
+            sparePartIdEntry.SetSizeRequest(140, 35);
+            fixedContainer.Put(sparePartIdEntry, 182, 131);
 
-            Label idVehicleLabel = new Label();
-            idVehicleLabel.Markup = "<span font='Arial 12' weight='bold'>ID Vehiculo:</span>";
-            fixedContainer.Put(idVehicleLabel, 55, 192);
+            Label vehicleIdLabel = new Label();
+            vehicleIdLabel.Markup = "<span font='Arial 12' weight='bold'>ID Vehiculo:</span>";
+            fixedContainer.Put(vehicleIdLabel, 55, 192);
 
-            idVehicleEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(idVehicleEntry, 182, 186);
+            vehicleIdEntry.SetSizeRequest(140, 35);
+            fixedContainer.Put(vehicleIdEntry, 182, 186);
 
             Label detailsLabel = new Label();
             detailsLabel.Markup = "<span font='Arial 12' weight='bold'>Detalles:</span>";
@@ -93,6 +94,10 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
+            if(!GlobalLists.stack.IsEmpty())
+            {
+                Menu.ShowDialog(this, MessageType.Info, "Tienes facturas por cancelar.");
+            }
             this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
@@ -100,7 +105,65 @@ namespace Interface
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
         {
-            
+            if (string.IsNullOrEmpty(idEntry.Text) || string.IsNullOrEmpty(sparePartIdEntry.Text) ||
+                string.IsNullOrEmpty(vehicleIdEntry.Text) || string.IsNullOrEmpty(detailsEntry.Text) ||
+                string.IsNullOrEmpty(costEntry.Text))
+            {
+                Menu.ShowDialog(this, MessageType.Warning, "Por favor, llene todos los campos.");
+                return;
+            }
+
+            if (!int.TryParse(idEntry.Text, out int id))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "ID inválido.");
+                return;
+            }
+
+            if (!int.TryParse(sparePartIdEntry.Text, out int sparePartId))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "ID de repuesto inválido.");
+                return;
+            }
+
+            if (!int.TryParse(vehicleIdEntry.Text, out int vehicleId))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "ID de vehiculo inválido.");
+                return;
+            }
+
+            if (!double.TryParse(costEntry.Text, out double cost))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "Costo inválido");
+                return;
+            }
+
+            if (!GlobalLists.doubleList.Contains(vehicleId))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "ID de vehiculo inexiste.");
+                return;
+            }
+
+            CircularNode* sparePart = GlobalLists.circularList.GetSparePart(sparePartId);
+
+            if (sparePart == null)
+            {
+                Menu.ShowDialog(this, MessageType.Error, "ID de repuesto inexiste.");
+                return;
+            }
+
+            GlobalLists.queue.Enqueue(id, sparePartId, vehicleId, detailsEntry.Text, cost);
+            GlobalLists.queue.Print();
+
+            GlobalLists.stack.Push(id, cost + sparePart->Cost);
+            GlobalLists.stack.Print();
+
+            Menu.ShowDialog(this, MessageType.Info, "Servicio guardado con éxito.");
+
+            idEntry.Text = "";
+            sparePartIdEntry.Text = "";
+            vehicleIdEntry.Text = "";
+            detailsEntry.Text = "";
+            costEntry.Text = "";
         }
     }
 }

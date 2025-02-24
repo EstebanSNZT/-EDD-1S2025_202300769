@@ -1,4 +1,5 @@
 using Gtk;
+using Lists;
 
 namespace Interface
 {
@@ -47,6 +48,7 @@ namespace Interface
 
             Button cancelInvoiceButton = new Button("Cancelar factura");
             cancelInvoiceButton.SetSizeRequest(280, 35);
+            cancelInvoiceButton.Clicked += OnButtonCancelInvoiceClicked;
             fixedContainer.Put(cancelInvoiceButton, 35, 285);
 
             Button reportsButton = new Button("Reportes");
@@ -92,6 +94,21 @@ namespace Interface
             this.Destroy();
             ReportsMenu reportsMenu = new ReportsMenu();
             reportsMenu.ShowAll();
+        }
+
+        private void OnButtonCancelInvoiceClicked(object? sender, EventArgs e)
+        {
+            if (GlobalLists.stack.IsEmpty())
+            {
+                ShowDialog(this, MessageType.Warning, "No hay facturas para cancelar.");
+                return;
+            }
+            else
+            {
+                this.Destroy();
+                CancelInvoice cancelInvoice = new CancelInvoice();
+                cancelInvoice.ShowAll();
+            }
         }
 
         public static void ShowDialog(Window window, MessageType messageType, string message)

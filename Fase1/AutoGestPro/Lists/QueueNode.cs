@@ -29,6 +29,6 @@ namespace Lists
 
         public string? GetDetails() => Marshal.PtrToStringUni(Details);
     
-        public override string ToString() => $"Id: {Id}, Id Repuesto: {SparePartId}, Id Vehiculo: {VehicleId}, Details: {GetDetails()}, Costo: {Cost}";
+        public override string ToString() => $"Id: {Id}, Id Repuesto: {SparePartId}, Id Vehiculo: {VehicleId}, Detalles: {GetDetails()}, Costo: {Cost}";
     }
 }

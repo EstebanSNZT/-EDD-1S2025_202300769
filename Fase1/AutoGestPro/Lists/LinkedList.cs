@@ -63,6 +63,7 @@ namespace Lists
 
         public void Print()
         {
+            Console.WriteLine("-------------------------------------------------------------------------------");
             LinkedNode* current = head;
             while (current != null)
             {
@@ -83,6 +84,16 @@ namespace Lists
                 current = current->Next;
             }
             return null;
+        }
+
+        public LinkedNode* UpdateUser(int id, string newNames, string newLastNames, string newEmail)
+        {
+            LinkedNode* user = GetUser(id);
+            if (user!= null)
+            {
+                user->UpdateNode(newNames, newLastNames, newEmail);
+            }
+            return user;
         }
 
         public bool IsEmpty()

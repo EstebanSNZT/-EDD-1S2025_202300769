@@ -1,4 +1,5 @@
 using System;
+using Gtk;
 using System.Runtime.InteropServices;
 
 namespace Lists
@@ -29,6 +30,57 @@ namespace Lists
                 newNode->Prev = tail;
                 tail = newNode;
             }
+        }
+
+        public DoubleNode* GetVehicle(int id)
+        {
+            DoubleNode* current = head;
+            while (current != null)
+            {
+                if (current->Id == id)
+                {
+                    return current;
+                }
+                current = current->Next;
+            }
+            return null;
+        }
+
+        public bool Contains(int id)
+        {
+            return GetVehicle(id) != null;
+        }
+
+        public TreeView GenerateTreeView(int userId)
+        {
+            TreeView treeView = new TreeView();
+            ListStore listStore = new ListStore(typeof(string), typeof(string), typeof(string), typeof(string));
+
+            CellRendererText cellRenderer = new CellRendererText();
+            cellRenderer.FontDesc = Pango.FontDescription.FromString("Arial 12");
+
+            treeView.AppendColumn("ID", cellRenderer, "text", 0);
+            treeView.AppendColumn("Marca", cellRenderer, "text", 1);
+            treeView.AppendColumn("Modelo", cellRenderer, "text", 2);
+            treeView.AppendColumn("Placa", cellRenderer, "text", 3);
+
+            DoubleNode* current = head;
+
+            while (current != null)
+            {
+                if (current->UserId == userId)
+                {
+                    listStore.AppendValues(
+                        current->Id.ToString(),
+                        current->GetBrand(),
+                        current->Model.ToString(),
+                        current->GetPlate()
+                    );
+                }
+                current = current->Next;
+            }
+            treeView.Model = listStore;
+            return treeView;
         }
 
         public string GenerateGraph()
@@ -66,14 +118,14 @@ namespace Lists
             return graph;
         }
 
-        public void Delete(int id)
+        public void Delete(int userId)
         {
             if (head == null) return;
 
             DoubleNode* current = head;
             while (current != null)
             {
-                if (current->Id == id)
+                if (current->UserId == userId)
                 {
                     if (current->Prev != null)
                         current->Prev->Next = current->Next;
@@ -86,7 +138,6 @@ namespace Lists
                         tail = current->Prev;
                     current->FreeData();
                     NativeMemory.Free(current);
-                    return;
                 }
                 current = current->Next;
             }
@@ -94,6 +145,7 @@ namespace Lists
 
         public void Print()
         {
+            Console.WriteLine("-------------------------------------------------------------------------------");
             DoubleNode* current = head;
             while (current != null)
             {

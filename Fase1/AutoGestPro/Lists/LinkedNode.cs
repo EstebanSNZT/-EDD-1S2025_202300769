@@ -35,6 +35,49 @@ namespace Lists
             return $"[label = \"{{<data> ID: {Id} \\n Nombre: {GetNames() + GetLastNames()} \\n Correo: {GetEmail()} \\n Contraseña: {GetPassword()}}}\"];";
         }
 
+        public void UpdateNode(string newNames, string newLastNames, string newEmail)
+        {
+            SetNames(newNames);
+            SetLastNames(newLastNames);
+            SetEmail(newEmail);
+        }
+
+        public void SetNames(string newNames)
+        {
+            if (!string.IsNullOrEmpty(newNames) && newNames != GetNames())
+            {
+                if (Names != IntPtr.Zero) Marshal.FreeHGlobal(Names);
+                Names = Marshal.StringToHGlobalUni(newNames);
+            }
+        }
+
+        public void SetLastNames(string newLastNames)
+        {
+            if (!string.IsNullOrEmpty(newLastNames) && newLastNames!= GetLastNames())
+            {
+                if (LastNames!= IntPtr.Zero) Marshal.FreeHGlobal(LastNames);
+                LastNames = Marshal.StringToHGlobalUni(newLastNames);
+            }
+        }
+
+        public void SetEmail(string newEmail)
+        {
+            if (!string.IsNullOrEmpty(newEmail) && newEmail!= GetEmail())
+            {
+                if (Email!= IntPtr.Zero) Marshal.FreeHGlobal(Email);
+                Email = Marshal.StringToHGlobalUni(newEmail);
+            }
+        }
+
+        public void SetPassword(string newPassword)
+        {
+            if (!string.IsNullOrEmpty(newPassword) && newPassword!= GetPassword())
+            {
+                if (Password!= IntPtr.Zero) Marshal.FreeHGlobal(Password);
+                Password = Marshal.StringToHGlobalUni(newPassword);
+            }
+        }
+
         public string? GetNames() => Marshal.PtrToStringUni(Names);
         public string? GetLastNames() => Marshal.PtrToStringUni(LastNames);
         public string? GetEmail() => Marshal.PtrToStringUni(Email);
