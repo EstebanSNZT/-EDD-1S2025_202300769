@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "CT//qUW2xf0=",
+  "dgSpecHash": "O6Wwx9ffTHc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase1\\AutoGestPro\\AutoGestPro.csproj",
+  "projectFilePath": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase1/AutoGestPro/AutoGestPro.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\atksharp\\3.24.24.95\\atksharp.3.24.24.95.nupkg.sha512",
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\cairosharp\\3.24.24.95\\cairosharp.3.24.24.95.nupkg.sha512",
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\gdksharp\\3.24.24.95\\gdksharp.3.24.24.95.nupkg.sha512",
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\giosharp\\3.24.24.95\\giosharp.3.24.24.95.nupkg.sha512",
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\glibsharp\\3.24.24.95\\glibsharp.3.24.24.95.nupkg.sha512",
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\gtksharp\\3.24.24.95\\gtksharp.3.24.24.95.nupkg.sha512",
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\pangosharp\\3.24.24.95\\pangosharp.3.24.24.95.nupkg.sha512"
+    "/home/esteban/.nuget/packages/atksharp/3.24.24.95/atksharp.3.24.24.95.nupkg.sha512",
+    "/home/esteban/.nuget/packages/cairosharp/3.24.24.95/cairosharp.3.24.24.95.nupkg.sha512",
+    "/home/esteban/.nuget/packages/gdksharp/3.24.24.95/gdksharp.3.24.24.95.nupkg.sha512",
+    "/home/esteban/.nuget/packages/giosharp/3.24.24.95/giosharp.3.24.24.95.nupkg.sha512",
+    "/home/esteban/.nuget/packages/glibsharp/3.24.24.95/glibsharp.3.24.24.95.nupkg.sha512",
+    "/home/esteban/.nuget/packages/gtksharp/3.24.24.95/gtksharp.3.24.24.95.nupkg.sha512",
+    "/home/esteban/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/home/esteban/.nuget/packages/pangosharp/3.24.24.95/pangosharp.3.24.24.95.nupkg.sha512"
   ],
   "logs": []
 }

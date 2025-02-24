@@ -25,6 +25,11 @@ namespace Interface
             SetSizeRequest(400, 297); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+
             StackNode* invoice = GlobalLists.stack.Pop();
 
             Fixed fixedContainer = new Fixed();
@@ -87,9 +92,9 @@ namespace Interface
             {
                 Menu.ShowDialog(this, MessageType.Info, "Tienes facturas por cancelar.");
             }
-            this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+            this.Destroy();
         }
     }
 }

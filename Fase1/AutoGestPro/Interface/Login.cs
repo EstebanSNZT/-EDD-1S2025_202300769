@@ -22,6 +22,11 @@ namespace Interface
             SetSizeRequest(450, 310); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+
             Fixed fixedContainer = new Fixed();
 
             Label welcomeLabel = new Label();
@@ -59,9 +64,9 @@ namespace Interface
 
         private void OnLoginButtonClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+            this.Destroy();
             // string user = entryUser.Text;
             // string password = entryPassword.Text;
 

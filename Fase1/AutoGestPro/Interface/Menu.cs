@@ -20,6 +20,11 @@ namespace Interface
             SetSizeRequest(350, 400); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
@@ -63,37 +68,37 @@ namespace Interface
 
         private void OnButtonBulkUploadClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             BulkUpload bulkUpload = new BulkUpload();
             bulkUpload.ShowAll();
+            this.Destroy();
         }
 
         private void OnButtonIndividualEntryClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             EntryOptions entryOptions = new EntryOptions();
             entryOptions.ShowAll();
+            this.Destroy();
         }
 
         private void OnButtonGenerateServiceClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             GenerateService generateService = new GenerateService();
             generateService.ShowAll();
+            this.Destroy();
         }
 
         private void OnButtonUserManagementClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             UserManagement userManagement = new UserManagement();
             userManagement.ShowAll();
+            this.Destroy();
         }
 
         private void OnButtonReportsClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             ReportsMenu reportsMenu = new ReportsMenu();
             reportsMenu.ShowAll();
+            this.Destroy();
         }
 
         private void OnButtonCancelInvoiceClicked(object? sender, EventArgs e)
@@ -105,9 +110,9 @@ namespace Interface
             }
             else
             {
-                this.Destroy();
                 CancelInvoice cancelInvoice = new CancelInvoice();
                 cancelInvoice.ShowAll();
+                this.Destroy();
             }
         }
 

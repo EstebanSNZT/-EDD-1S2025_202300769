@@ -9,6 +9,12 @@ namespace Interface
         {
             SetSizeRequest(400, 200); //(ancho, alto)
             SetPosition(WindowPosition.Center);
+
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+            
             TreeView treeView = GlobalLists.doubleList.GenerateTreeView(userId);
             ScrolledWindow scrolledWindow = new ScrolledWindow();
             scrolledWindow.Add(treeView);

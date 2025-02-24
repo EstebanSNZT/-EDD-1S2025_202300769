@@ -31,6 +31,11 @@ namespace Interface
             SetSizeRequest(598, 496); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
@@ -125,9 +130,9 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+            this.Destroy();
         }
 
         private void OnSearchButtonClicked(object? sender, EventArgs e)

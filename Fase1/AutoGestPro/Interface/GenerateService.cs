@@ -26,6 +26,11 @@ namespace Interface
             SetSizeRequest(400, 461); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+            
             Fixed fixedContainer = new Fixed();
 
             Label generateServiceLabel = new Label();
@@ -98,9 +103,9 @@ namespace Interface
             {
                 Menu.ShowDialog(this, MessageType.Info, "Tienes facturas por cancelar.");
             }
-            this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+            this.Destroy();
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)

@@ -19,6 +19,11 @@ namespace Interface
             SetSizeRequest(350, 315); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+
             Fixed fixedContainer = new Fixed();
 
             Label optionsLabel1 = new Label();
@@ -58,30 +63,30 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+            this.Destroy();
         }
 
         private void OnUsersButtonClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             UserEntry userEntry = new UserEntry();
             userEntry.ShowAll();
+            this.Destroy();
         }
 
         private void OnVehiclesButtonClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             VehicleEntry vehicleEntry = new VehicleEntry();
             vehicleEntry.ShowAll();
+            this.Destroy();
         }
 
         private void OnPartsButtonClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             SparePartEntry sparePartEntry = new SparePartEntry();
             sparePartEntry.ShowAll();
+            this.Destroy();
         }
     }
 }

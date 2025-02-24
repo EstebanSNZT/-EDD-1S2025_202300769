@@ -19,6 +19,11 @@ namespace Interface
             SetSizeRequest(350, 463); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
+            if (Child != null)
+            {
+                Remove(Child);
+            }
+
             Fixed fixedContainer = new Fixed();
 
             Label reportsLabel = new Label();
@@ -61,9 +66,9 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            this.Destroy();
             Menu menu = new Menu();
             menu.ShowAll();
+            this.Destroy();
         }
     }
 }
