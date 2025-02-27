@@ -17,6 +17,11 @@ namespace Lists
             TotalCost = totalCost;
             Next = null;
         }
+
+        public string ToGraph(int invoiceNum)
+        {
+            return $"[label = \"{{<data> Factura {invoiceNum} \\n ID: {Id} \\n Id_Orden: {OrderId} \\n Total: {TotalCost}}}\"];";
+        }
         
         public override string ToString() => $"Id: {Id}, Id_Orden: {OrderId}, Total: {TotalCost}";
     }

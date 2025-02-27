@@ -37,13 +37,22 @@ namespace Lists
             DoubleNode* current = head;
             while (current != null)
             {
-                if (current->Id == id)
-                {
-                    return current;
-                }
+                if (current->Id == id) return current;
                 current = current->Next;
             }
             return null;
+        }
+
+        public bool IsEmpty()
+        {
+            if (head == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool Contains(int id)
@@ -153,6 +162,68 @@ namespace Lists
                 current = current->Next;
             }
 
+        }
+
+        public void SortByModel()
+        {
+            if (head == null || head->Next == null) return;
+
+            bool swapped;
+            do
+            {
+                swapped = false;
+                DoubleNode* current = head;
+                DoubleNode* last = null;
+
+                while (current->Next != last)
+                {
+                    if (current->Model < current->Next->Model)
+                    {
+                        DoubleNode* nextNode = current->Next;
+                        DoubleNode* prevNode = current->Prev;
+
+                        if (prevNode != null)
+                            prevNode->Next = nextNode;
+                        else
+                            head = nextNode;
+
+                        current->Next = nextNode->Next;
+                        nextNode->Prev = prevNode;
+
+                        if (current->Next != null)
+                            current->Next->Prev = current;
+
+                        nextNode->Next = current;
+                        current->Prev = nextNode;
+
+                        swapped = true;
+                    }
+                    else
+                    {
+                        current = current->Next;
+                    }
+                }
+                last = current;
+            } while (swapped);
+
+            DoubleNode* tmp = head;
+            while (tmp->Next != null)
+            {
+                tmp = tmp->Next;
+            }
+            tail = tmp;
+        }
+
+        public DoubleList Duplicate()
+        {
+            DoubleList newList = new DoubleList();
+            DoubleNode* current = head;
+            while (current != null)
+            {
+                newList.Insert(current->Id, current->UserId, current->GetBrand(), current->Model, current->GetPlate());
+                current = current->Next;
+            }
+            return newList;
         }
 
         ~DoubleList()

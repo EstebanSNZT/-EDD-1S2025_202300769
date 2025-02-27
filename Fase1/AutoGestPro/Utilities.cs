@@ -1,10 +1,10 @@
 using System.Diagnostics;
 
-namespace utilities
+namespace Utilities
 {
     public static class Utility
     {
-        public static void GenerateDotFIle(string name, string content)
+        public static void GenerateDotFile(string name, string content)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace utilities
                 ProcessStartInfo processStartInfo = new ProcessStartInfo
                 {
                     FileName = "dot",
-                    Arguments = $"-Tpng -Gdpi=300 \"{dotFile}\" -o \"{imageFile}\"",
+                    Arguments = $"-Tpng \"{dotFile}\" -o \"{imageFile}\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,

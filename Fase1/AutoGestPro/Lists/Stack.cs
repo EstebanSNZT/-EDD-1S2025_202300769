@@ -7,6 +7,7 @@ namespace Lists
     {
         private static int lastId = 0;
         private StackNode* top;
+        private int count = 0;
 
         public Stack()
         {
@@ -21,6 +22,7 @@ namespace Lists
             *newNode = new StackNode(newId, orderId, totalCost);
             newNode->Next = top;
             top = newNode;
+            count++;
         }
 
         public StackNode* Pop()
@@ -28,6 +30,7 @@ namespace Lists
             if (top == null) return null;
             StackNode* temp = top;
             top = top->Next;
+            count--;
             return temp;
         }
 
@@ -41,6 +44,34 @@ namespace Lists
             {
                 return false;
             }
+        }
+
+        public string GenerateGraph()
+        {
+            var graph = "digraph G {\n";
+            graph += "    node [shape=record];\n";
+            graph += "    rankdir=TB;\n";
+            graph += "    subgraph cluster_0 {\n";
+            graph += "        label = \"Pila\";\n";
+
+            StackNode* current = top;
+            int index = count;
+
+            while (current != null)
+            {
+                graph += $"        n{index} {current->ToGraph(index)}\n";
+                current = current->Next;
+                index--;
+            }
+
+            for (int i = count; i > 1; i--)
+            {
+                graph += $"        n{i} -> n{i - 1};\n";
+            }
+
+            graph += "    }\n";
+            graph += "}\n";
+            return graph;
         }
 
         public void Print()

@@ -70,35 +70,35 @@ namespace Interface
         {
             BulkUpload bulkUpload = new BulkUpload();
             bulkUpload.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnButtonIndividualEntryClicked(object? sender, EventArgs e)
         {
             EntryOptions entryOptions = new EntryOptions();
             entryOptions.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnButtonGenerateServiceClicked(object? sender, EventArgs e)
         {
             GenerateService generateService = new GenerateService();
             generateService.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnButtonUserManagementClicked(object? sender, EventArgs e)
         {
             UserManagement userManagement = new UserManagement();
             userManagement.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnButtonReportsClicked(object? sender, EventArgs e)
         {
             ReportsMenu reportsMenu = new ReportsMenu();
             reportsMenu.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnButtonCancelInvoiceClicked(object? sender, EventArgs e)
@@ -112,7 +112,7 @@ namespace Interface
             {
                 CancelInvoice cancelInvoice = new CancelInvoice();
                 cancelInvoice.ShowAll();
-                this.Destroy();
+                this.Dispose();
             }
         }
 
@@ -120,7 +120,7 @@ namespace Interface
         {
             MessageDialog dialog = new MessageDialog(window, DialogFlags.Modal, messageType, ButtonsType.Ok, message);
             dialog.Run();
-            dialog.Destroy();
+            dialog.Dispose();
         }
     }
 }

@@ -138,7 +138,7 @@ namespace Interface
         {
             Menu menu = new Menu();
             menu.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
     }
 }

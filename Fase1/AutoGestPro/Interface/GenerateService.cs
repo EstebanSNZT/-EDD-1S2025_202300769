@@ -105,7 +105,7 @@ namespace Interface
             }
             Menu menu = new Menu();
             menu.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
@@ -142,7 +142,9 @@ namespace Interface
                 return;
             }
 
-            if (!GlobalLists.doubleList.Contains(vehicleId))
+            DoubleNode* vehicle = GlobalLists.doubleList.GetVehicle(vehicleId);
+
+            if (vehicle == null)
             {
                 Menu.ShowDialog(this, MessageType.Error, "ID de vehiculo inexiste.");
                 return;
@@ -162,8 +164,10 @@ namespace Interface
             GlobalLists.stack.Push(id, cost + sparePart->Cost);
             GlobalLists.stack.Print();
 
-            Menu.ShowDialog(this, MessageType.Info, "Servicio guardado con éxito.");
+            vehicle->ServiceCounter++;
 
+            Menu.ShowDialog(this, MessageType.Info, "Servicio guardado con éxito.");
+            
             idEntry.Text = "";
             sparePartIdEntry.Text = "";
             vehicleIdEntry.Text = "";

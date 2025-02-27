@@ -132,7 +132,7 @@ namespace Interface
         {
             Menu menu = new Menu();
             menu.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnSearchButtonClicked(object? sender, EventArgs e)

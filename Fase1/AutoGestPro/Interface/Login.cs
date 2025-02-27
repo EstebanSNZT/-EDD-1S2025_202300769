@@ -66,7 +66,7 @@ namespace Interface
         {
             Menu menu = new Menu();
             menu.ShowAll();
-            this.Destroy();
+            this.Dispose();
             // string user = entryUser.Text;
             // string password = entryPassword.Text;
 

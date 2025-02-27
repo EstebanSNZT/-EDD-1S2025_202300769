@@ -65,28 +65,28 @@ namespace Interface
         {
             Menu menu = new Menu();
             menu.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnUsersButtonClicked(object? sender, EventArgs e)
         {
             UserEntry userEntry = new UserEntry();
             userEntry.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnVehiclesButtonClicked(object? sender, EventArgs e)
         {
             VehicleEntry vehicleEntry = new VehicleEntry();
             vehicleEntry.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnPartsButtonClicked(object? sender, EventArgs e)
         {
             SparePartEntry sparePartEntry = new SparePartEntry();
             sparePartEntry.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
     }
 }

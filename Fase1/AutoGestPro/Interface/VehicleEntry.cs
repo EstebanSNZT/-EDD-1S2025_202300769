@@ -91,7 +91,7 @@ namespace Interface
         {
             EntryOptions entryOptions = new EntryOptions();
             entryOptions.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
@@ -113,6 +113,12 @@ namespace Interface
             if (!int.TryParse(idUserEntry.Text, out int idUser))
             {
                 Menu.ShowDialog(this, MessageType.Error, "ID de usuario inválido.");
+                return;
+            }
+
+            if (!GlobalLists.linkedList.Contains(idUser))
+            {
+                Menu.ShowDialog(this, MessageType.Error, "ID de usuario inexiste.");
                 return;
             }
 

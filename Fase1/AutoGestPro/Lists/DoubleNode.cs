@@ -10,6 +10,7 @@ namespace Lists
         public IntPtr Brand;
         public int Model;
         public IntPtr Plate;
+        public int ServiceCounter;
         public DoubleNode* Next;
         public DoubleNode* Prev;
 
@@ -20,6 +21,7 @@ namespace Lists
             Brand = Marshal.StringToHGlobalUni(brand);
             Model = model;
             Plate = Marshal.StringToHGlobalUni(plate);
+            ServiceCounter = 0;
             Next = null;
             Prev = null;
         }

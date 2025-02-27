@@ -86,6 +86,11 @@ namespace Lists
             return null;
         }
 
+        public bool Contains(int id)
+        {
+            return GetUser(id) != null;
+        }
+
         public LinkedNode* UpdateUser(int id, string newNames, string newLastNames, string newEmail)
         {
             LinkedNode* user = GetUser(id);
@@ -126,7 +131,7 @@ namespace Lists
                 index++;
             }
 
-            for (int i = 0; i < index; i++)
+            for (int i = 0; i < index-1; i++)
             {
                 graph += $"        n{i} -> n{i + 1};\n";
             }

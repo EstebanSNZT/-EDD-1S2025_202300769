@@ -27,8 +27,13 @@ namespace Lists
             if (Details != IntPtr.Zero) Marshal.FreeHGlobal(Details);
         }
 
+        public string ToGraph(int serviceNum)
+        {
+            return $"[label = \"{{<data> Servicio {serviceNum} \\n ID: {Id} \\n Id_Repuesto: {SparePartId} \\n Id_Vehículo: {VehicleId} \\n Detalles: {GetDetails()} \\n Costo: {Cost}}}\"];";
+        }
+
         public string? GetDetails() => Marshal.PtrToStringUni(Details);
     
-        public override string ToString() => $"Id: {Id}, Id Repuesto: {SparePartId}, Id Vehiculo: {VehicleId}, Detalles: {GetDetails()}, Costo: {Cost}";
+        public override string ToString() => $"Id: {Id}, Id Repuesto: {SparePartId}, Id Vehículo: {VehicleId}, Detalles: {GetDetails()}, Costo: {Cost}";
     }
 }

@@ -83,7 +83,7 @@ namespace Interface
         {
             EntryOptions entryOptions = new EntryOptions();
             entryOptions.ShowAll();
-            this.Destroy();
+            this.Dispose();
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
