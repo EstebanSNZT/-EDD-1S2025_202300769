@@ -65,16 +65,6 @@ namespace Interface
             returnButton.Clicked += OnReturnButtonClicked;
             fixedContainer.Put(returnButton, 20, 241);
 
-            Label coordsLabel = new Label("Coordenadas: X = 0, Y = 0");
-            fixedContainer.Put(coordsLabel, 0, 0);
-
-            MotionNotifyEvent += (o, args) =>
-            {
-                int x = (int)args.Event.X;
-                int y = (int)args.Event.Y;
-                coordsLabel.Text = $"Coordenadas: X = {x}, Y = {y}";
-            };
-
             Add(fixedContainer);
 
             Shown += OnWindowShown;
