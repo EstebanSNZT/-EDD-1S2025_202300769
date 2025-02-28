@@ -7,12 +7,11 @@ digraph G {
         n1 [label = "{<data> ID: 2 \n Nombre: Ana LuciaMartinez Lopez \n Correo: ana.lucia@usac.com \n Contraseña: AnaLopez}"];
         n2 [label = "{<data> ID: 3 \n Nombre: Luis EnriquePerez Ramirez \n Correo: luis.enrique@usac.com \n Contraseña: LuisRamirez}"];
         n3 [label = "{<data> ID: 4 \n Nombre: Marta IsabelLopez Perez \n Correo: marta.isabel@usac.com \n Contraseña: MartaPerez}"];
-        n4 [label = "{<data> ID: 5 \n Nombre: Juan CarlosHernandez Lopez \n Correo: juan.carlos@usac.com \n Contraseña: JuanLopez}"];
-        n5 [label = "{<data> ID: 6 \n Nombre: Maria FernandaGarcia Lopez \n Correo: maria.fernanda@usac.com \n Contraseña: MariaLopez}"];
-        n6 [label = "{<data> ID: 7 \n Nombre: Pedro PabloRodriguez Torres \n Correo: pedro.pablo@usac.com \n Contraseña: PedroTorres}"];
-        n7 [label = "{<data> ID: 8 \n Nombre: Laura IsabelSanchez Morales \n Correo: laura.isabel@usac.com \n Contraseña: LauraMorales}"];
-        n8 [label = "{<data> ID: 9 \n Nombre: Rafael AlejandroRamirez Diaz \n Correo: rafael.alejandro@usac.com \n Contraseña: RafaelDiaz}"];
-        n9 [label = "{<data> ID: 10 \n Nombre: Isabel CristinaDiaz Lopez \n Correo: isabel.cristina@usac.com \n Contraseña: IsabelLopez}"];
+        n4 [label = "{<data> ID: 6 \n Nombre: Milo FernandihnoGarcia Lopez \n Correo: maria.fernanda@usac.com \n Contraseña: MariaLopez}"];
+        n5 [label = "{<data> ID: 7 \n Nombre: Pedro PabloRodriguez Torres \n Correo: pedro.pablo@usac.com \n Contraseña: PedroTorres}"];
+        n6 [label = "{<data> ID: 8 \n Nombre: Laura IsabelSanchez Morales \n Correo: laura.isabel@usac.com \n Contraseña: LauraMorales}"];
+        n7 [label = "{<data> ID: 9 \n Nombre: Rafael AlejandroRamirez Diaz \n Correo: rafael.alejandro@usac.com \n Contraseña: RafaelDiaz}"];
+        n8 [label = "{<data> ID: 10 \n Nombre: Isabel CristinaDiaz Lopez \n Correo: isabel.cristina@usac.com \n Contraseña: IsabelLopez}"];
         n0 -> n1;
         n1 -> n2;
         n2 -> n3;
@@ -21,6 +20,5 @@ digraph G {
         n5 -> n6;
         n6 -> n7;
         n7 -> n8;
-        n8 -> n9;
     }
 }

@@ -1,8 +1,0 @@
-digraph G {
-    node [shape=record];
-    rankdir=LR;
-    subgraph cluster_0 {
-        label = "Cola";
-        n0 [label = "{<data> Servicio 1 \n ID: 10 \n Id_Repuesto: 10 \n Id_Vehículo: 10 \n Detalles: AAAAAA \n Costo: 100}"];
-    }
-}

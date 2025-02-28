@@ -32,7 +32,7 @@ namespace Lists
 
         public string ToGraph()
         {
-            return $"[label = \"{{<data> ID: {Id} \\n Nombre: {GetNames() + GetLastNames()} \\n Correo: {GetEmail()} \\n Contraseña: {GetPassword()}}}\"];";
+            return $"[label = \"{{<data> ID: {Id} \\n Nombre: {GetNames() + " " + GetLastNames()} \\n Correo: {GetEmail()} \\n Contraseña: {GetPassword()}}}\"];";
         }
 
         public void UpdateNode(string newNames, string newLastNames, string newEmail)

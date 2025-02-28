@@ -238,19 +238,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\": {}
+    "/home/esteban/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase1\\AutoGestPro\\AutoGestPro.csproj",
+      "projectUniqueName": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase1/AutoGestPro/AutoGestPro.csproj",
       "projectName": "AutoGestPro",
-      "projectPath": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase1\\AutoGestPro\\AutoGestPro.csproj",
-      "packagesPath": "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase1\\AutoGestPro\\obj\\",
+      "projectPath": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase1/AutoGestPro/AutoGestPro.csproj",
+      "packagesPath": "/home/esteban/.nuget/packages/",
+      "outputPath": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase1/AutoGestPro/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Esteban Sánchez\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/esteban/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -274,7 +274,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -305,7 +305,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
