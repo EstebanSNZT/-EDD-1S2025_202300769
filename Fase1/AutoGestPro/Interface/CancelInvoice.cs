@@ -30,12 +30,10 @@ namespace Interface
                 Remove(Child);
             }
 
-            StackNode* invoice = GlobalLists.stack.Pop();
-
             Fixed fixedContainer = new Fixed();
 
             Label cancelInvoiceLabel = new Label();
-            cancelInvoiceLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Factura Cancela</span>";
+            cancelInvoiceLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Factura Cancelada</span>";
             fixedContainer.Put(cancelInvoiceLabel, 85, 15);
 
             Label idLabel = new Label();
@@ -44,7 +42,6 @@ namespace Interface
 
             idEntry.SetSizeRequest(140, 35);
             idEntry.Sensitive = false;
-            idEntry.Text = invoice->Id.ToString();
             fixedContainer.Put(idEntry, 182, 76);
 
             Label orderIdLabel = new Label();
@@ -53,7 +50,6 @@ namespace Interface
 
             orderIdEntry.SetSizeRequest(140, 35);
             orderIdEntry.Sensitive = false;
-            orderIdEntry.Text = invoice->OrderId.ToString();
             fixedContainer.Put(orderIdEntry, 182, 131);
 
             Label totalCostLabel = new Label();
@@ -62,7 +58,6 @@ namespace Interface
 
             totalCostEntry.SetSizeRequest(140, 35);
             totalCostEntry.Sensitive = false;
-            totalCostEntry.Text = invoice->TotalCost.ToString();
             fixedContainer.Put(totalCostEntry, 182, 186);
 
             Button returnButton = new Button("Volver");
@@ -81,20 +76,31 @@ namespace Interface
             };
 
             Add(fixedContainer);
-            NativeMemory.Free(invoice);
+
+            Shown += OnWindowShown;
 
             DeleteEvent += (o, args) => Application.Quit();
         }
 
+        private void OnWindowShown(object? sender, EventArgs e)
+        {
+            StackNode* invoice = GlobalLists.stack.Pop();
+
+            idEntry.Text = invoice->Id.ToString();
+            orderIdEntry.Text = invoice->OrderId.ToString();
+            totalCostEntry.Text = invoice->TotalCost.ToString();
+
+            NativeMemory.Free(invoice);
+        }
+
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            if(!GlobalLists.stack.IsEmpty())
+            if (!GlobalLists.stack.IsEmpty())
             {
                 Menu.ShowDialog(this, MessageType.Info, "Tienes facturas por cancelar.");
             }
-            Menu menu = new Menu();
-            menu.ShowAll();
-            this.Dispose();
+            GlobalWindows.menu.ShowAll();
+            Hide();
         }
     }
 }

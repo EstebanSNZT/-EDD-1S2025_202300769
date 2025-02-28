@@ -109,7 +109,14 @@ namespace Interface
                     {
                         foreach (var localVehicle in localVehicles)
                         {
-                            GlobalLists.doubleList.Insert(localVehicle.ID, localVehicle.ID_Usuario, localVehicle.Marca, localVehicle.Modelo, localVehicle.Placa);
+                            if (GlobalLists.linkedList.Contains(localVehicle.ID_Usuario))
+                            {
+                                GlobalLists.doubleList.Insert(localVehicle.ID, localVehicle.ID_Usuario, localVehicle.Marca, localVehicle.Modelo, localVehicle.Placa);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Vehiculo con ID {localVehicle.ID} no ingresado dado que el usuario con ID {localVehicle.ID_Usuario} no existe.");
+                            }
                         }
                         GlobalLists.doubleList.Print();
                     }
@@ -136,9 +143,9 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            Menu menu = new Menu();
-            menu.ShowAll();
-            this.Dispose();
+            comboBox.Active = 0;
+            GlobalWindows.menu.ShowAll();
+            Hide();
         }
     }
 }

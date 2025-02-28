@@ -82,16 +82,6 @@ namespace Interface
             returnButton.Clicked += OnReturnButtonClicked;
             fixedContainer.Put(returnButton, 20, 405);
 
-            Label coordsLabel = new Label("Coordenadas: X = 0, Y = 0");
-            fixedContainer.Put(coordsLabel, 0, 0);
-
-            MotionNotifyEvent += (o, args) =>
-            {
-                int x = (int)args.Event.X;
-                int y = (int)args.Event.Y;
-                coordsLabel.Text = $"Coordenadas: X = {x}, Y = {y}";
-            };
-
             Add(fixedContainer);
 
             DeleteEvent += (o, args) => Application.Quit();
@@ -103,9 +93,18 @@ namespace Interface
             {
                 Menu.ShowDialog(this, MessageType.Info, "Tienes facturas por cancelar.");
             }
-            Menu menu = new Menu();
-            menu.ShowAll();
-            this.Dispose();
+            GlobalWindows.menu.ShowAll();
+            CleanEntrys();
+            Hide();
+        }
+
+        private void CleanEntrys()
+        {
+            idEntry.Text = "";
+            sparePartIdEntry.Text = "";
+            vehicleIdEntry.Text = "";
+            detailsEntry.Text = "";
+            costEntry.Text = "";
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
@@ -164,15 +163,14 @@ namespace Interface
             GlobalLists.stack.Push(id, cost + sparePart->Cost);
             GlobalLists.stack.Print();
 
+            GlobalLists.matrix.Insert(vehicleId, sparePartId, detailsEntry.Text);
+            GlobalLists.matrix.Print();
+
             vehicle->ServiceCounter++;
 
             Menu.ShowDialog(this, MessageType.Info, "Servicio guardado con éxito.");
             
-            idEntry.Text = "";
-            sparePartIdEntry.Text = "";
-            vehicleIdEntry.Text = "";
-            detailsEntry.Text = "";
-            costEntry.Text = "";
+            CleanEntrys();
         }
     }
 }

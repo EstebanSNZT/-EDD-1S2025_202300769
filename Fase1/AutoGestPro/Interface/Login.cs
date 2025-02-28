@@ -64,25 +64,16 @@ namespace Interface
 
         private void OnLoginButtonClicked(object? sender, EventArgs e)
         {
-            Menu menu = new Menu();
-            menu.ShowAll();
-            this.Dispose();
-            // string user = entryUser.Text;
-            // string password = entryPassword.Text;
-
-            // MessageDialog messageDialog;
-
-            // if (user == "root@gmail.com" && password == "root123")
-            // {
-            //     messageDialog = new MessageDialog(this, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "¡Bienvenido!");
-            // }
-            // else
-            // {
-            //     messageDialog = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Usuario o contraseña incorrectos");
-            // }
-
-            // messageDialog.Run();
-            // messageDialog.Dispose();
+            if (userEntry.Text == "root@gmail.com" && passwordEntry.Text == "root123")
+            {
+                Menu.ShowDialog(this, MessageType.Info, "¡Bienvenido root@gmail.com!");
+                GlobalWindows.menu.ShowAll();
+                Hide();
+            }
+            else
+            {
+                Menu.ShowDialog(this, MessageType.Warning, "Usuario o contraseña incorrectos. Inténtelo de nuevo");
+            }
         }
     }
 }

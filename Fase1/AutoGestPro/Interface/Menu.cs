@@ -68,37 +68,32 @@ namespace Interface
 
         private void OnButtonBulkUploadClicked(object? sender, EventArgs e)
         {
-            BulkUpload bulkUpload = new BulkUpload();
-            bulkUpload.ShowAll();
-            this.Dispose();
+            GlobalWindows.bulkUpload.ShowAll();
+            Hide();
         }
 
         private void OnButtonIndividualEntryClicked(object? sender, EventArgs e)
         {
-            EntryOptions entryOptions = new EntryOptions();
-            entryOptions.ShowAll();
-            this.Dispose();
+            GlobalWindows.entryOptions.ShowAll();
+            Hide();
         }
 
         private void OnButtonGenerateServiceClicked(object? sender, EventArgs e)
         {
-            GenerateService generateService = new GenerateService();
-            generateService.ShowAll();
-            this.Dispose();
+            GlobalWindows.generateService.ShowAll();
+            Hide();
         }
 
         private void OnButtonUserManagementClicked(object? sender, EventArgs e)
         {
-            UserManagement userManagement = new UserManagement();
-            userManagement.ShowAll();
-            this.Dispose();
+            GlobalWindows.userManagement.ShowAll();
+            Hide();
         }
 
         private void OnButtonReportsClicked(object? sender, EventArgs e)
         {
-            ReportsMenu reportsMenu = new ReportsMenu();
-            reportsMenu.ShowAll();
-            this.Dispose();
+            GlobalWindows.reportsMenu.ShowAll();
+            Hide();
         }
 
         private void OnButtonCancelInvoiceClicked(object? sender, EventArgs e)
@@ -110,9 +105,8 @@ namespace Interface
             }
             else
             {
-                CancelInvoice cancelInvoice = new CancelInvoice();
-                cancelInvoice.ShowAll();
-                this.Dispose();
+                GlobalWindows.cancelInvoice.ShowAll();
+                Hide();
             }
         }
 

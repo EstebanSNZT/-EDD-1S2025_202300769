@@ -6,8 +6,8 @@ namespace Lists
 {
     public unsafe class DoubleList
     {
-        private DoubleNode* head;
-        private DoubleNode* tail;
+        public DoubleNode* head;
+        public DoubleNode* tail;
 
         public DoubleList()
         {
@@ -99,7 +99,6 @@ namespace Lists
             graph += "    rankdir=LR;\n";
             graph += "    subgraph cluster_0 {\n";
             graph += "        label = \"Lista Doblemente Enlazada\";\n";
-
             DoubleNode* current = head;
             int index = 0;
 
@@ -164,6 +163,42 @@ namespace Lists
 
         }
 
+        public void Truncate(int n)
+        {
+            if (n <= 0)
+            {
+                Clean();
+                return;
+            }
+
+            DoubleNode* current = head;
+            int count = 1;
+
+            while (current != null && count < n)
+            {
+                current = current->Next;
+                count++;
+            }
+
+            if (current == null)
+            {
+                return;
+            }
+
+            DoubleNode* nodeDelete = current->Next;
+            current->Next = null;
+
+            while (nodeDelete != null)
+            {
+                DoubleNode* temp = nodeDelete;
+                nodeDelete = nodeDelete->Next;
+                temp->FreeData();
+                NativeMemory.Free(temp);
+            }
+
+            tail = current;
+        }
+
         public void SortByModel()
         {
             if (head == null || head->Next == null) return;
@@ -177,7 +212,57 @@ namespace Lists
 
                 while (current->Next != last)
                 {
-                    if (current->Model < current->Next->Model)
+                    if (current->Model > current->Next->Model)
+                    {
+                        DoubleNode* nextNode = current->Next;
+                        DoubleNode* prevNode = current->Prev;
+
+                        if (prevNode != null)
+                            prevNode->Next = nextNode;
+                        else
+                            head = nextNode;
+
+                        current->Next = nextNode->Next;
+                        nextNode->Prev = prevNode;
+
+                        if (current->Next != null)
+                            current->Next->Prev = current;
+
+                        nextNode->Next = current;
+                        current->Prev = nextNode;
+
+                        swapped = true;
+                    }
+                    else
+                    {
+                        current = current->Next;
+                    }
+                }
+                last = current;
+            } while (swapped);
+
+            DoubleNode* tmp = head;
+            while (tmp->Next != null)
+            {
+                tmp = tmp->Next;
+            }
+            tail = tmp;
+        }
+
+        public void SortByNumServices()
+        {
+            if (head == null || head->Next == null) return;
+
+            bool swapped;
+            do
+            {
+                swapped = false;
+                DoubleNode* current = head;
+                DoubleNode* last = null;
+
+                while (current->Next != last)
+                {
+                    if (current->ServiceCounter < current->Next->ServiceCounter)
                     {
                         DoubleNode* nextNode = current->Next;
                         DoubleNode* prevNode = current->Prev;
@@ -218,15 +303,69 @@ namespace Lists
         {
             DoubleList newList = new DoubleList();
             DoubleNode* current = head;
+
             while (current != null)
             {
-                newList.Insert(current->Id, current->UserId, current->GetBrand(), current->Model, current->GetPlate());
+                DoubleNode* clonedNode = DoubleNode.CloneNode(current);
+                if (newList.head == null)
+                {
+                    newList.head = newList.tail = clonedNode;
+                }
+                else
+                {
+                    newList.tail->Next = clonedNode;
+                    clonedNode->Prev = newList.tail;
+                    newList.tail = clonedNode;
+                }
                 current = current->Next;
             }
+
             return newList;
         }
 
-        ~DoubleList()
+        public string Top5Model()
+        {
+            DoubleList topVehicles = Duplicate();
+            topVehicles.SortByModel();
+            topVehicles.Truncate(5);
+
+            string message = "Top 5 vehículos más antiguos\n\n";
+
+            DoubleNode* current = topVehicles.head;
+            int number = 1;
+
+            while (current != null)
+            {
+                message += $"Número {number} -- ID: {current->Id}, Marca: {current->GetBrand()}, Modelo: {current->Model}\n";
+                current = current->Next;
+                number++;
+            }
+
+            return message;
+        }
+
+        public string Top5Services()
+        {
+            DoubleList topVehicles = Duplicate();
+            topVehicles.SortByNumServices();
+            topVehicles.Truncate(5);
+
+            string message = "Top 5 vehículos con más servicios\n\n";
+
+            DoubleNode* current = topVehicles.head;
+            int number = 1;
+
+            while (current != null)
+            {
+                message += $"Número {number} -- ID: {current->Id}, Marca: {current->GetBrand()}, Cantidad de servicios: {current->ServiceCounter}\n";
+                current = current->Next;
+                number++;
+            }
+
+            return message;
+        }
+
+        public void Clean()
         {
             while (head != null)
             {
@@ -235,6 +374,12 @@ namespace Lists
                 temp->FreeData();
                 NativeMemory.Free(temp);
             }
+            tail = null;
+        }
+
+        ~DoubleList()
+        {
+            Clean();
         }
     }
 }

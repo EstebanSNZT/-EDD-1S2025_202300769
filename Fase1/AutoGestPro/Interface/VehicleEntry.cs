@@ -89,9 +89,18 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            EntryOptions entryOptions = new EntryOptions();
-            entryOptions.ShowAll();
-            this.Dispose();
+            GlobalWindows.entryOptions.ShowAll();
+            CleanEntrys();
+            Hide();
+        }
+
+        private void CleanEntrys()
+        {
+            idEntry.Text = "";
+            idUserEntry.Text = "";
+            brandEntry.Text = "";
+            modelEntry.Text = "";
+            plateEntry.Text = "";
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
@@ -133,11 +142,7 @@ namespace Interface
 
             Menu.ShowDialog(this, MessageType.Info, "Vehículo guardado con éxito.");
 
-            idEntry.Text = "";
-            idUserEntry.Text = "";
-            brandEntry.Text = "";
-            modelEntry.Text = "";
-            plateEntry.Text = "";
+            CleanEntrys();
         }
     }
 }

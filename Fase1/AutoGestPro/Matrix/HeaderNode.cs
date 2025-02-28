@@ -5,14 +5,15 @@ namespace Matrix
         public int id;
         public HeaderNode* Next;
         public HeaderNode* Prev;
-        public InternalNode* Access;
+        public InternalNode* accessFirst;
+        public InternalNode* accessLast;
 
         public HeaderNode(int id)
         {
             this.id = id;
             Next = null;
             Prev = null;
-            Access = null;
+            accessFirst = null;
         }
     }
 }

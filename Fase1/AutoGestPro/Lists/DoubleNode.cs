@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Lists 
+namespace Lists
 {
-    public unsafe struct DoubleNode 
+    public unsafe struct DoubleNode
     {
         public int Id;
         public int UserId;
@@ -34,12 +34,22 @@ namespace Lists
 
         public string ToGraph()
         {
-            return $"[label = \"{{<data> ID: {Id} \\n ID_Usuario: {UserId} \\n Marca: {GetBrand()} \\n Model: {Model} \\n Placa: {GetPlate()}}}\"];";
+            return $"[label = \"{{<data> ID: {Id} \\n ID_Usuario: {UserId} \\n Marca: {GetBrand()} \\n Modelo: {Model} \\n Placa: {GetPlate()}}}\"];";
+        }
+
+        public static DoubleNode* CloneNode(DoubleNode* node)
+        {
+            if (node == null) return null;
+
+            DoubleNode* newNode = (DoubleNode*)NativeMemory.Alloc((nuint)sizeof(DoubleNode));
+            *newNode = new DoubleNode(node->Id, node->UserId, node->GetBrand(), node->Model, node->GetPlate());
+            newNode->ServiceCounter = node->ServiceCounter;
+            return newNode;
         }
 
         public string? GetBrand() => Marshal.PtrToStringUni(Brand);
         public string? GetPlate() => Marshal.PtrToStringUni(Plate);
 
-        public override string ToString() => $"Id: {Id}, Id Usuario: {UserId}, Marca: {GetBrand()}, Modelo: {Model}, Placa: {GetPlate()}";
+        public override string ToString() => $"Id: {Id}, Id Usuario: {UserId}, Marca: {GetBrand()}, Modelo: {Model}, Placa: {GetPlate()}, Servicios: {ServiceCounter}";
     }
 }

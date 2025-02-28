@@ -9,8 +9,7 @@ class Program
     {
         Application.Init();
 
-        Login login = new Login();
-        login.ShowAll();
+        GlobalWindows.login.ShowAll();
 
         Application.Run();
     }

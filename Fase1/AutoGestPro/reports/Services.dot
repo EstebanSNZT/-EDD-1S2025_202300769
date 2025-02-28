@@ -3,10 +3,6 @@ digraph G {
     rankdir=LR;
     subgraph cluster_0 {
         label = "Cola";
-        n0 [label = "{<data> Servicio 1 \n ID: 12 \n Id_Repuesto: 4 \n Id_Vehículo: 5 \n Detalles: sdfdsfsdfds \n Costo: 54}"];
-        n1 [label = "{<data> Servicio 2 \n ID: 14 \n Id_Repuesto: 3 \n Id_Vehículo: 4 \n Detalles: sdfdsfsdf \n Costo: 15}"];
-        n2 [label = "{<data> Servicio 3 \n ID: 7 \n Id_Repuesto: 9 \n Id_Vehículo: 10 \n Detalles: asdasdasdasdMilo \n Costo: 150}"];
-        n0 -> n1;
-        n1 -> n2;
+        n0 [label = "{<data> Servicio 1 \n ID: 10 \n Id_Repuesto: 10 \n Id_Vehículo: 10 \n Detalles: AAAAAA \n Costo: 100}"];
     }
 }

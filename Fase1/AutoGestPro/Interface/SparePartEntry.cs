@@ -81,9 +81,17 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            EntryOptions entryOptions = new EntryOptions();
-            entryOptions.ShowAll();
-            this.Dispose();
+            GlobalWindows.entryOptions.ShowAll();
+            CleanEntrys();
+            Hide();
+        }
+
+        private void CleanEntrys()
+        {
+            idEntry.Text = "";
+            sparePartEntry.Text = "";
+            detailsEntry.Text = "";
+            costEntry.Text = "";
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
@@ -112,10 +120,7 @@ namespace Interface
 
             Menu.ShowDialog(this, MessageType.Info, "Repuesto guardado con éxito.");
 
-            idEntry.Text = "";
-            sparePartEntry.Text = "";
-            detailsEntry.Text = "";
-            costEntry.Text = "";
+            CleanEntrys();
         }
     }
 }

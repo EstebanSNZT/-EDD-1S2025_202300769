@@ -44,6 +44,7 @@ namespace Lists
 
         public void Print()
         {
+            Console.WriteLine("-------------------------------------------------------------------------------");
             QueueNode* current = front;
             while (current != null)
             {

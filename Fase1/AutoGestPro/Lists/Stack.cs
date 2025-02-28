@@ -76,6 +76,7 @@ namespace Lists
 
         public void Print()
         {
+            Console.WriteLine("-------------------------------------------------------------------------------");
             StackNode* current = top;
             while (current != null)
             {

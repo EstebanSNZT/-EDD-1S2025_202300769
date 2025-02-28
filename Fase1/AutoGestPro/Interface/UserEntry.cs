@@ -89,9 +89,18 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            EntryOptions entryOptions = new EntryOptions();
-            entryOptions.ShowAll();
-            this.Dispose();
+            GlobalWindows.entryOptions.ShowAll();
+            CleanEntrys();
+            Hide();
+        }
+
+        private void CleanEntrys()
+        {
+            idEntry.Text = "";
+            namesEntry.Text = "";
+            lastNamesEntry.Text = "";
+            emailEntry.Text = "";
+            passwordEntry.Text = "";
         }
 
         private void OnSaveButtonClicked(object? sender, EventArgs e)
@@ -116,11 +125,7 @@ namespace Interface
 
             Menu.ShowDialog(this, MessageType.Info, "Usuario guardado con éxito.");
 
-            idEntry.Text = "";
-            namesEntry.Text = "";
-            lastNamesEntry.Text = "";
-            emailEntry.Text = "";
-            passwordEntry.Text = "";
+            CleanEntrys();
         }
     }
 }

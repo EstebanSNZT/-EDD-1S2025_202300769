@@ -130,9 +130,22 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            Menu menu = new Menu();
-            menu.ShowAll();
-            this.Dispose();
+            found = false;
+            GlobalWindows.menu.ShowAll();
+            CleanEntrys();
+            Hide();
+        }
+
+        private void CleanEntrys()
+        {
+            idEntry.Text = "";
+            currentIdEntry.Text = "";
+            newNamesEntry.Text = "";
+            newLastNamesEntry.Text = "";
+            newEmailEntry.Text = "";
+            currentNamesEntry.Text = "";
+            currentLastNamesEntry.Text = "";
+            currentEmailEntry.Text = "";
         }
 
         private void OnSearchButtonClicked(object? sender, EventArgs e)
@@ -186,14 +199,7 @@ namespace Interface
             Menu.ShowDialog(this, MessageType.Info, "Usuario y vehiculos del usuario eliminados correctamente.");
 
             found = false;
-            idEntry.Text = "";
-            currentIdEntry.Text = "";
-            currentNamesEntry.Text = "";
-            currentLastNamesEntry.Text = "";
-            currentEmailEntry.Text = "";
-            newNamesEntry.Text = "";
-            newLastNamesEntry.Text = "";
-            newEmailEntry.Text = "";
+            CleanEntrys();
         }
 
         private void OnUpdateButtonClicked(object? sender, EventArgs e)

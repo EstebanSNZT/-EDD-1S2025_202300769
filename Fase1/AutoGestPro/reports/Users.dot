@@ -12,7 +12,7 @@ digraph G {
         n6 [label = "{<data> ID: 7 \n Nombre: Pedro PabloRodriguez Torres \n Correo: pedro.pablo@usac.com \n Contraseña: PedroTorres}"];
         n7 [label = "{<data> ID: 8 \n Nombre: Laura IsabelSanchez Morales \n Correo: laura.isabel@usac.com \n Contraseña: LauraMorales}"];
         n8 [label = "{<data> ID: 9 \n Nombre: Rafael AlejandroRamirez Diaz \n Correo: rafael.alejandro@usac.com \n Contraseña: RafaelDiaz}"];
-        n9 [label = "{<data> ID: 10 \n Nombre: JuanchoDiaz Lopez \n Correo: isabel.cristina@usac.com \n Contraseña: IsabelLopez}"];
+        n9 [label = "{<data> ID: 10 \n Nombre: Isabel CristinaDiaz Lopez \n Correo: isabel.cristina@usac.com \n Contraseña: IsabelLopez}"];
         n0 -> n1;
         n1 -> n2;
         n2 -> n3;

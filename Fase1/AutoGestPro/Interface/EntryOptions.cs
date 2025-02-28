@@ -63,30 +63,26 @@ namespace Interface
 
         private void OnReturnButtonClicked(object? sender, EventArgs e)
         {
-            Menu menu = new Menu();
-            menu.ShowAll();
-            this.Dispose();
+            GlobalWindows.menu.ShowAll();
+            Hide();
         }
 
         private void OnUsersButtonClicked(object? sender, EventArgs e)
         {
-            UserEntry userEntry = new UserEntry();
-            userEntry.ShowAll();
-            this.Dispose();
+            GlobalWindows.userEntry.ShowAll();
+            Hide();
         }
 
         private void OnVehiclesButtonClicked(object? sender, EventArgs e)
         {
-            VehicleEntry vehicleEntry = new VehicleEntry();
-            vehicleEntry.ShowAll();
-            this.Dispose();
+            GlobalWindows.vehicleEntry.ShowAll();
+            Hide();
         }
 
         private void OnPartsButtonClicked(object? sender, EventArgs e)
         {
-            SparePartEntry sparePartEntry = new SparePartEntry();
-            sparePartEntry.ShowAll();
-            this.Dispose();
+            GlobalWindows.sparePartEntry.ShowAll();
+            Hide();
         }
     }
 }
