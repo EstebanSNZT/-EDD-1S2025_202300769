@@ -3,13 +3,9 @@ digraph G {
     rankdir=TB;
     subgraph cluster_0 {
         label = "Pila";
-        n5 [label = "{<data> Factura 5 \n ID: 5 \n Id_Orden: 3 \n Total: 175.2}"];
-        n4 [label = "{<data> Factura 4 \n ID: 4 \n Id_Orden: 16 \n Total: 150}"];
-        n3 [label = "{<data> Factura 3 \n ID: 3 \n Id_Orden: 9 \n Total: 250}"];
-        n2 [label = "{<data> Factura 2 \n ID: 2 \n Id_Orden: 6 \n Total: 65.5}"];
-        n1 [label = "{<data> Factura 1 \n ID: 1 \n Id_Orden: 12 \n Total: 95.3}"];
-        n5 -> n4;
-        n4 -> n3;
+        n3 [label = "{<data> Factura 3 \n ID: 3 \n Id_Orden: 1 \n Total: 239.5}"];
+        n2 [label = "{<data> Factura 2 \n ID: 2 \n Id_Orden: 4 \n Total: 44489.3}"];
+        n1 [label = "{<data> Factura 1 \n ID: 1 \n Id_Orden: 9 \n Total: 40.4}"];
         n3 -> n2;
         n2 -> n1;
     }

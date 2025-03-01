@@ -144,7 +144,7 @@ namespace Interface
             string dotCode = GlobalLists.queue.GenerateGraph();
             Utility.GenerateDotFile("Services", dotCode);
             Utility.ConvertDotToImage("Services.dot");
-            GlobalWindows.showReport1.SetImage("SpareParts.png");
+            GlobalWindows.showReport1.SetImage("Services.png");
             GlobalWindows.showReport1.ShowAll();
         }
 
