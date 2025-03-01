@@ -1,0 +1,12 @@
+digraph G {
+    node [shape=record];
+    rankdir=LR;
+    subgraph cluster_0 {
+        label = "Cola";
+        n0 [label = "{<data> Servicio 1 \n ID: 3 \n Id_Repuesto: 6 \n Id_Vehículo: 7 \n Detalles: Cambio de Repuesto 1 \n Costo: 50}"];
+        n1 [label = "{<data> Servicio 2 \n ID: 2 \n Id_Repuesto: 2 \n Id_Vehículo: 3 \n Detalles: Cambio2 \n Costo: 50}"];
+        n2 [label = "{<data> Servicio 3 \n ID: 4 \n Id_Repuesto: 3 \n Id_Vehículo: 3 \n Detalles: Cambio3 \n Costo: 140}"];
+        n0 -> n1;
+        n1 -> n2;
+    }
+}

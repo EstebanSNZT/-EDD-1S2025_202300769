@@ -3,15 +3,16 @@ digraph G {
     rankdir=LR;
     subgraph cluster_0 {
         label = "Lista Simple Enlazada";
-        n0 [label = "{<data> ID: 1 \n Nombre: Carlos AlbertoGomez Martinez \n Correo: carlos.alberto@usac.com \n Contraseña: CarlosMartinez}"];
-        n1 [label = "{<data> ID: 2 \n Nombre: Ana LuciaMartinez Lopez \n Correo: ana.lucia@usac.com \n Contraseña: AnaLopez}"];
-        n2 [label = "{<data> ID: 3 \n Nombre: Luis EnriquePerez Ramirez \n Correo: luis.enrique@usac.com \n Contraseña: LuisRamirez}"];
-        n3 [label = "{<data> ID: 4 \n Nombre: Marta IsabelLopez Perez \n Correo: marta.isabel@usac.com \n Contraseña: MartaPerez}"];
-        n4 [label = "{<data> ID: 6 \n Nombre: Milo FernandihnoGarcia Lopez \n Correo: maria.fernanda@usac.com \n Contraseña: MariaLopez}"];
-        n5 [label = "{<data> ID: 7 \n Nombre: Pedro PabloRodriguez Torres \n Correo: pedro.pablo@usac.com \n Contraseña: PedroTorres}"];
-        n6 [label = "{<data> ID: 8 \n Nombre: Laura IsabelSanchez Morales \n Correo: laura.isabel@usac.com \n Contraseña: LauraMorales}"];
-        n7 [label = "{<data> ID: 9 \n Nombre: Rafael AlejandroRamirez Diaz \n Correo: rafael.alejandro@usac.com \n Contraseña: RafaelDiaz}"];
-        n8 [label = "{<data> ID: 10 \n Nombre: Isabel CristinaDiaz Lopez \n Correo: isabel.cristina@usac.com \n Contraseña: IsabelLopez}"];
+        n0 [label = "{<data> ID: 1 \n Nombre: Carlos Alberto Gomez Martinez \n Correo: carlos.alberto@usac.com \n Contraseña: CarlosMartinez}"];
+        n1 [label = "{<data> ID: 2 \n Nombre: Ana Lucia Martinez Lopez \n Correo: ana.lucia@usac.com \n Contraseña: AnaLopez}"];
+        n2 [label = "{<data> ID: 3 \n Nombre: Luis Enrique Perez Ramirez \n Correo: luis.enrique@usac.com \n Contraseña: LuisRamirez}"];
+        n3 [label = "{<data> ID: 4 \n Nombre: Marta Isabel Lopez Perez \n Correo: marta.isabel@usac.com \n Contraseña: MartaPerez}"];
+        n4 [label = "{<data> ID: 6 \n Nombre: Maria Fernanda Garcia Lopez \n Correo: maria.fernanda@usac.com \n Contraseña: MariaLopez}"];
+        n5 [label = "{<data> ID: 7 \n Nombre: Pedro Pablo Rodriguez Torres \n Correo: pedro.pablo@usac.com \n Contraseña: PedroTorres}"];
+        n6 [label = "{<data> ID: 8 \n Nombre: Laura Isabel Sanchez Morales \n Correo: laura.isabel@usac.com \n Contraseña: LauraMorales}"];
+        n7 [label = "{<data> ID: 9 \n Nombre: Rafael Alejandro Ramirez Diaz \n Correo: rafael.alejandro@usac.com \n Contraseña: RafaelDiaz}"];
+        n8 [label = "{<data> ID: 10 \n Nombre: Isabel Cristina Diaz Lopez \n Correo: isabel.cristina@usac.com \n Contraseña: IsabelLopez}"];
+        n9 [label = "{<data> ID: 16 \n Nombre: Esteban Sánchez Túchez \n Correo: esteban07sanchez@gmail.com \n Contraseña: EDD}"];
         n0 -> n1;
         n1 -> n2;
         n2 -> n3;
@@ -20,5 +21,6 @@ digraph G {
         n5 -> n6;
         n6 -> n7;
         n7 -> n8;
+        n8 -> n9;
     }
 }
