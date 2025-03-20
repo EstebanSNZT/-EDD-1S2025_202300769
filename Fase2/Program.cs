@@ -1,2 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Gtk;
+using Global;
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Application.Init();
+
+        GlobalWindows.login.ShowAll();
+
+        Application.Run();
+    }
+}
