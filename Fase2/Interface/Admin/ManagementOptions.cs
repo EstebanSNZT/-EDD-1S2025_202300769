@@ -1,5 +1,5 @@
 using Gtk;
-
+using Global;
 namespace Interface
 {
     public class EntityManagement : Window
@@ -34,7 +34,7 @@ namespace Interface
             Label optionsLabel2 = new Label();
             optionsLabel2.Markup = "<span font='Arial 18' weight='bold'>desea gestionar:</span>";
             optionsLabel2.Halign = Align.Center;
-            fixedContainer.Put(optionsLabel2, 95, 40);
+            fixedContainer.Put(optionsLabel2, 89, 40);
 
             Button usersButton = new Button("Usuarios");
             usersButton.SetSizeRequest(280, 35);
@@ -58,17 +58,19 @@ namespace Interface
 
         private void OnReturnButtonClicked(object sender, EventArgs e)
         {
-            Global.GlobalWindows.adminMenu.ShowAll();
+            GlobalWindows.adminMenu.ShowAll();
             Hide();
         }
 
         private void OnUsersButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.userManagement.ShowAll();
             Hide();
         }
 
         private void OnVehiclesButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.vehicleManagement.ShowAll();
             Hide();
         }
     }

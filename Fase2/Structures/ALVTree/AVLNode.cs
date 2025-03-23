@@ -1,6 +1,6 @@
 using Classes;
 
-namespace DataStructures
+namespace Structures
 {
     public class AVLNode
     {

@@ -1,6 +1,6 @@
 using Classes;
 
-namespace DataStructures
+namespace Structures
 {
     public class DoublyLinkedList
     {
@@ -29,28 +29,30 @@ namespace DataStructures
             }
         }
 
-        public void Delete(Vehicle data)
+        public bool Delete(int id)
         {
-            if (head == null) return;
+            if (head == null) return false;
 
             DoublyLinkedNode current = head;
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if (current.Data.Id == id)
                 {
                     if (current.Prev != null)
                         current.Prev.Next = current.Next;
                     else
                         head = current.Next;
+    
                     if (current.Next != null)
                         current.Next.Prev = current.Prev;
                     else
                         tail = current.Prev;
 
-                    return;
+                    return true;
                 }
                 current = current.Next;
             }
+            return false;
         }
 
         public void DeleteByUserId(int userId)
@@ -75,7 +77,7 @@ namespace DataStructures
             }
         }
 
-        public Vehicle GetVehicle(int id)
+        public Vehicle Get(int id)
         {
             DoublyLinkedNode current = head;
             while (current != null)
@@ -93,7 +95,7 @@ namespace DataStructures
 
         public bool Contains(int id)
         {
-            return GetVehicle(id) != null;
+            return Get(id) != null;
         }
 
         public void Print()

@@ -1,12 +1,12 @@
-using Classes;
-using DataStructures;
+using Structures;
 
 namespace Global
 {
-    public class GlobalDataStructures
+    public class GlobalStructures
     {
         public static LinkedList UsersList = new LinkedList();
         public static DoublyLinkedList VehiclesList = new DoublyLinkedList();
-        public static AVLTree sparePartsTree = new AVLTree();
+        public static AVLTree SparePartsTree = new AVLTree();
+        public BinaryTree ServicesTree = new BinaryTree();
     }
 }

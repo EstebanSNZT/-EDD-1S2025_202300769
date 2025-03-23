@@ -1,11 +1,16 @@
 using System.Text;
 using Classes;
 
-namespace DataStructures
+namespace Structures
 {
     public class AVLTree
     {
         private AVLNode root { get; set; }
+
+        public AVLTree()
+        {
+            root = null;
+        }
 
         private int GetHeight(AVLNode node)
         {
@@ -68,12 +73,11 @@ namespace DataStructures
                 return RotateRight(node);
 
             // Right-Right
-            if(balance < -1 && data.Id > node.Right.Data.Id)
+            if (balance < -1 && data.Id > node.Right.Data.Id)
                 return RotateLeft(node);
 
-            
             // Left-Right
-            if(balance > 1 && data.Id > node.Left.Data.Id)
+            if (balance > 1 && data.Id > node.Left.Data.Id)
             {
                 node.Left = RotateLeft(node.Left);
                 return RotateRight(node);
@@ -89,12 +93,30 @@ namespace DataStructures
             return node;
         }
 
+        public SparePart Get(int id)
+        {
+            return GetRecursive(root, id);
+        }
+
+        private SparePart GetRecursive(AVLNode node, int id)
+        {
+            if (node == null) return null;
+
+            if (id < node.Data.Id)
+                return GetRecursive(node.Left, id);
+            else if (id > node.Data.Id)
+                return GetRecursive(node.Right, id);
+            else
+                return node.Data;
+        }
+
         public string GenerateDot()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("digraph ALVTree {");
             sb.AppendLine("    node [shape=box];");
             sb.AppendLine("    rankdir=TB;");
+            sb.AppendLine("    label = \"Árbol AVL\";\n");
             GenerateDotNodes(root, sb);
             GenerateDotConnections(root, sb);
             sb.AppendLine("}");

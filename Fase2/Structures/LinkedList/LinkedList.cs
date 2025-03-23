@@ -1,6 +1,6 @@
 using Classes;
 
-namespace DataStructures
+namespace Structures
 {
     public class LinkedList
     {
@@ -30,19 +30,19 @@ namespace DataStructures
             }
         }
 
-        public void Delete(User data)
+        public bool Delete(int id)
         {
-            if (head == null) return;
+            if (head == null) return false;
 
-            if (head.Data.Equals(data))
+            if (head.Data.Id == id)
             {
                 head = head.Next;
-                return;
+                return true;
             }
 
             LinkedNode current = head;
 
-            while (current.Next != null && !current.Next.Data.Equals(data))
+            while (current.Next != null && !(current.Next.Data.Id == id))
             {
                 current = current.Next;
             }
@@ -50,7 +50,10 @@ namespace DataStructures
             if (current.Next != null)
             {
                 current.Next = current.Next.Next;
+                return true;
             }
+
+            return false;
         }
 
         public void Print()
@@ -64,7 +67,7 @@ namespace DataStructures
             }
         }
 
-        public User GetUser(int id)
+        public User Get(int id)
         {
             LinkedNode current = head;
             while (current != null)
@@ -80,7 +83,7 @@ namespace DataStructures
 
         public bool Contains(int id)
         {
-            return GetUser(id) != null;
+            return Get(id) != null;
         }
 
         public bool IsEmpty()

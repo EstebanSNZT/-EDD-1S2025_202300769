@@ -1,5 +1,5 @@
 using Classes;
-namespace DataStructures
+namespace Structures
 {
     public class DoublyLinkedNode
     {

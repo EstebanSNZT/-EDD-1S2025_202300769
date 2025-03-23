@@ -97,9 +97,9 @@ namespace Interface
                         foreach (var localUser in localUsers)
                         {
                             User newUser = new User(localUser.ID, localUser.Nombres, localUser.Apellidos, localUser.Correo, localUser.Edad, localUser.Contrasenia);
-                            GlobalDataStructures.UsersList.Insert(newUser);
+                            GlobalStructures.UsersList.Insert(newUser);
                         }
-                        GlobalDataStructures.UsersList.Print();
+                        GlobalStructures.UsersList.Print();
                     }
 
                 }
@@ -110,17 +110,17 @@ namespace Interface
                     {
                         foreach (var localVehicle in localVehicles)
                         {
-                            if (GlobalDataStructures.UsersList.Contains(localVehicle.ID_Usuario))
+                            if (GlobalStructures.UsersList.Contains(localVehicle.ID_Usuario))
                             {
                                 Vehicle newVehicle = new Vehicle(localVehicle.ID, localVehicle.ID_Usuario, localVehicle.Marca, localVehicle.Modelo, localVehicle.Placa);
-                                GlobalDataStructures.VehiclesList.Insert(newVehicle);
+                                GlobalStructures.VehiclesList.Insert(newVehicle);
                             }
                             else
                             {
                                 Console.WriteLine($"Vehiculo con ID {localVehicle.ID} no ingresado dado que el usuario con ID {localVehicle.ID_Usuario} no existe.");
                             }
                         }
-                        GlobalDataStructures.VehiclesList.Print();
+                        GlobalStructures.VehiclesList.Print();
                     }
                 }
                 else if (selectedText == "Repuestos")
@@ -131,7 +131,7 @@ namespace Interface
                         foreach (var localSparePart in localSpareParts)
                         {
                             SparePart newSparePart = new SparePart(localSparePart.ID, localSparePart.Repuesto, localSparePart.Detalles, localSparePart.Costo);
-                            GlobalDataStructures.sparePartsTree.Insert(newSparePart);
+                            GlobalStructures.SparePartsTree.Insert(newSparePart);
                         }
 
                     }

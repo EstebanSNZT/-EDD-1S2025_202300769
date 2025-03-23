@@ -15,6 +15,14 @@ namespace Classes
             Cost = cost;
         }
 
+        public void Update(int id, string spare, string details, double cost)
+        {
+            Id = id;
+            Spare = spare;
+            Details = details;
+            Cost = cost;
+        }
+
         public override string ToString()
         {
             return $"ID: {Id}, Repuesto: {Spare}, Detalles: {Details}, Costo: ${Cost}";
