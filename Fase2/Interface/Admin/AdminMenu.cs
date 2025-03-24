@@ -3,6 +3,7 @@ using Global;
 
 namespace Interface
 {
+
     public class AdminMenu : Window
     {
         public AdminMenu() : base("AutoGest Pro - Admin")
@@ -46,10 +47,10 @@ namespace Interface
             sparePartsUpdateButton.Clicked += OnSparePartsUpdateButtonClicked;
             fixedContainer.Put(sparePartsUpdateButton, 35, 175);
 
-            Button sparePartsVisualization = new Button("Visualización de Repuestos");
-            sparePartsVisualization.SetSizeRequest(280, 35);
-            sparePartsVisualization.Clicked += OnSparePartsVisualizationClicked;
-            fixedContainer.Put(sparePartsVisualization, 35, 230);
+            Button sparePartsVisualizationButton = new Button("Visualización de Repuestos");
+            sparePartsVisualizationButton.SetSizeRequest(280, 35);
+            sparePartsVisualizationButton.Clicked += OnSparePartsVisualizationButtonClicked;
+            fixedContainer.Put(sparePartsVisualizationButton, 35, 230);
 
             Button generateServicesButton = new Button("Generar Servicios");
             generateServicesButton.SetSizeRequest(280, 35);
@@ -88,18 +89,22 @@ namespace Interface
             Hide();
         }
 
-        private void OnSparePartsVisualizationClicked(object sender, EventArgs e)
+        private void OnSparePartsUpdateButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.updatedSparePart.ShowAll();
             Hide();
         }
 
-        private void OnSparePartsUpdateButtonClicked(object sender, EventArgs e)
+        private void OnSparePartsVisualizationButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.viewSparePart.AdjustOrder(GlobalStructures.SparePartsTree.PreOrder());
+            GlobalWindows.viewSparePart.ShowAll();
             Hide();
         }
 
         private void OnGenerateServicesButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.generateService.ShowAll();
             Hide();
         }
 

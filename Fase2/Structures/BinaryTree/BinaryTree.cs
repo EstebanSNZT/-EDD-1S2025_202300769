@@ -1,5 +1,6 @@
 using System.Text;
 using Classes;
+using Gtk;
 
 namespace Structures
 {
@@ -17,7 +18,7 @@ namespace Structures
             if (root == null)
                 root = new BinaryNode(data);
             else
-                InsertRecursive(root, data);                
+                InsertRecursive(root, data);
         }
 
         private void InsertRecursive(BinaryNode node, Service data)
@@ -57,13 +58,76 @@ namespace Structures
                 return node.Data;
         }
 
+        public bool Contains(int id)
+        {
+            return Get(id) != null;
+        }
+
+        public bool IsEmpty()
+        {
+            return root == null;
+        }
+
+        public ListStore PreOrder()
+        {
+            ListStore result = new ListStore(typeof(int), typeof(int), typeof(int), typeof(string), typeof(string));
+            PreOrderRecursive(root, result);
+            return result;
+        }
+
+        private void PreOrderRecursive(BinaryNode node, ListStore result)
+        {
+            if (node == null) return;
+
+            Service service = node.Data;
+            result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
+            PreOrderRecursive(node.Left, result);
+            PreOrderRecursive(node.Right, result);
+        }
+
+        public ListStore InOrder()
+        {
+            ListStore result = new ListStore(typeof(int), typeof(int), typeof(int), typeof(string), typeof(string));
+            InOrderRecursive(root, result);
+            return result;
+        }
+
+        private void InOrderRecursive(BinaryNode node, ListStore result)
+        {
+            if (node == null) return;
+
+            Service service = node.Data;
+            InOrderRecursive(node.Left, result);
+            result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
+            InOrderRecursive(node.Right, result);
+        }
+
+        public ListStore PostOrder()
+        {
+            ListStore result = new ListStore(typeof(int), typeof(int), typeof(int), typeof(string), typeof(string));
+            PostOrderRecursive(root, result);
+            return result;
+        }
+
+        private void PostOrderRecursive(BinaryNode node, ListStore result)
+        {
+            if (node == null) return;
+
+            Service service = node.Data;
+            PostOrderRecursive(node.Left, result);
+            PostOrderRecursive(node.Right, result);
+            result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
+        }
+
         public string GenerateDot()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("digraph BinaryTree {");
             sb.AppendLine("    node [shape=box];");
             sb.AppendLine("    rankdir=TB;");
-            sb.AppendLine("    label = \"Esteban Sánchez\";\n");
+            sb.AppendLine("    label = \"Árbol Binario\";\n");
+            sb.AppendLine("    labelloc = \"t\";\n");
+            sb.AppendLine("    fontsize = 18;\n");
             GenerateDotNodes(root, sb);
             GenerateDotConnections(root, sb);
             sb.AppendLine("}");

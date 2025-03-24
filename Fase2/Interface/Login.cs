@@ -5,7 +5,7 @@ namespace Interface
 {
     public class Login : Window
     {
-        private Entry userEntry = new Entry();
+        private Entry emailEntry = new Entry();
         private Entry passwordEntry = new Entry();
 
         public Login() : base("AutoGest Pro - Inicio de Sesión")
@@ -38,12 +38,12 @@ namespace Interface
             loginLabel.Markup = "<span font='Arial 18' weight='bold'>Inicio de sesión</span>";
             fixedContainer.Put(loginLabel, 135, 65);
 
-            Label userLabel = new Label();
-            userLabel.Markup = "<span font='Arial 16'>Correo:</span>";
-            fixedContainer.Put(userLabel, 65, 125);
+            Label emailLabel = new Label();
+            emailLabel.Markup = "<span font='Arial 16'>Correo:</span>";
+            fixedContainer.Put(emailLabel, 65, 125);
 
-            userEntry.SetSizeRequest(200, 20);
-            fixedContainer.Put(userEntry, 190, 120);
+            emailEntry.SetSizeRequest(200, 20);
+            fixedContainer.Put(emailEntry, 190, 120);
 
             Label passwordLabel = new Label();
             passwordLabel.Markup = "<span font='Arial 16'>Contraseña:</span>";
@@ -65,7 +65,14 @@ namespace Interface
 
         private void OnLoginButtonClicked(object sender, EventArgs e)
         {
-            GlobalWindows.adminMenu.ShowAll();
+            if (string.IsNullOrEmpty(emailEntry.Text))
+            {
+                GlobalWindows.adminMenu.ShowAll();
+            }
+            else
+            {
+                GlobalWindows.userMenu.ShowAll();
+            }
             Hide();
         }
 

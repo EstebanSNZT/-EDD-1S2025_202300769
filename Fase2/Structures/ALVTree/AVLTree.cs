@@ -1,5 +1,6 @@
 using System.Text;
 using Classes;
+using Gtk;
 
 namespace Structures
 {
@@ -109,6 +110,62 @@ namespace Structures
             else
                 return node.Data;
         }
+        
+        public bool IsEmpty()
+        {
+            return root == null;
+        }
+
+        public ListStore PreOrder()
+        {
+            ListStore result = new ListStore(typeof(int), typeof(string), typeof(string), typeof(string));
+            PreOrderRecursive(root, result);
+            return result;
+        }
+
+        private void PreOrderRecursive(AVLNode node, ListStore result)
+        {
+            if (node == null) return;
+            
+            SparePart sparePart = node.Data;
+            result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
+            PreOrderRecursive(node.Left, result);
+            PreOrderRecursive(node.Right, result);
+        }
+
+        public ListStore InOrder()
+        {
+            ListStore result = new ListStore(typeof(int), typeof(string), typeof(string), typeof(string));
+            InOrderRecursive(root, result);
+            return result;
+        }
+
+        private void InOrderRecursive(AVLNode node, ListStore result)
+        {
+            if (node == null) return;
+            
+            SparePart sparePart = node.Data;
+            InOrderRecursive(node.Left, result);
+            result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
+            InOrderRecursive(node.Right, result);
+        }
+
+        public ListStore PostOrder()
+        {
+            ListStore result = new ListStore(typeof(int), typeof(string), typeof(string), typeof(string));
+            PostOrderRecursive(root, result);
+            return result;
+        }
+
+        private void PostOrderRecursive(AVLNode node, ListStore result)
+        {
+            if (node == null) return;
+            
+            SparePart sparePart = node.Data;
+            PostOrderRecursive(node.Left, result);
+            PostOrderRecursive(node.Right, result);
+            result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
+        }
 
         public string GenerateDot()
         {
@@ -117,6 +174,8 @@ namespace Structures
             sb.AppendLine("    node [shape=box];");
             sb.AppendLine("    rankdir=TB;");
             sb.AppendLine("    label = \"Árbol AVL\";\n");
+            sb.AppendLine("    labelloc = \"t\";\n");
+            sb.AppendLine("    fontsize = 18;\n");
             GenerateDotNodes(root, sb);
             GenerateDotConnections(root, sb);
             sb.AppendLine("}");

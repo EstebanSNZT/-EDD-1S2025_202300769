@@ -7,6 +7,6 @@ namespace Global
         public static LinkedList UsersList = new LinkedList();
         public static DoublyLinkedList VehiclesList = new DoublyLinkedList();
         public static AVLTree SparePartsTree = new AVLTree();
-        public BinaryTree ServicesTree = new BinaryTree();
+        public static BinaryTree ServicesTree = new BinaryTree();
     }
 }

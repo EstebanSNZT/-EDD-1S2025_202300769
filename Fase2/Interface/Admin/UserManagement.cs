@@ -13,7 +13,7 @@ namespace Interface
         private Entry ageEntry = new Entry();
         private Entry passwordEntry = new Entry();
 
-        public UserManagement() : base("AutoGest Pro - Ingreso de Usuario")
+        public UserManagement() : base("AutoGest Pro - Gestión de Usuario")
         {
             InitializeComponents();
         }
