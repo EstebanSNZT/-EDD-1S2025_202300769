@@ -93,9 +93,9 @@ namespace Interface
             newDetailsEntry.SetSizeRequest(140, 35);
             fixedContainer.Put(newDetailsEntry, 380, 276);
 
-            Label emailLabel = new Label();
-            emailLabel.Markup = "<span font='Arial 12' weight='bold'>Costo:</span>";
-            fixedContainer.Put(emailLabel, 64, 337);
+            Label costLabel = new Label();
+            costLabel.Markup = "<span font='Arial 12' weight='bold'>Costo:</span>";
+            fixedContainer.Put(costLabel, 64, 337);
 
             currentCostEntry.SetSizeRequest(140, 35);
             currentCostEntry.Sensitive = false;

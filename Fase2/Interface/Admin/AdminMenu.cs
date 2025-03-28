@@ -57,10 +57,10 @@ namespace Interface
             generateServicesButton.Clicked += OnGenerateServicesButtonClicked;
             fixedContainer.Put(generateServicesButton, 35, 285);
 
-            Button logControlButton = new Button("Control de Logueo");
-            logControlButton.SetSizeRequest(280, 35);
-            logControlButton.Clicked += OnLogControlButtonClicked;
-            fixedContainer.Put(logControlButton, 35, 340);
+            Button loginControlButton = new Button("Control de Logueo");
+            loginControlButton.SetSizeRequest(280, 35);
+            loginControlButton.Clicked += OnLoginControlButtonClicked;
+            fixedContainer.Put(loginControlButton, 35, 340);
 
             Button generateReportsButton = new Button("Generar Reportes");
             generateReportsButton.SetSizeRequest(280, 35);
@@ -97,8 +97,9 @@ namespace Interface
 
         private void OnSparePartsVisualizationButtonClicked(object sender, EventArgs e)
         {
-            GlobalWindows.viewSparePart.AdjustOrder(GlobalStructures.SparePartsTree.PreOrder());
-            GlobalWindows.viewSparePart.ShowAll();
+            GlobalWindows.sparePartsVisualization.UpdateData();
+            GlobalWindows.sparePartsVisualization.AdjustTraversal(0);
+            GlobalWindows.sparePartsVisualization.ShowAll();
             Hide();
         }
 
@@ -108,9 +109,10 @@ namespace Interface
             Hide();
         }
 
-        private void OnLogControlButtonClicked(object sender, EventArgs e)
+        private void OnLoginControlButtonClicked(object sender, EventArgs e)
         {
-            Hide();
+            LoginControl.CreateJson();
+            Login.ShowDialog(this, MessageType.Info, "El archivo ControlLogueo.json ha sido creado con exito en la carpeta Reportes.");
         }
 
         private void OnGenerateReportsButtonButtonClicked(object sender, EventArgs e)

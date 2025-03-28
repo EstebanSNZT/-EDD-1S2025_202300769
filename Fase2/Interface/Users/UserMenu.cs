@@ -70,36 +70,28 @@ namespace Interface
 
         private void OnServicesVisualizationButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.servicesVisualization.UpdateData(LoginControl.LoggedUserId);
+            GlobalWindows.servicesVisualization.AdjustTraversal(0);
+            GlobalWindows.servicesVisualization.ShowAll();
             Hide();
         }
 
         private void OnInvoicesVisualizationButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.invoicesVisualization.ShowAll();
             Hide();
         }
 
         private void OnCancelInvoicesButtonClicked(object sender, EventArgs e)
         {
-            Hide();
-        }
-
-        private void OnGenerateServicesButtonClicked(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
-        private void OnLogControlButtonClicked(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
-        private void OnGenerateReportsButtonButtonClicked(object sender, EventArgs e)
-        {
+            GlobalWindows.cancelInvoice.ShowAll();
             Hide();
         }
 
         private void OnLogoutButtonClicked(object sender, EventArgs e)
         {
+            LoginControl.GenerateLogoutTime();
+            LoginControl.AddLogin();
             GlobalWindows.login.ShowAll();
             Hide();
         }

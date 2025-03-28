@@ -1,3 +1,4 @@
+using Classes;
 using Global;
 using Gtk;
 
@@ -65,22 +66,51 @@ namespace Interface
 
         private void OnLoginButtonClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(emailEntry.Text))
+            string email = emailEntry.Text;
+            string password = passwordEntry.Text;
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
+                ShowDialog(this, MessageType.Error, "Por favor, complete todos los campos.");
+                return;
+            }
+
+            if (email.Equals("admin@usac.com") && password.Equals("admin123"))
+            {
+                ShowDialog(this, MessageType.Info, "¡Bienvenido Admin!");
+                CleanEntrys();
                 GlobalWindows.adminMenu.ShowAll();
+                Hide();
             }
             else
             {
+                User user = GlobalStructures.UsersList.GetByEmail(email);
+
+                if (user == null || !user.Password.Equals(password))
+                {
+                    ShowDialog(this, MessageType.Error, "Correo o contraseña incorrectos.");
+                    return;
+                }
+
+                ShowDialog(this, MessageType.Info, $"Bienvenido {user.Names} {user.LastNames}!");
+                LoginControl.GenerateLoginTime(user.Id, user.Email);
+                CleanEntrys();
                 GlobalWindows.userMenu.ShowAll();
+                Hide();
             }
-            Hide();
         }
 
         public static void ShowDialog(Window window, MessageType messageType, string message)
         {
             MessageDialog dialog = new MessageDialog(window, DialogFlags.Modal, messageType, ButtonsType.Ok, message);
             dialog.Run();
-            dialog.Dispose();
+            dialog.Destroy();
+        }
+
+        public void CleanEntrys()
+        {
+            emailEntry.Text = "";
+            passwordEntry.Text = "";
         }
     }
 }

@@ -99,7 +99,6 @@ namespace Interface
                             User newUser = new User(localUser.ID, localUser.Nombres, localUser.Apellidos, localUser.Correo, localUser.Edad, localUser.Contrasenia);
                             GlobalStructures.UsersList.Insert(newUser);
                         }
-                        GlobalStructures.UsersList.Print();
                     }
 
                 }
@@ -120,7 +119,6 @@ namespace Interface
                                 Console.WriteLine($"Vehiculo con ID {localVehicle.ID} no ingresado dado que el usuario con ID {localVehicle.ID_Usuario} no existe.");
                             }
                         }
-                        GlobalStructures.VehiclesList.Print();
                     }
                 }
                 else if (selectedText == "Repuestos")

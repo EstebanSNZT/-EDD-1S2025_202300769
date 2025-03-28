@@ -81,6 +81,21 @@ namespace Structures
             return null;
         }
 
+        public User GetByEmail(string email)
+        {
+            LinkedNode current = head;
+            while (current != null)
+            {
+                if (current.Data.Email.Equals(email))
+                {
+                    return current.Data;
+                }
+                current = current.Next;
+            }
+            return null;
+        }
+
+
         public bool Contains(int id)
         {
             return Get(id) != null;

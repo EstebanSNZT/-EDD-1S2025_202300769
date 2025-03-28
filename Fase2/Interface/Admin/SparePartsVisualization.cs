@@ -7,6 +7,9 @@ namespace Interface
     {
         private ComboBoxText comboBox = new ComboBoxText();
         private TreeView treeView = new TreeView();
+        private ListStore preOrder;
+        private ListStore inOrder;
+        private ListStore postOrder;
 
         public SparePartsVisualization() : base("AutoGest Pro - Visualización de Repuestos")
         {
@@ -73,23 +76,30 @@ namespace Interface
 
         private void OnComboBoxChanged(object sender, EventArgs e)
         {
-            switch (comboBox.Active)
+            AdjustTraversal(comboBox.Active);
+        }
+
+        public void AdjustTraversal(int traversalNumber)
+        {
+            switch (traversalNumber)
             {
                 case 0:
-                    AdjustOrder(GlobalStructures.SparePartsTree.PreOrder());
+                    treeView.Model = preOrder;
                     break;
                 case 1:
-                    AdjustOrder(GlobalStructures.SparePartsTree.InOrder());
+                    treeView.Model = inOrder;
                     break;
                 case 2:
-                    AdjustOrder(GlobalStructures.SparePartsTree.PostOrder());
+                    treeView.Model = postOrder;
                     break;
             }
         }
 
-        public void AdjustOrder(ListStore order)
+        public void UpdateData()
         {
-            treeView.Model = order;
+            preOrder = GlobalStructures.SparePartsTree.PreOrder();
+            inOrder = GlobalStructures.SparePartsTree.InOrder();
+            postOrder = GlobalStructures.SparePartsTree.PostOrder();
         }
     }
 }

@@ -8,10 +8,10 @@ namespace Utilities
         {
             try
             {
-                string carpeta = Path.Combine(Directory.GetCurrentDirectory(), "Reportes");
-                if (!Directory.Exists(carpeta))
+                string folder = Path.Combine(Directory.GetCurrentDirectory(), "Reportes");
+                if (!Directory.Exists(folder))
                 {
-                    Directory.CreateDirectory(carpeta);
+                    Directory.CreateDirectory(folder);
                 }
 
                 if (string.IsNullOrEmpty(name))
@@ -25,7 +25,7 @@ namespace Utilities
                     name += ".dot";
                 }
 
-                string rutaArchivo = Path.Combine(carpeta, name);
+                string rutaArchivo = Path.Combine(folder, name);
                 File.WriteAllText(rutaArchivo, content);
 
                 Console.WriteLine($"Archivo generado con éxito en: {rutaArchivo}");

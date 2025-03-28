@@ -7,6 +7,9 @@ namespace Interface
     {
         private ComboBoxText comboBox = new ComboBoxText();
         private TreeView treeView = new TreeView();
+        private ListStore preOrder;
+        private ListStore inOrder;
+        private ListStore postOrder;
 
         public ServicesVisualization() : base("AutoGest Pro - Visualización de Servicios")
         {
@@ -32,7 +35,7 @@ namespace Interface
 
             Label menuLabel = new Label();
             menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Visualización de Servicios</span>";
-            fixedContainer.Put(menuLabel, 124, 15);
+            fixedContainer.Put(menuLabel, 156, 15);
 
             comboBox.AppendText("Pre-Orden");
             comboBox.AppendText("In-Orden");
@@ -49,9 +52,10 @@ namespace Interface
             fixedContainer.Put(scrollWindow, 40, 130);
 
             treeView.AppendColumn("ID", new CellRendererText(), "text", 0);
-            treeView.AppendColumn("Repuesto", new CellRendererText(), "text", 1);
-            treeView.AppendColumn("Detalles", new CellRendererText(), "text", 2);
-            treeView.AppendColumn("Costo", new CellRendererText(), "text", 3);
+            treeView.AppendColumn("ID Repuesto", new CellRendererText(), "text", 1);
+            treeView.AppendColumn("ID Vehículo", new CellRendererText(), "text", 2);
+            treeView.AppendColumn("Detalles", new CellRendererText(), "text", 3);
+            treeView.AppendColumn("Costo", new CellRendererText(), "text", 4);
             scrollWindow.Add(treeView);
 
             Button returnButton = new Button("Volver");
@@ -67,29 +71,36 @@ namespace Interface
         private void OnReturnButtonClicked(object sender, EventArgs e)
         {
             comboBox.Active = 0;
-            GlobalWindows.adminMenu.ShowAll();
+            GlobalWindows.userMenu.ShowAll();
             Hide();
         }
 
         private void OnComboBoxChanged(object sender, EventArgs e)
         {
-            switch (comboBox.Active)
+            AdjustTraversal(comboBox.Active);
+        }
+
+        public void AdjustTraversal(int traversalNumber)
+        {
+            switch (traversalNumber)
             {
                 case 0:
-                    AdjustOrder(GlobalStructures.SparePartsTree.PreOrder());
+                    treeView.Model = preOrder;
                     break;
                 case 1:
-                    AdjustOrder(GlobalStructures.SparePartsTree.InOrder());
+                    treeView.Model = inOrder;
                     break;
                 case 2:
-                    AdjustOrder(GlobalStructures.SparePartsTree.PostOrder());
+                    treeView.Model = postOrder;
                     break;
             }
         }
 
-        public void AdjustOrder(ListStore order)
+        public void UpdateData(int userId)
         {
-            treeView.Model = order;
+            preOrder = GlobalStructures.ServicesTree.PreOrder(userId);
+            inOrder = GlobalStructures.ServicesTree.InOrder(userId);
+            postOrder = GlobalStructures.ServicesTree.PostOrder(userId);
         }
     }
 }

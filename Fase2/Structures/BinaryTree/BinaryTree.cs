@@ -1,6 +1,7 @@
 using System.Text;
 using Classes;
 using Gtk;
+using Global;
 
 namespace Structures
 {
@@ -68,55 +69,65 @@ namespace Structures
             return root == null;
         }
 
-        public ListStore PreOrder()
+        public ListStore PreOrder(int userId)
         {
             ListStore result = new ListStore(typeof(int), typeof(int), typeof(int), typeof(string), typeof(string));
-            PreOrderRecursive(root, result);
+            PreOrderRecursive(root, result, userId);
             return result;
         }
 
-        private void PreOrderRecursive(BinaryNode node, ListStore result)
+        private void PreOrderRecursive(BinaryNode node, ListStore result, int userId)
         {
             if (node == null) return;
 
             Service service = node.Data;
-            result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
-            PreOrderRecursive(node.Left, result);
-            PreOrderRecursive(node.Right, result);
+            Vehicle vehicle = GlobalStructures.VehiclesList.Get(service.VehicleId);
+            if (vehicle != null && vehicle.UserId == userId)
+                result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
+
+            PreOrderRecursive(node.Left, result, userId);
+            PreOrderRecursive(node.Right, result, userId);
         }
 
-        public ListStore InOrder()
+        public ListStore InOrder(int userId)
         {
             ListStore result = new ListStore(typeof(int), typeof(int), typeof(int), typeof(string), typeof(string));
-            InOrderRecursive(root, result);
+            InOrderRecursive(root, result, userId);
             return result;
         }
 
-        private void InOrderRecursive(BinaryNode node, ListStore result)
+        private void InOrderRecursive(BinaryNode node, ListStore result, int userId)
         {
             if (node == null) return;
 
+            InOrderRecursive(node.Left, result, userId);
+
             Service service = node.Data;
-            InOrderRecursive(node.Left, result);
-            result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
-            InOrderRecursive(node.Right, result);
+            Vehicle vehicle = GlobalStructures.VehiclesList.Get(service.VehicleId);
+            if (vehicle != null && vehicle.UserId == userId)
+                result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
+
+            InOrderRecursive(node.Right, result, userId);
         }
 
-        public ListStore PostOrder()
+        public ListStore PostOrder(int userId)
         {
             ListStore result = new ListStore(typeof(int), typeof(int), typeof(int), typeof(string), typeof(string));
-            PostOrderRecursive(root, result);
+            PostOrderRecursive(root, result, userId);
             return result;
         }
 
-        private void PostOrderRecursive(BinaryNode node, ListStore result)
+        private void PostOrderRecursive(BinaryNode node, ListStore result, int userId)
         {
             if (node == null) return;
 
+            PostOrderRecursive(node.Left, result, userId);
+            PostOrderRecursive(node.Right, result, userId);
+
             Service service = node.Data;
-            PostOrderRecursive(node.Left, result);
-            PostOrderRecursive(node.Right, result);
-            result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
+            Vehicle vehicle = GlobalStructures.VehiclesList.Get(service.VehicleId);
+            if (vehicle != null && vehicle.UserId == userId)
+                result.AppendValues(service.Id, service.SparePartId, service.VehicleId, service.Details, service.Cost.ToString("F2"));
         }
 
         public string GenerateDot()

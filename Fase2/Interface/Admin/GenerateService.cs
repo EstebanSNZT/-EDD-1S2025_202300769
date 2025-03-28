@@ -11,6 +11,7 @@ namespace Interface
         private Entry vehicleIdEntry = new Entry();
         private Entry detailsEntry = new Entry();
         private Entry costEntry = new Entry();
+        private int invoiceId = 1;
 
         public GenerateService() : base("AutoGest Pro - Generar Servicio")
         {
@@ -152,7 +153,11 @@ namespace Interface
             Service newService = new Service(id, sparePartId, vehicleId, detailsEntry.Text, cost);
             GlobalStructures.ServicesTree.Insert(newService);
 
-            Login.ShowDialog(this, MessageType.Info, "Servicio generado con éxito.");
+            Invoice newInvoice = new Invoice(invoiceId, newService.Id, newService.Cost + sparePart.Cost);
+            GlobalStructures.InvoicesTree.Insert(newInvoice);
+            invoiceId++;
+
+            Login.ShowDialog(this, MessageType.Info, "Servicio y factura generados con éxito.");
             CleanEntrys();
         }
 

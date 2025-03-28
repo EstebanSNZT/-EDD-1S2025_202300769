@@ -7,7 +7,6 @@ namespace Interface
     public class InsertVehicle : Window
     {
         private Entry idEntry = new Entry();
-        private Entry idUserEntry = new Entry();
         private Entry brandEntry = new Entry();
         private Entry modelEntry = new Entry();
         private Entry plateEntry = new Entry();
@@ -24,7 +23,7 @@ namespace Interface
 
         private void InitializeComponents()
         {
-            SetSizeRequest(400, 461); //(ancho, alto)
+            SetSizeRequest(400, 405); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
             if (Child != null)
@@ -45,43 +44,36 @@ namespace Interface
             idEntry.SetSizeRequest(140, 35);
             fixedContainer.Put(idEntry, 182, 76);
 
-            Label idUserLabel = new Label();
-            idUserLabel.Markup = "<span font='Arial 12' weight='bold'>ID Usuario:</span>";
-            fixedContainer.Put(idUserLabel, 51, 137);
-
-            idUserEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(idUserEntry, 182, 131);
-
             Label brandLabel = new Label();
             brandLabel.Markup = "<span font='Arial 12' weight='bold'>Marca:</span>";
-            fixedContainer.Put(brandLabel, 68, 192);
+            fixedContainer.Put(brandLabel, 68, 137);
 
             brandEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(brandEntry, 182, 186);
+            fixedContainer.Put(brandEntry, 182, 131);
 
             Label modelLabel = new Label();
             modelLabel.Markup = "<span font='Arial 12' weight='bold'>Modelo:</span>";
-            fixedContainer.Put(modelLabel, 63, 247);
+            fixedContainer.Put(modelLabel, 63, 192);
 
             modelEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(modelEntry, 182, 241);
+            fixedContainer.Put(modelEntry, 182, 186);
 
             Label plateLabel = new Label();
             plateLabel.Markup = "<span font='Arial 12' weight='bold'>Placa:</span>";
-            fixedContainer.Put(plateLabel, 70, 302);
+            fixedContainer.Put(plateLabel, 70, 247);
 
             plateEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(plateEntry, 182, 296);
+            fixedContainer.Put(plateEntry, 182, 241);
 
             Button saveButton = new Button("Guardar");
             saveButton.SetSizeRequest(120, 30);
             saveButton.Clicked += OnSaveButtonClicked;
-            fixedContainer.Put(saveButton, 140, 351);
+            fixedContainer.Put(saveButton, 140, 296);
 
             Button returnButton = new Button("Volver");
             returnButton.SetSizeRequest(50, 20);
             returnButton.Clicked += OnReturnButtonClicked;
-            fixedContainer.Put(returnButton, 20, 405);
+            fixedContainer.Put(returnButton, 20, 350);
 
             Add(fixedContainer);
 
@@ -97,13 +89,14 @@ namespace Interface
 
         private void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(idEntry.Text) || string.IsNullOrWhiteSpace(idUserEntry.Text) ||
-                string.IsNullOrWhiteSpace(brandEntry.Text) || string.IsNullOrWhiteSpace(modelEntry.Text) ||
-                string.IsNullOrWhiteSpace(plateEntry.Text))
+            if (string.IsNullOrWhiteSpace(idEntry.Text) || string.IsNullOrWhiteSpace(brandEntry.Text) ||
+                string.IsNullOrWhiteSpace(modelEntry.Text) || string.IsNullOrWhiteSpace(plateEntry.Text))
             {
                 Login.ShowDialog(this, MessageType.Error, "Por favor, llene todos los campos.");
                 return;
             }
+
+            int idUser = LoginControl.LoggedUserId;
 
             if (!int.TryParse(idEntry.Text, out int id))
             {
@@ -111,21 +104,15 @@ namespace Interface
                 return;
             }
 
-            if (!int.TryParse(idUserEntry.Text, out int idUser))
+            if (!int.TryParse(modelEntry.Text, out int model))
             {
-                Login.ShowDialog(this, MessageType.Error, "ID de usuario inválido.");
+                Login.ShowDialog(this, MessageType.Error, "Modelo inválido.");
                 return;
             }
 
             if (!GlobalStructures.UsersList.Contains(idUser))
             {
                 Login.ShowDialog(this, MessageType.Error, "ID de usuario inexiste.");
-                return;
-            }         
-
-            if (!int.TryParse(modelEntry.Text, out int model))
-            {
-                Login.ShowDialog(this, MessageType.Error, "Modelo inválido.");
                 return;
             }
 
@@ -145,7 +132,6 @@ namespace Interface
         private void CleanEntrys()
         {
             idEntry.Text = "";
-            idUserEntry.Text = "";
             brandEntry.Text = "";
             modelEntry.Text = "";
             plateEntry.Text = "";
