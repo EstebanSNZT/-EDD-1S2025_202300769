@@ -1,6 +1,7 @@
 using Classes;
 using Gtk;
 using Global;
+using System.Text;
 
 namespace Structures
 {
@@ -141,7 +142,7 @@ namespace Structures
         public void Delete(int id)
         {
             DeleteRecursive(root, id);
-            
+
             if (root.Keys.Count == 0 && !root.IsLeaf)
             {
                 BNode oldRoot = root;
@@ -315,7 +316,58 @@ namespace Structures
 
         public bool IsEmpty()
         {
-            return root == null;
+            return root.Keys.Count == 0;
+        }
+
+        public string GenerateDot()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("digraph BTree {");
+            sb.AppendLine("    node [shape=record];");
+            sb.AppendLine("    rankdir=TB;");
+            sb.AppendLine("    subgraph cluster_0 {");
+            sb.AppendLine("        label = \"Árbol B\";");
+
+            int nodeCounter = 0;
+            GenerateDotRecursive(root, sb, ref nodeCounter);
+
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+            return sb.ToString();
+        }
+
+        private void GenerateDotRecursive(BNode node, StringBuilder sb, ref int nodeCounter)
+        {
+            if (node == null)
+                return;
+
+            int currentNode = nodeCounter++;
+
+            StringBuilder nodeLabel = new StringBuilder();
+            nodeLabel.Append($"        n{currentNode} [label=\"");
+
+            for (int i = 0; i < node.Keys.Count; i++)
+            {
+                if (i > 0)
+                    nodeLabel.Append("|");
+                nodeLabel.Append($"<f{i}> |Id: {node.Keys[i].Id}, Orden: {node.Keys[i].ServiceId}, Total: {node.Keys[i].Total}|");
+            }
+
+            if (node.Keys.Count > 0)
+                nodeLabel.Append($"<f{node.Keys.Count}>");
+
+            nodeLabel.Append("\"];");
+            sb.AppendLine(nodeLabel.ToString());
+
+            if (!node.IsLeaf)
+            {
+                for (int i = 0; i <= node.Keys.Count; i++)
+                {
+                    int childPosition = nodeCounter;
+                    GenerateDotRecursive(node.Children[i], sb, ref nodeCounter);
+                    sb.AppendLine($"        n{currentNode}:f{i} -> n{childPosition};");
+                }
+            }
         }
     }
 }

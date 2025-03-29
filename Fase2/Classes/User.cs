@@ -23,5 +23,10 @@ namespace Classes
         {
             return $"ID: {Id}, Nombres: {Names}, Apellidos: {LastNames}, Correo: {Email}, Edad: {Age}, Contraseña: {Password}";
         }
+
+        public string ToDotNode()
+        {
+            return $"[label = \"{{<data> ID: {Id} \\n Nombre: {Names} {LastNames} \\n Correo: {Email} \\n Edad: {Age} \\n Contraseña: {Password}}}\"];";
+        }
     }
 }

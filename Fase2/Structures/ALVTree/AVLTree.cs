@@ -173,11 +173,11 @@ namespace Structures
             sb.AppendLine("digraph ALVTree {");
             sb.AppendLine("    node [shape=box];");
             sb.AppendLine("    rankdir=TB;");
-            sb.AppendLine("    label = \"Árbol AVL\";\n");
-            sb.AppendLine("    labelloc = \"t\";\n");
-            sb.AppendLine("    fontsize = 18;\n");
+            sb.AppendLine("    subgraph cluster_0 {");
+            sb.AppendLine("        label = \"Árbol AVL\";");
             GenerateDotNodes(root, sb);
             GenerateDotConnections(root, sb);
+            sb.AppendLine("    }"); 
             sb.AppendLine("}");
             return sb.ToString();
         }
@@ -185,7 +185,7 @@ namespace Structures
         public void GenerateDotNodes(AVLNode node, StringBuilder sb)
         {
             if (node == null) return;
-            sb.Append("    ").Append(node.Data.ToDotNode()).AppendLine();
+            sb.Append("        ").Append(node.Data.ToDotNode()).AppendLine();
             GenerateDotNodes(node.Left, sb);
             GenerateDotNodes(node.Right, sb);
         }
@@ -194,9 +194,9 @@ namespace Structures
         {
             if (node == null) return;
             if (node.Left != null)
-                sb.AppendLine($"    \"{node.Data.Id}\" -> \"{node.Left.Data.Id}\";");
+                sb.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Left.Data.Id}\";");
             if (node.Right != null)
-                sb.AppendLine($"    \"{node.Data.Id}\" -> \"{node.Right.Data.Id}\";");
+                sb.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Right.Data.Id}\";");
             GenerateDotConnections(node.Left, sb);
             GenerateDotConnections(node.Right, sb);
         }

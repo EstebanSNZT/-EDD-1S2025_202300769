@@ -1,0 +1,50 @@
+digraph DoublyLinkedList {
+    node [shape=record];
+    rankdir=LR;
+    subgraph cluster_0 {
+        label = "Lista Doblemente Enlazada";
+        n0 [label = "{<data> ID: 1 \n ID_Usuario: 1 \n Marca: Honda Civic \n Modelo: 2005 \n Placa: XZJ7H9K}"];
+        n1 [label = "{<data> ID: 2 \n ID_Usuario: 2 \n Marca: Toyota Corolla \n Modelo: 2010 \n Placa: JKS8T5A}"];
+        n2 [label = "{<data> ID: 3 \n ID_Usuario: 2 \n Marca: Ford Focus \n Modelo: 2008 \n Placa: YT2XG9M}"];
+        n3 [label = "{<data> ID: 4 \n ID_Usuario: 3 \n Marca: Nissan Altima \n Modelo: 2012 \n Placa: FTE6V3R}"];
+        n4 [label = "{<data> ID: 5 \n ID_Usuario: 3 \n Marca: Chevrolet Aveo \n Modelo: 2007 \n Placa: BZX5D2L}"];
+        n5 [label = "{<data> ID: 6 \n ID_Usuario: 3 \n Marca: Hyundai Elantra \n Modelo: 2015 \n Placa: QWE3P0F}"];
+        n6 [label = "{<data> ID: 7 \n ID_Usuario: 4 \n Marca: Mazda 3 \n Modelo: 2011 \n Placa: MSD9H8A}"];
+        n7 [label = "{<data> ID: 8 \n ID_Usuario: 5 \n Marca: Kia Rio \n Modelo: 2014 \n Placa: RT5Y4O2}"];
+        n8 [label = "{<data> ID: 9 \n ID_Usuario: 5 \n Marca: Honda Accord \n Modelo: 2009 \n Placa: VBR9P1S}"];
+        n9 [label = "{<data> ID: 10 \n ID_Usuario: 6 \n Marca: Subaru Impreza \n Modelo: 2016 \n Placa: XZJ3M5P}"];
+        n10 [label = "{<data> ID: 11 \n ID_Usuario: 6 \n Marca: BMW X3 \n Modelo: 2013 \n Placa: BNM8D7Q}"];
+        n11 [label = "{<data> ID: 12 \n ID_Usuario: 7 \n Marca: Volkswagen Jetta \n Modelo: 2012 \n Placa: JXK3L9D}"];
+        n12 [label = "{<data> ID: 13 \n ID_Usuario: 8 \n Marca: Toyota Camry \n Modelo: 2014 \n Placa: OIJ6R4F}"];
+        n13 [label = "{<data> ID: 14 \n ID_Usuario: 9 \n Marca: Chevrolet Spark \n Modelo: 2011 \n Placa: XTR9E1Q}"];
+        n14 [label = "{<data> ID: 15 \n ID_Usuario: 10 \n Marca: Mazda CX-5 \n Modelo: 2017 \n Placa: VWL3P0D}"];
+        n0 -> n1;
+        n1 -> n2;
+        n1 -> n0;
+        n2 -> n3;
+        n2 -> n1;
+        n3 -> n4;
+        n3 -> n2;
+        n4 -> n5;
+        n4 -> n3;
+        n5 -> n6;
+        n5 -> n4;
+        n6 -> n7;
+        n6 -> n5;
+        n7 -> n8;
+        n7 -> n6;
+        n8 -> n9;
+        n8 -> n7;
+        n9 -> n10;
+        n9 -> n8;
+        n10 -> n11;
+        n10 -> n9;
+        n11 -> n12;
+        n11 -> n10;
+        n12 -> n13;
+        n12 -> n11;
+        n13 -> n14;
+        n13 -> n12;
+        n14 -> n13;
+    }
+}

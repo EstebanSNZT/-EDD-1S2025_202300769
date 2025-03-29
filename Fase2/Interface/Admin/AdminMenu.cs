@@ -1,5 +1,6 @@
 using Gtk;
 using Global;
+using Utilities;
 
 namespace Interface
 {
@@ -116,7 +117,42 @@ namespace Interface
 
         private void OnGenerateReportsButtonButtonClicked(object sender, EventArgs e)
         {
-            Hide();
+            if (!GlobalStructures.UsersList.IsEmpty())
+            {
+                string linkedListDot = GlobalStructures.UsersList.GenerateDot();
+                Utility.GenerateDotFile("Usuarios", linkedListDot);
+                Utility.ConvertDotToImage("Usuarios.dot");
+            }
+
+            if (!GlobalStructures.VehiclesList.IsEmpty())
+            {
+                string doublyLinkedListDot = GlobalStructures.VehiclesList.GenerateDot();
+                Utility.GenerateDotFile("Vehículos", doublyLinkedListDot);
+                Utility.ConvertDotToImage("Vehículos.dot");
+            }
+
+            if (!GlobalStructures.SparePartsTree.IsEmpty())
+            {
+                string avlTreeDot = GlobalStructures.SparePartsTree.GenerateDot();
+                Utility.GenerateDotFile("Repuestos", avlTreeDot);
+                Utility.ConvertDotToImage("Repuestos.dot");
+            }
+
+            if (!GlobalStructures.ServicesTree.IsEmpty())
+            {
+                string binaryTreeDot = GlobalStructures.ServicesTree.GenerateDot();
+                Utility.GenerateDotFile("Servicios", binaryTreeDot);
+                Utility.ConvertDotToImage("Servicios.dot");
+            }
+
+            if (!GlobalStructures.InvoicesTree.IsEmpty())
+            {
+                string bTreeDot = GlobalStructures.InvoicesTree.GenerateDot();
+                Utility.GenerateDotFile("Facturas", bTreeDot);
+                Utility.ConvertDotToImage("Facturas.dot");
+            }
+
+            Login.ShowDialog(this, MessageType.Info, "Los reportes han sido generados con éxito en la carpeta Reportes.");
         }
 
         private void OnLogoutButtonClicked(object sender, EventArgs e)

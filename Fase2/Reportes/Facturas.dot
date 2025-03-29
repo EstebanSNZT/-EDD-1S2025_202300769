@@ -1,0 +1,16 @@
+digraph BTree {
+    node [shape=record];
+    rankdir=TB;
+    subgraph cluster_0 {
+        label = "Árbol B";
+        n0 [label="<f0> |Id: 2, Orden: 99, Total: 215.75||<f1> |Id: 4, Orden: 107, Total: 300||<f2> |Id: 6, Orden: 113, Total: 395.3|<f3>"];
+        n1 [label="<f0> |Id: 1, Orden: 106, Total: 195.2|<f1>"];
+        n0:f0 -> n1;
+        n2 [label="<f0> |Id: 3, Orden: 109, Total: 315.75|<f1>"];
+        n0:f1 -> n2;
+        n3 [label="<f0> |Id: 5, Orden: 117, Total: 370|<f1>"];
+        n0:f2 -> n3;
+        n4 [label="<f0> |Id: 7, Orden: 112, Total: 195.8||<f1> |Id: 8, Orden: 123, Total: 247.1||<f2> |Id: 9, Orden: 120, Total: 325||<f3> |Id: 10, Orden: 125, Total: 340.75|<f4>"];
+        n0:f3 -> n4;
+    }
+}

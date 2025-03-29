@@ -17,7 +17,7 @@ namespace Structures
 
             if (head == null)
             {
-                head = newNode;   
+                head = newNode;
             }
             else
             {
@@ -104,6 +104,34 @@ namespace Structures
         public bool IsEmpty()
         {
             return head == null;
+        }
+
+        public string GenerateDot()
+        {
+            var graph = "digraph LinkedList {\n";
+            graph += "    node [shape=record];\n";
+            graph += "    rankdir=LR;\n";
+            graph += "    subgraph cluster_0 {\n";
+            graph += "        label = \"Lista Simple Enlazada\";\n";
+
+            LinkedNode current = head;
+            int index = 0;
+
+            while (current != null)
+            {
+                graph += $"        n{index} {current.Data.ToDotNode()}\n";
+                current = current.Next;
+                index++;
+            }
+
+            for (int i = 0; i < index - 1; i++)
+            {
+                graph += $"        n{i} -> n{i + 1};\n";
+            }
+
+            graph += "    }\n";
+            graph += "}\n";
+            return graph;
         }
     }
 }

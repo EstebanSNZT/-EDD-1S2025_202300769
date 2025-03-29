@@ -1,0 +1,27 @@
+digraph BinaryTree {
+    node [shape=box];
+    rankdir=TB;
+    subgraph cluster_0 {
+        label = "Árbol Binario";
+
+        "106" [label="ID: 106\nId_Repuesto: 5\nId_Vehículo: 6\nDetalles: AAAA\nCosto: 100"];
+        "99" [label="ID: 99\nId_Repuesto: 2\nId_Vehículo: 9\nDetalles: BBBB\nCosto: 200"];
+        "109" [label="ID: 109\nId_Repuesto: 2\nId_Vehículo: 8\nDetalles: CCCC\nCosto: 300"];
+        "107" [label="ID: 107\nId_Repuesto: 9\nId_Vehículo: 11\nDetalles: DDDD\nCosto: 150"];
+        "117" [label="ID: 117\nId_Repuesto: 14\nId_Vehículo: 2\nDetalles: FFFF\nCosto: 250"];
+        "113" [label="ID: 113\nId_Repuesto: 4\nId_Vehículo: 6\nDetalles: GGGG\nCosto: 350"];
+        "112" [label="ID: 112\nId_Repuesto: 13\nId_Vehículo: 1\nDetalles: HHHH\nCosto: 175"];
+        "123" [label="ID: 123\nId_Repuesto: 7\nId_Vehículo: 8\nDetalles: JJJJ\nCosto: 225"];
+        "120" [label="ID: 120\nId_Repuesto: 12\nId_Vehículo: 10\nDetalles: KKKK\nCosto: 275"];
+        "125" [label="ID: 125\nId_Repuesto: 2\nId_Vehículo: 3\nDetalles: LLLL\nCosto: 325"];
+        "106" -> "99";
+        "106" -> "109";
+        "109" -> "107";
+        "109" -> "117";
+        "117" -> "113";
+        "117" -> "123";
+        "113" -> "112";
+        "123" -> "120";
+        "123" -> "125";
+    }
+}

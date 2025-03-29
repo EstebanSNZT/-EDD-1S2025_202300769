@@ -42,7 +42,7 @@ namespace Structures
                         current.Prev.Next = current.Next;
                     else
                         head = current.Next;
-    
+
                     if (current.Next != null)
                         current.Next.Prev = current.Prev;
                     else
@@ -107,7 +107,40 @@ namespace Structures
                 Console.WriteLine(current.Data.ToString());
                 current = current.Next;
             }
+        }
 
+        public string GenerateDot()
+        {
+            var graph = "digraph DoublyLinkedList {\n";
+            graph += "    node [shape=record];\n";
+            graph += "    rankdir=LR;\n";
+            graph += "    subgraph cluster_0 {\n";
+            graph += "        label = \"Lista Doblemente Enlazada\";\n";
+            DoublyLinkedNode current = head;
+            int index = 0;
+
+            while (current != null)
+            {
+                graph += $"        n{index} {current.Data.ToDotNode()}\n";
+                current = current.Next;
+                index++;
+            }
+
+            for (int i = 0; i < index; i++)
+            {
+                if (i < index - 1)
+                {
+                    graph += $"        n{i} -> n{i + 1};\n";
+                }
+                if (i > 0)
+                {
+                    graph += $"        n{i} -> n{i - 1};\n";
+                }
+            }
+
+            graph += "    }\n";
+            graph += "}\n";
+            return graph;
         }
     }
 }
