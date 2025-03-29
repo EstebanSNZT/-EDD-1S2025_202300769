@@ -26,10 +26,7 @@ namespace Interface
             SetSizeRequest(680, 496); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
+
 
             Fixed fixedContainer = new Fixed();
 
@@ -45,7 +42,6 @@ namespace Interface
             comboBox.Changed += OnComboBoxChanged;
             fixedContainer.Put(comboBox, 200, 70);
 
-            ScrolledWindow scrolledWindow = new ScrolledWindow();
             ScrolledWindow scrollWindow = new ScrolledWindow();
             scrollWindow.SetSizeRequest(600, 285);
             scrollWindow.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -64,7 +60,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnReturnButtonClicked(object sender, EventArgs e)
@@ -81,6 +81,8 @@ namespace Interface
 
         public void AdjustTraversal(int traversalNumber)
         {
+            treeView.Model = null;
+
             switch (traversalNumber)
             {
                 case 0:

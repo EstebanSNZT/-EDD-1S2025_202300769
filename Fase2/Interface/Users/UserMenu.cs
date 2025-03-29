@@ -21,10 +21,7 @@ namespace Interface
             SetSizeRequest(350, 345); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
+            
 
             Fixed fixedContainer = new Fixed();
 
@@ -59,7 +56,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnInsertVehicleButtonClicked(object sender, EventArgs e)
@@ -78,6 +79,7 @@ namespace Interface
 
         private void OnInvoicesVisualizationButtonClicked(object sender, EventArgs e)
         {
+            GlobalWindows.invoicesVisualization.UpdateData(LoginControl.LoggedUserId);
             GlobalWindows.invoicesVisualization.ShowAll();
             Hide();
         }

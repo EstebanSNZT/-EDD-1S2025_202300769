@@ -24,11 +24,6 @@ namespace Interface
             SetSizeRequest(450, 310); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
-
             Fixed fixedContainer = new Fixed();
 
             Label welcomeLabel = new Label();
@@ -61,7 +56,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnLoginButtonClicked(object sender, EventArgs e)
@@ -78,6 +77,7 @@ namespace Interface
             if (email.Equals("admin@usac.com") && password.Equals("admin123"))
             {
                 ShowDialog(this, MessageType.Info, "¡Bienvenido Admin!");
+                LoginControl.GenerateLoginTime(0, email);
                 CleanEntrys();
                 GlobalWindows.adminMenu.ShowAll();
                 Hide();
@@ -92,7 +92,7 @@ namespace Interface
                     return;
                 }
 
-                ShowDialog(this, MessageType.Info, $"Bienvenido {user.Names} {user.LastNames}!");
+                ShowDialog(this, MessageType.Info, $"¡Bienvenido {user.Names} {user.LastNames}!");
                 LoginControl.GenerateLoginTime(user.Id, user.Email);
                 CleanEntrys();
                 GlobalWindows.userMenu.ShowAll();

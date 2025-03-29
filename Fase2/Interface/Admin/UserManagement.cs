@@ -28,11 +28,6 @@ namespace Interface
             SetSizeRequest(400, 516); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
-
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
@@ -103,7 +98,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnReturnButtonClicked(object sender, EventArgs e)
@@ -171,8 +170,8 @@ namespace Interface
 
             if (GlobalStructures.UsersList.Delete(id))
             {
-                Login.ShowDialog(this, MessageType.Info, $"Usuario con ID {id} eliminado correctamente.");
                 GlobalStructures.VehiclesList.DeleteByUserId(id);
+                Login.ShowDialog(this, MessageType.Info, $"Usuario con ID {id} eliminado correctamente.");
                 CleanEntrys();
             }
             else

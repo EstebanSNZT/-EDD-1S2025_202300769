@@ -19,11 +19,6 @@ namespace Interface
             SetSizeRequest(350, 260); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
-
             Fixed fixedContainer = new Fixed();
 
             Label optionsLabel1 = new Label();
@@ -53,7 +48,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnReturnButtonClicked(object sender, EventArgs e)

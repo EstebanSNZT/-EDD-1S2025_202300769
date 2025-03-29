@@ -25,11 +25,6 @@ namespace Interface
             SetSizeRequest(350, 245); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
-
             Fixed fixedContainer = new Fixed();
 
             Label bulkUploadLabel = new Label();
@@ -55,7 +50,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnUploadButtonClicked(object sender, EventArgs e)

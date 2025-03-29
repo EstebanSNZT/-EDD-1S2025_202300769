@@ -6,6 +6,7 @@ namespace Interface
     public class InvoicesVisualization : Window
     {
         private TreeView treeView = new TreeView();
+        private ListStore userInvoices;
 
         public InvoicesVisualization() : base("AutoGest Pro - Visualización de Facturas")
         {
@@ -22,10 +23,7 @@ namespace Interface
             SetSizeRequest(440, 416); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
+            
 
             Fixed fixedContainer = new Fixed();
 
@@ -35,13 +33,13 @@ namespace Interface
 
             ScrolledWindow scrolledWindow = new ScrolledWindow();
             ScrolledWindow scrollWindow = new ScrolledWindow();
-            scrollWindow.SetSizeRequest(360, 285);
+            scrollWindow.SetSizeRequest(360, 265);
             scrollWindow.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            fixedContainer.Put(scrollWindow, 40, 50);
+            fixedContainer.Put(scrollWindow, 40, 70);
 
             treeView.AppendColumn("ID", new CellRendererText(), "text", 0);
             treeView.AppendColumn("Orden", new CellRendererText(), "text", 1);
-            treeView.AppendColumn("Total", new CellRendererText(), "text", 3);
+            treeView.AppendColumn("Total", new CellRendererText(), "text", 2);
             scrollWindow.Add(treeView);
 
             Button returnButton = new Button("Volver");
@@ -51,13 +49,24 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnReturnButtonClicked(object sender, EventArgs e)
         {
             GlobalWindows.userMenu.ShowAll();
             Hide();
+        }
+
+        public void UpdateData(int userId)
+        {
+            userInvoices = GlobalStructures.InvoicesTree.GetUserInvoices(userId);
+            treeView.Model = null;
+            treeView.Model = userInvoices;
         }
     }
 }

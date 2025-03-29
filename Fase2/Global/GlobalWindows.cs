@@ -21,5 +21,24 @@ namespace Global
         public static ServicesVisualization servicesVisualization = new ServicesVisualization();
         public static InvoicesVisualization invoicesVisualization = new InvoicesVisualization();
         public static CancelInvoice cancelInvoice = new CancelInvoice();
+
+
+        public static void DestroyAll()
+        {
+            login.Destroy();
+            adminMenu.Destroy();
+            bulkUpload.Destroy();
+            entityManagement.Destroy();
+            userManagement.Destroy();
+            vehicleManagement.Destroy();
+            updatedSparePart.Destroy();
+            sparePartsVisualization.Destroy();
+            generateService.Destroy();
+            userMenu.Destroy();
+            insertVehicle.Destroy();
+            servicesVisualization.Destroy();
+            invoicesVisualization.Destroy();
+            cancelInvoice.Destroy();
+        }
     }
 }

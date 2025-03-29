@@ -21,11 +21,6 @@ namespace Interface
             SetSizeRequest(350, 510); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
-
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
@@ -74,7 +69,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnBulkUploadButtonClicked(object sender, EventArgs e)
@@ -122,6 +121,8 @@ namespace Interface
 
         private void OnLogoutButtonClicked(object sender, EventArgs e)
         {
+            LoginControl.GenerateLogoutTime();
+            LoginControl.AddLogin();
             GlobalWindows.login.ShowAll();
             Hide();
         }

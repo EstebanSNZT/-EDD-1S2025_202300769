@@ -26,16 +26,11 @@ namespace Interface
             SetSizeRequest(400, 405); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
-            if (Child != null)
-            {
-                Remove(Child);
-            }
-
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
             menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Insertar Vehículo</span>";
-            fixedContainer.Put(menuLabel, 63, 15);
+            fixedContainer.Put(menuLabel, 88, 15);
 
             Label idLabel = new Label();
             idLabel.Markup = "<span font='Arial 12' weight='bold'>ID:</span>";
@@ -77,7 +72,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnReturnButtonClicked(object sender, EventArgs e)

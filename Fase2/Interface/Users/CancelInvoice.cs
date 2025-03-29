@@ -11,7 +11,7 @@ namespace Interface
         private Entry idEntry = new Entry();
         private Entry idSearchedEntry = new Entry();
         private Entry orderSearchedEntry = new Entry();
-        private Entry costSearchedEntry = new Entry();
+        private Entry totalSearchedEntry = new Entry();
 
         public CancelInvoice() : base("AutoGest Pro - Cancelar Factura")
         {
@@ -27,11 +27,6 @@ namespace Interface
         {
             SetSizeRequest(510, 415); //(ancho, alto)
             SetPosition(WindowPosition.Center);
-
-            if (Child != null && Child.IsRealized)
-            {
-                Remove(Child);
-            }
 
             Fixed fixedContainer = new Fixed();
 
@@ -67,13 +62,13 @@ namespace Interface
             orderSearchedEntry.Sensitive = false;
             fixedContainer.Put(orderSearchedEntry, 140, 196);
 
-            Label costLabel = new Label();
-            costLabel.Markup = "<span font='Arial 12' weight='bold'>Costo:</span>";
-            fixedContainer.Put(costLabel, 50, 257);
+            Label totalLabel = new Label();
+            totalLabel.Markup = "<span font='Arial 12' weight='bold'>Total:</span>";
+            fixedContainer.Put(totalLabel, 50, 257);
 
-            costSearchedEntry.SetSizeRequest(140, 35);
-            costSearchedEntry.Sensitive = false;
-            fixedContainer.Put(costSearchedEntry, 140, 251);
+            totalSearchedEntry.SetSizeRequest(140, 35);
+            totalSearchedEntry.Sensitive = false;
+            fixedContainer.Put(totalSearchedEntry, 140, 251);
 
             Button payButton = new Button("Pagar");
             payButton.SetSizeRequest(120, 30);
@@ -87,7 +82,11 @@ namespace Interface
 
             Add(fixedContainer);
 
-            DeleteEvent += (o, args) => Application.Quit();
+            DeleteEvent += (o, args) =>
+            {
+                GlobalWindows.DestroyAll();
+                Application.Quit();
+            };
         }
 
         private void OnReturnButtonClicked(object sender, EventArgs e)
@@ -100,10 +99,65 @@ namespace Interface
 
         private void OnSearchButtonClicked(object sender, EventArgs e)
         {
+            int userId = LoginControl.LoggedUserId;
+
+            if (string.IsNullOrEmpty(idEntry.Text))
+            {
+                Login.ShowDialog(this, MessageType.Error, "Debe ingresar un ID de factura.");
+                return;
+            }
+
+            if (!int.TryParse(idEntry.Text, out idFound))
+            {
+                Login.ShowDialog(this, MessageType.Error, "ID inválido.");
+                return;
+            }
+
+            if (GlobalStructures.InvoicesTree.IsEmpty())
+            {
+                Login.ShowDialog(this, MessageType.Warning, "El árbol de facturas se encuentra actualmente vacío. Ingrese facturas antes de continuar.");
+                return;
+            }
+
+            Invoice invoice = GlobalStructures.InvoicesTree.Get(idFound);
+
+            if (invoice == null)
+            {
+                Login.ShowDialog(this, MessageType.Warning, "No se encontró ninguna factura con ese ID en sus facturas por pagar.");
+                return;
+            }
+
+            Service service = GlobalStructures.ServicesTree.Get(invoice.ServiceId);
+
+            Vehicle vehicle = GlobalStructures.VehiclesList.Get(service.VehicleId);
+
+            if(vehicle == null || vehicle.UserId != userId)
+            {
+                Login.ShowDialog(this, MessageType.Warning, "No tiene permitido pagar esa factura.");
+                return;
+            }         
+
+            Login.ShowDialog(this, MessageType.Info, "Factura encontrada.");
+            found = true;
+            idSearchedEntry.Text = "";
+            orderSearchedEntry.Text = "";
+            totalSearchedEntry.Text = "";
+            idSearchedEntry.Text = invoice.Id.ToString();
+            orderSearchedEntry.Text = invoice.ServiceId.ToString();
+            totalSearchedEntry.Text = invoice.Total.ToString();
         }
 
         private void OnPayButtonClicked(object sender, EventArgs e)
         {
+            if (!found)
+            {
+                Login.ShowDialog(this, MessageType.Error, "Debe buscar una factura primero.");
+                return;
+            }
+
+            GlobalStructures.InvoicesTree.Delete(idFound);
+            Login.ShowDialog(this, MessageType.Info, "Factura pagada correctamente.");
+            CleanEntrys();
         }
 
         private void CleanEntrys()
@@ -111,7 +165,7 @@ namespace Interface
             idEntry.Text = "";
             idSearchedEntry.Text = "";
             orderSearchedEntry.Text = "";
-            costSearchedEntry.Text = "";
+            totalSearchedEntry.Text = "";
         }
     }
 }
