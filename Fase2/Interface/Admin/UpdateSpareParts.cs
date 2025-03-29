@@ -36,7 +36,7 @@ namespace Interface
 
             Label menuLabel = new Label();
             menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Actualización de Repuestos</span>";
-            fixedContainer.Put(menuLabel, 145, 15);
+            fixedContainer.Put(menuLabel, 115, 15);
 
             Label idLabel = new Label();
             idLabel.Markup = "<span font='Arial 12' weight='bold'>ID:</span>";

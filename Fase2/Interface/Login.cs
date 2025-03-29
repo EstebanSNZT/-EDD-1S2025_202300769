@@ -95,6 +95,7 @@ namespace Interface
                 ShowDialog(this, MessageType.Info, $"¡Bienvenido {user.Names} {user.LastNames}!");
                 LoginControl.GenerateLoginTime(user.Id, user.Email);
                 CleanEntrys();
+                GlobalWindows.userMenu.menuLabel.Markup = $"<span font='Arial 16' weight='bold' foreground='blue'>{user.Email}</span>";
                 GlobalWindows.userMenu.ShowAll();
                 Hide();
             }

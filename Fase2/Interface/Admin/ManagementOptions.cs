@@ -4,7 +4,7 @@ namespace Interface
 {
     public class EntityManagement : Window
     {
-        public EntityManagement() : base("AutoGest Pro - Opciones de Gestíon de Entidades")
+        public EntityManagement() : base("AutoGest Pro - Gestíon de Entidades")
         {
             InitializeComponents();
         }

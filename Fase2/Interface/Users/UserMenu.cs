@@ -6,6 +6,7 @@ namespace Interface
 
     public class UserMenu : Window
     {
+        public Label menuLabel = new Label();
         public UserMenu() : base("AutoGest Pro - Usuario")
         {
             InitializeComponents();
@@ -20,14 +21,10 @@ namespace Interface
         {
             SetSizeRequest(350, 345); //(ancho, alto)
             SetPosition(WindowPosition.Center);
-
             
-
             Fixed fixedContainer = new Fixed();
 
-            Label menuLabel = new Label();
-            menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>User</span>";
-            fixedContainer.Put(menuLabel, 130, 15);
+            fixedContainer.Put(menuLabel, 35, 15);
 
             Button insertVehicleButton = new Button("Insertar Vehículo");
             insertVehicleButton.SetSizeRequest(280, 35);

@@ -32,7 +32,7 @@ namespace Interface
 
             Label menuLabel = new Label();
             menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Visualización de Repuestos</span>";
-            fixedContainer.Put(menuLabel, 124, 15);
+            fixedContainer.Put(menuLabel, 154, 15);
 
             comboBox.AppendText("Pre-Orden");
             comboBox.AppendText("In-Orden");

@@ -3,16 +3,16 @@ digraph LinkedList {
     rankdir=LR;
     subgraph cluster_0 {
         label = "Lista Simple Enlazada";
-        n0 [label = "{<data> ID: 1 \n Nombre: Carlos Alberto Gomez Martinez \n Correo: carlos.alberto@usac.com \n Edad: 45 \n Contraseña: CarlosMartinez}"];
-        n1 [label = "{<data> ID: 2 \n Nombre: Ana Lucia Martinez Lopez \n Correo: ana.lucia@usac.com \n Edad: 38 \n Contraseña: AnaLopez}"];
-        n2 [label = "{<data> ID: 3 \n Nombre: Luis Enrique Perez Ramirez \n Correo: luis.enrique@usac.com \n Edad: 50 \n Contraseña: LuisRamirez}"];
-        n3 [label = "{<data> ID: 4 \n Nombre: Marta Isabel Lopez Perez \n Correo: marta.isabel@usac.com \n Edad: 40 \n Contraseña: MartaPerez}"];
-        n4 [label = "{<data> ID: 5 \n Nombre: Juan Carlos Hernandez Lopez \n Correo: juan.carlos@usac.com \n Edad: 35 \n Contraseña: JuanLopez}"];
-        n5 [label = "{<data> ID: 6 \n Nombre: Maria Fernanda Garcia Lopez \n Correo: maria.fernanda@usac.com \n Edad: 42 \n Contraseña: MariaLopez}"];
-        n6 [label = "{<data> ID: 7 \n Nombre: Pedro Pablo Rodriguez Torres \n Correo: pedro.pablo@usac.com \n Edad: 37 \n Contraseña: PedroTorres}"];
-        n7 [label = "{<data> ID: 8 \n Nombre: Laura Isabel Sanchez Morales \n Correo: laura.isabel@usac.com \n Edad: 48 \n Contraseña: LauraMorales}"];
-        n8 [label = "{<data> ID: 9 \n Nombre: Rafael Alejandro Ramirez Diaz \n Correo: rafael.alejandro@usac.com \n Edad: 43 \n Contraseña: RafaelDiaz}"];
-        n9 [label = "{<data> ID: 10 \n Nombre: Isabel Cristina Diaz Lopez \n Correo: isabel.cristina@usac.com \n Edad: 39 \n Contraseña: IsabelLopez}"];
+        n0 [label = "{<data> ID: 1 \n Nombre: Efraín Josué Cuxum Pérez \n Correo: efrain.josue@usac.com \n Edad: 19 \n Contraseña: EC123}"];
+        n1 [label = "{<data> ID: 2 \n Nombre: Ximena Marisol Quixchán Rojas \n Correo: ximena.marisol@usac.com \n Edad: 21 \n Contraseña: XQ123}"];
+        n2 [label = "{<data> ID: 3 \n Nombre: Brayan Estuardo Tumax García \n Correo: brayan.estuardo@usac.com \n Edad: 22 \n Contraseña: BT123}"];
+        n3 [label = "{<data> ID: 4 \n Nombre: Karla Lisseth Chocoy Méndez \n Correo: karla.lisseth@usac.com \n Edad: 20 \n Contraseña: KC123}"];
+        n4 [label = "{<data> ID: 5 \n Nombre: Steven Facundo Mejia Xolop \n Correo: steven.mejia@usac.com \n Edad: 23 \n Contraseña: SM123}"];
+        n5 [label = "{<data> ID: 6 \n Nombre: Selvin Orlando Ajpacajá Ruiz \n Correo: selvin.orlando@usac.com \n Edad: 18 \n Contraseña: SA123}"];
+        n6 [label = "{<data> ID: 7 \n Nombre: Mayra Alejandra Cojulún Díaz \n Correo: mayra.alejandra@usac.com \n Edad: 21 \n Contraseña: MC123}"];
+        n7 [label = "{<data> ID: 8 \n Nombre: Noé Eliseo Sactic Vásquez \n Correo: noe.eliseo@usac.com \n Edad: 19 \n Contraseña: NS123}"];
+        n8 [label = "{<data> ID: 9 \n Nombre: Dulce María Xolop Castillo \n Correo: dulce.maria@usac.com \n Edad: 20 \n Contraseña: DX123}"];
+        n9 [label = "{<data> ID: 10 \n Nombre: Jairo Vinicio Camey Ortiz \n Correo: jairo.vinicio@usac.com \n Edad: 22 \n Contraseña: JC123}"];
         n0 -> n1;
         n1 -> n2;
         n2 -> n3;
