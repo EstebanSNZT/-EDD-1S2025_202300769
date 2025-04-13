@@ -238,19 +238,19 @@
     ]
   },
   "packageFolders": {
-    "/home/esteban/.nuget/packages/": {}
+    "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase2/Fase2.csproj",
+      "projectUniqueName": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase2\\Fase2.csproj",
       "projectName": "Fase2",
-      "projectPath": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase2/Fase2.csproj",
-      "packagesPath": "/home/esteban/.nuget/packages/",
-      "outputPath": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase2/obj/",
+      "projectPath": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase2\\Fase2.csproj",
+      "packagesPath": "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/esteban/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Esteban Sánchez\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -274,7 +274,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -305,7 +305,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,13 @@
+using Structures;
+
+namespace Global
+{
+    public class GlobalStructures
+    {
+        public static Blockchain UsersBlockchain = new Blockchain();
+        public static DoublyLinkedList VehiclesList = new DoublyLinkedList();
+        public static AVLTree SparePartsTree = new AVLTree();
+        public static BinaryTree ServicesTree = new BinaryTree();
+        public static BTree InvoicesTree = new BTree(5);
+    }
+}
