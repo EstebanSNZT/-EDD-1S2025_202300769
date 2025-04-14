@@ -1,5 +1,7 @@
 ﻿using Gtk;
 using Global;
+using Structures;
+using Utilities;
 
 class Program
 {

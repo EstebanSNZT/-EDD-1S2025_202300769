@@ -3,17 +3,17 @@ using Global;
 
 namespace Interface
 {
-    public class InvoicesVisualization : Window
+    public class VehiclesVisualization : Window
     {
         private TreeView treeView = new TreeView();
-        private ListStore userInvoices = new ListStore(typeof(int), typeof(int), typeof(string), typeof(string), typeof(string));
+        private ListStore userVehicles = new ListStore(typeof(int), typeof(int), typeof(string), typeof(int), typeof(string));
 
-        public InvoicesVisualization() : base("AutoGest Pro - Visualización de Facturas")
+        public VehiclesVisualization() : base("AutoGest Pro - Visualización de Vehículos")
         {
             InitializeComponents();
         }
 
-        public InvoicesVisualization(IntPtr raw) : base(raw)
+        public VehiclesVisualization(IntPtr raw) : base(raw)
         {
             InitializeComponents();
         }
@@ -26,8 +26,8 @@ namespace Interface
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
-            menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Visualización de Facturas</span>";
-            fixedContainer.Put(menuLabel, 50, 15);
+            menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Visualización de Vehículos</span>";
+            fixedContainer.Put(menuLabel, 43, 15);
 
             ScrolledWindow scrolledWindow = new ScrolledWindow();
             ScrolledWindow scrollWindow = new ScrolledWindow();
@@ -36,10 +36,10 @@ namespace Interface
             fixedContainer.Put(scrollWindow, 40, 70);
 
             treeView.AppendColumn("ID", new CellRendererText(), "text", 0);
-            treeView.AppendColumn("Orden", new CellRendererText(), "text", 1);
-            treeView.AppendColumn("Total", new CellRendererText(), "text", 2);
-            treeView.AppendColumn("Método de pago", new CellRendererText(), "text", 3);
-            treeView.AppendColumn("Fecha", new CellRendererText(), "text", 4);
+            treeView.AppendColumn("ID Usuario", new CellRendererText(), "text", 1);
+            treeView.AppendColumn("Marca", new CellRendererText(), "text", 2);
+            treeView.AppendColumn("Modelo", new CellRendererText(), "text", 3);
+            treeView.AppendColumn("Placa", new CellRendererText(), "text", 4);
             scrollWindow.Add(treeView);
 
             Button returnButton = new Button("Volver");
@@ -64,8 +64,8 @@ namespace Interface
 
         public void UpdateData(int userId)
         {
-            userInvoices = GlobalStructures.InvoicesTree.GetUserInvoices(userId);
-            treeView.Model = userInvoices;
+            userVehicles = GlobalStructures.VehiclesList.GetUserVehicles(userId);
+            treeView.Model = userVehicles;
         }
     }
 }

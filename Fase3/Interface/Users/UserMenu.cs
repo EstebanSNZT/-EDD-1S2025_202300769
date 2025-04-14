@@ -31,20 +31,20 @@ namespace Interface
             insertVehicleButton.Clicked += OnInsertVehicleButtonClicked;
             fixedContainer.Put(insertVehicleButton, 35, 65);
 
+            Button vehiclesVisualizationButton = new Button("Visualización de Vehículos");
+            vehiclesVisualizationButton.SetSizeRequest(280, 35);
+            vehiclesVisualizationButton.Clicked += OnVehiclesVisualizationButtonClicked;
+            fixedContainer.Put(vehiclesVisualizationButton, 35, 120);
+
             Button servicesVisualizationButton = new Button("Visualización de Servicios");
             servicesVisualizationButton.SetSizeRequest(280, 35);
             servicesVisualizationButton.Clicked += OnServicesVisualizationButtonClicked;
-            fixedContainer.Put(servicesVisualizationButton, 35, 120);
+            fixedContainer.Put(servicesVisualizationButton, 35, 175);
 
             Button invoicesVisualizationButton = new Button("Visualización de Facturas");
             invoicesVisualizationButton.SetSizeRequest(280, 35);
             invoicesVisualizationButton.Clicked += OnInvoicesVisualizationButtonClicked;
-            fixedContainer.Put(invoicesVisualizationButton, 35, 175);
-
-            Button cancelInvoicesButton = new Button("Cancelar Facturas");
-            cancelInvoicesButton.SetSizeRequest(280, 35);
-            cancelInvoicesButton.Clicked += OnCancelInvoicesButtonClicked;
-            fixedContainer.Put(cancelInvoicesButton, 35, 230);
+            fixedContainer.Put(invoicesVisualizationButton, 35, 230);
 
             Button logoutButton = new Button("Cerrar Sesión");
             logoutButton.SetSizeRequest(160, 30);
@@ -66,6 +66,13 @@ namespace Interface
             Hide();
         }
 
+        private void OnVehiclesVisualizationButtonClicked(object sender, EventArgs e)
+        {
+            GlobalWindows.vehiclesVisualization.UpdateData(LoginControl.LoggedUserId);
+            GlobalWindows.vehiclesVisualization.ShowAll();
+            Hide();
+        }
+
         private void OnServicesVisualizationButtonClicked(object sender, EventArgs e)
         {
             GlobalWindows.servicesVisualization.UpdateData(LoginControl.LoggedUserId);
@@ -78,12 +85,6 @@ namespace Interface
         {
             GlobalWindows.invoicesVisualization.UpdateData(LoginControl.LoggedUserId);
             GlobalWindows.invoicesVisualization.ShowAll();
-            Hide();
-        }
-
-        private void OnCancelInvoicesButtonClicked(object sender, EventArgs e)
-        {
-            GlobalWindows.cancelInvoice.ShowAll();
             Hide();
         }
 

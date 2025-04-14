@@ -117,7 +117,7 @@ namespace Interface
                                 else
                                 {
                                     Vehicle newVehicle = new Vehicle(localVehicle.ID, localVehicle.ID_Usuario, localVehicle.Marca, localVehicle.Modelo, localVehicle.Placa);
-                                    GlobalStructures.VehiclesList.Insert(newVehicle);
+                                    GlobalStructures.VehiclesList.Add(newVehicle);
                                 }
 
                             }
@@ -143,7 +143,7 @@ namespace Interface
                             else
                             {
                                 SparePart newSparePart = new SparePart(localSparePart.ID, localSparePart.Repuesto, localSparePart.Detalles, localSparePart.Costo);
-                                GlobalStructures.SparePartsTree.Insert(newSparePart);
+                                GlobalStructures.SparePartsTree.Add(newSparePart);
                             }
                         }
 

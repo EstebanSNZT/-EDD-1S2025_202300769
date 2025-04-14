@@ -10,6 +10,7 @@ namespace Interface
         private Entry sparePartIdEntry = new Entry();
         private Entry vehicleIdEntry = new Entry();
         private Entry detailsEntry = new Entry();
+        private ComboBoxText paymentMethodComboBox = new ComboBoxText();
         private Entry costEntry = new Entry();
         private int invoiceId = 1;
 
@@ -25,7 +26,7 @@ namespace Interface
 
         private void InitializeComponents()
         {
-            SetSizeRequest(400, 461); //(ancho, alto)
+            SetSizeRequest(430, 515); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
             Fixed fixedContainer = new Fixed();
@@ -36,48 +37,59 @@ namespace Interface
 
             Label idLabel = new Label();
             idLabel.Markup = "<span font='Arial 12' weight='bold'>ID:</span>";
-            fixedContainer.Put(idLabel, 90, 82);
+            fixedContainer.Put(idLabel, 103, 82);
 
             idEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(idEntry, 182, 76);
+            fixedContainer.Put(idEntry, 212, 76);
 
             Label sparePartIdLabel = new Label();
             sparePartIdLabel.Markup = "<span font='Arial 12' weight='bold'>ID Repuesto:</span>";
-            fixedContainer.Put(sparePartIdLabel, 51, 137);
+            fixedContainer.Put(sparePartIdLabel, 64, 137);
 
             sparePartIdEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(sparePartIdEntry, 182, 131);
+            fixedContainer.Put(sparePartIdEntry, 212, 131);
 
             Label vehicleIdLabel = new Label();
             vehicleIdLabel.Markup = "<span font='Arial 12' weight='bold'>ID Vehiculo:</span>";
-            fixedContainer.Put(vehicleIdLabel, 55, 192);
+            fixedContainer.Put(vehicleIdLabel, 68, 192);
 
             vehicleIdEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(vehicleIdEntry, 182, 186);
+            fixedContainer.Put(vehicleIdEntry, 212, 186);
 
             Label detailsLabel = new Label();
             detailsLabel.Markup = "<span font='Arial 12' weight='bold'>Detalles:</span>";
-            fixedContainer.Put(detailsLabel, 67, 247);
+            fixedContainer.Put(detailsLabel, 80, 247);
 
             detailsEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(detailsEntry, 182, 241);
+            fixedContainer.Put(detailsEntry, 212, 241);
+
+            Label paymentMethodLabel = new Label();
+            paymentMethodLabel.Markup = "<span font='Arial 12' weight='bold'>Método de Pago:</span>";
+            fixedContainer.Put(paymentMethodLabel, 51, 302);
+
+            paymentMethodComboBox.AppendText("Efectivo");
+            paymentMethodComboBox.AppendText("Tarjeta de Débito");
+            paymentMethodComboBox.AppendText("Tarjeta de Crédito");
+            paymentMethodComboBox.Active = -1;
+            paymentMethodComboBox.SetSizeRequest(168, 35);
+            fixedContainer.Put(paymentMethodComboBox, 212, 296);            
 
             Label costLabel = new Label();
             costLabel.Markup = "<span font='Arial 12' weight='bold'>Costo:</span>";
-            fixedContainer.Put(costLabel, 75, 302);
+            fixedContainer.Put(costLabel, 88, 357);
 
             costEntry.SetSizeRequest(140, 35);
-            fixedContainer.Put(costEntry, 182, 296);
+            fixedContainer.Put(costEntry, 212, 351);
 
             Button saveButton = new Button("Guardar");
             saveButton.SetSizeRequest(120, 30);
             saveButton.Clicked += OnSaveButtonClicked;
-            fixedContainer.Put(saveButton, 140, 351);
+            fixedContainer.Put(saveButton, 155, 406);
 
             Button returnButton = new Button("Volver");
             returnButton.SetSizeRequest(50, 20);
             returnButton.Clicked += OnReturnButtonClicked;
-            fixedContainer.Put(returnButton, 20, 405);
+            fixedContainer.Put(returnButton, 20, 460);
 
             Add(fixedContainer);
 
@@ -99,7 +111,7 @@ namespace Interface
         {
             if (string.IsNullOrEmpty(idEntry.Text) || string.IsNullOrEmpty(sparePartIdEntry.Text) ||
                 string.IsNullOrEmpty(vehicleIdEntry.Text) || string.IsNullOrEmpty(detailsEntry.Text) ||
-                string.IsNullOrEmpty(costEntry.Text))
+                string.IsNullOrEmpty(costEntry.Text) || paymentMethodComboBox.Active == -1)
             {
                 Login.ShowDialog(this, MessageType.Warning, "Por favor, llene todos los campos.");
                 return;
@@ -150,10 +162,15 @@ namespace Interface
             }
 
             Service newService = new Service(id, sparePartId, vehicleId, detailsEntry.Text, cost);
-            GlobalStructures.ServicesTree.Insert(newService);
+            GlobalStructures.ServicesTree.Add(newService);
 
-            Invoice newInvoice = new Invoice(invoiceId, newService.Id, newService.Cost + sparePart.Cost);
-            GlobalStructures.InvoicesTree.Insert(newInvoice);
+            GlobalStructures.Graph.AddEdge($"V{vehicleId}", $"R{sparePartId}");
+            
+            double total = newService.Cost + sparePart.Cost;
+            string paymentMethod = paymentMethodComboBox.ActiveText;
+
+            Invoice newInvoice = new Invoice(invoiceId, newService.Id, total, paymentMethod);
+            GlobalStructures.InvoicesTree.Add(newInvoice);
             invoiceId++;
 
             Login.ShowDialog(this, MessageType.Info, "Servicio y factura generados con éxito.");
@@ -167,6 +184,7 @@ namespace Interface
             vehicleIdEntry.Text = "";
             detailsEntry.Text = "";
             costEntry.Text = "";
+            paymentMethodComboBox.Active = -1;
         }
     }
 }

@@ -91,5 +91,28 @@ namespace Utilities
                 Console.WriteLine($"Error al convertir el archivo .dot a imagen: {ex.Message}");
             }
         }
+
+        public static void GenerateJsonFile(string fileName, string jsonContent, string folderName)
+        {
+            try
+            {
+                string folder = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+                
+                fileName += ".json";
+                string filePath = Path.Combine(folder, fileName);
+
+                File.WriteAllText(filePath, jsonContent);
+
+                Console.WriteLine($"Archivo {fileName} creado con éxito en: {filePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al crear el archivo JSON: {ex.Message}");
+            }
+        }
     }
 }

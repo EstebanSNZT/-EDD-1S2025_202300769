@@ -14,29 +14,29 @@ namespace Structures
             root = null;
         }
 
-        public void Insert(Service data)
+        public void Add(Service data)
         {
             if (root == null)
                 root = new BinaryNode(data);
             else
-                InsertRecursive(root, data);
+                AddRecursive(root, data);
         }
 
-        private void InsertRecursive(BinaryNode node, Service data)
+        private void AddRecursive(BinaryNode node, Service data)
         {
             if (data.Id < node.Data.Id)
             {
                 if (node.Left == null)
                     node.Left = new BinaryNode(data);
                 else
-                    InsertRecursive(node.Left, data);
+                    AddRecursive(node.Left, data);
             }
             else if (data.Id > node.Data.Id)
             {
                 if (node.Right == null)
                     node.Right = new BinaryNode(data);
                 else
-                    InsertRecursive(node.Right, data);
+                    AddRecursive(node.Right, data);
             }
             else
                 return;
@@ -148,7 +148,7 @@ namespace Structures
         public void GenerateDotNodes(BinaryNode node, StringBuilder sb)
         {
             if (node == null) return;
-            sb.Append("        ").Append(node.Data.ToDotNode()).AppendLine();
+            sb.Append("        ").Append(node.ToDotNode()).AppendLine();
             GenerateDotNodes(node.Left, sb);
             GenerateDotNodes(node.Right, sb);
         }

@@ -131,7 +131,8 @@ namespace Interface
 
         private void OnLoginControlButtonClicked(object sender, EventArgs e)
         {
-            LoginControl.CreateJson();
+            string loginJson = LoginControl.GenerateJson();
+            Utility.GenerateJsonFile("ControlLogueo", loginJson, "Reportes");
             Login.ShowDialog(this, MessageType.Info, "El archivo ControlLogueo.json ha sido creado con exito en la carpeta Reportes.");
         }
 
@@ -165,12 +166,19 @@ namespace Interface
                 Utility.ConvertDotToImage("Servicios.dot");
             }
 
-            if (!GlobalStructures.InvoicesTree.IsEmpty())
+            if (!GlobalStructures.Graph.IsEmpty())
             {
-                string bTreeDot = GlobalStructures.InvoicesTree.GenerateDot();
-                Utility.GenerateDotFile("Facturas", bTreeDot);
-                Utility.ConvertDotToImage("Facturas.dot");
+                string graphDot = GlobalStructures.Graph.GenerateDot();
+                Utility.GenerateDotFile("Grafo", graphDot);
+                Utility.ConvertDotToImage("Grafo.dot");
             }
+
+            // if (!GlobalStructures.InvoicesTree.IsEmpty())
+            // {
+            //     string bTreeDot = GlobalStructures.InvoicesTree.GenerateDot();
+            //     Utility.GenerateDotFile("Facturas", bTreeDot);
+            //     Utility.ConvertDotToImage("Facturas.dot");
+            // }
 
             Login.ShowDialog(this, MessageType.Info, "Los reportes han sido generados con éxito en la carpeta Reportes.");
         }

@@ -21,10 +21,5 @@ namespace Classes
         {
             return $"ID: {Id}, Id_Repuesto: {SparePartId}, Id_Vehículo: {VehicleId}, Detalles: {Details}, Costo: ${Cost}";
         }
-
-        public string ToDotNode()
-        {
-            return $"\"{Id}\" [label=\"ID: {Id}\\nId_Repuesto: {SparePartId}\\nId_Vehículo: {VehicleId}\\nDetalles: {Details}\\nCosto: {Cost}\"];";
-        }
     }
 }

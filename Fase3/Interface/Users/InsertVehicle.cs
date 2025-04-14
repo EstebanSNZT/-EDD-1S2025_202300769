@@ -122,7 +122,7 @@ namespace Interface
             }   
 
             Vehicle newVehicle = new Vehicle(id, idUser, brandEntry.Text, model, plateEntry.Text);
-            GlobalStructures.VehiclesList.Insert(newVehicle);
+            GlobalStructures.VehiclesList.Add(newVehicle);
 
             Login.ShowDialog(this, MessageType.Info, "Vehículo insertado con éxito.");
             CleanEntrys();

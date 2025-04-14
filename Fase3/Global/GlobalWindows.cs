@@ -17,10 +17,9 @@ namespace Global
         //--------------------Users----------------------
         public static UserMenu userMenu = new UserMenu();
         public static InsertVehicle insertVehicle = new InsertVehicle();
+        public static VehiclesVisualization vehiclesVisualization = new VehiclesVisualization();
         public static ServicesVisualization servicesVisualization = new ServicesVisualization();
         public static InvoicesVisualization invoicesVisualization = new InvoicesVisualization();
-        public static CancelInvoice cancelInvoice = new CancelInvoice();
-
 
         public static void DestroyAll()
         {
@@ -36,7 +35,6 @@ namespace Global
             insertVehicle.Destroy();
             servicesVisualization.Destroy();
             invoicesVisualization.Destroy();
-            cancelInvoice.Destroy();
         }
     }
 }

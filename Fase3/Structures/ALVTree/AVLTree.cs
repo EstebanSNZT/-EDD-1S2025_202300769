@@ -49,19 +49,19 @@ namespace Structures
             return y;
         }
 
-        public void Insert(SparePart data)
+        public void Add(SparePart data)
         {
-            root = InsertRecursive(root, data);
+            root = AddRecursive(root, data);
         }
 
-        private AVLNode InsertRecursive(AVLNode node, SparePart data)
+        private AVLNode AddRecursive(AVLNode node, SparePart data)
         {
             if (node == null) return new AVLNode(data);
 
             if (data.Id < node.Data.Id)
-                node.Left = InsertRecursive(node.Left, data);
+                node.Left = AddRecursive(node.Left, data);
             else if (data.Id > node.Data.Id)
-                node.Right = InsertRecursive(node.Right, data);
+                node.Right = AddRecursive(node.Right, data);
             else
                 return node;
 
@@ -190,7 +190,7 @@ namespace Structures
         public void GenerateDotNodes(AVLNode node, StringBuilder sb)
         {
             if (node == null) return;
-            sb.Append("        ").Append(node.Data.ToDotNode()).AppendLine();
+            sb.Append("        ").Append(node.ToDotNode()).AppendLine();
             GenerateDotNodes(node.Left, sb);
             GenerateDotNodes(node.Right, sb);
         }

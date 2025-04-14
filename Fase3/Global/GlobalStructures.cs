@@ -8,6 +8,7 @@ namespace Global
         public static DoublyLinkedList VehiclesList = new DoublyLinkedList();
         public static AVLTree SparePartsTree = new AVLTree();
         public static BinaryTree ServicesTree = new BinaryTree();
-        public static BTree InvoicesTree = new BTree(5);
+        public static UndirectedGraph Graph = new UndirectedGraph();
+        public static MerkleTree InvoicesTree = new MerkleTree();
     }
 }

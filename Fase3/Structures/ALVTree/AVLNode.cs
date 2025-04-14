@@ -16,5 +16,10 @@ namespace Structures
             Right = null;
             Height = 1;
         }
+
+        public string ToDotNode()
+        {
+            return $"\"{Data.Id}\" [label=\"ID: {Data.Id}\\nRepuesto: {Data.Spare}\\nDetalles: {Data.Details}\\nCosto: {Data.Cost}\"];";
+        }
     }
 }

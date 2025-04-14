@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Global
 {
-    public class LoginControl
+    public static class LoginControl
     {
         public static int LoggedUserId = 0;
         private static string LoggedUserEmail = "";
@@ -38,18 +38,9 @@ namespace Global
             LogoutTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ff");
         }
 
-        public static void CreateJson()
+        public static string GenerateJson()
         {
-            string folder = Path.Combine(Directory.GetCurrentDirectory(), "Reportes");
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
-            string filePath = Path.Combine(folder, "ControlLogueo.json");
-
-            string json = LoginControlJson.ToString(Formatting.Indented);
-            File.WriteAllText(filePath, json);
-            Console.WriteLine("El archivo ControlLogueo.json ha sido creado con exito.");
+            return LoginControlJson.ToString(Formatting.Indented);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Classes;
+using Gtk;
 
 namespace Structures
 {
@@ -13,7 +14,7 @@ namespace Structures
             tail = null;
         }
 
-        public void Insert(Vehicle data)
+        public void Add(Vehicle data)
         {
             DoublyLinkedNode newNode = new DoublyLinkedNode(data);
 
@@ -88,6 +89,24 @@ namespace Structures
             return null;
         }
 
+        public ListStore GetUserVehicles(int userId)
+        {
+            ListStore result = new ListStore(typeof(int), typeof(int), typeof(string), typeof(int), typeof(string));
+            DoublyLinkedNode current = head;
+
+            while (current != null)
+            {
+                Vehicle vehicle = current.Data;
+                if (vehicle.UserId == userId)
+                {
+                    result.AppendValues(vehicle.Id, vehicle.UserId, vehicle.Brand, vehicle.Model, vehicle.Plate);
+                }
+                current = current.Next;
+            }
+
+            return result;
+        }
+
         public bool IsEmpty()
         {
             return head == null;
@@ -121,7 +140,7 @@ namespace Structures
 
             while (current != null)
             {
-                graph += $"        n{index} {current.Data.ToDotNode()}\n";
+                graph += $"        n{index} {current.ToDotNode()}\n";
                 current = current.Next;
                 index++;
             }

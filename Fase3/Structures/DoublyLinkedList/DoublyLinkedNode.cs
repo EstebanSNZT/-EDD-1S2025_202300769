@@ -12,5 +12,10 @@ namespace Structures
             Data = data;
             Next = null;
         }
+
+        public string ToDotNode()
+        {
+            return $"[label = \"{{<data> ID: {Data.Id} \\n ID_Usuario: {Data.UserId} \\n Marca: {Data.Brand} \\n Modelo: {Data.Model} \\n Placa: {Data.Plate}}}\"];";
+        }
     }
 }

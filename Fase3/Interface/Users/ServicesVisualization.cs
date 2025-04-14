@@ -80,8 +80,6 @@ namespace Interface
 
         public void AdjustTraversal(int traversalNumber)
         {
-            treeView.Model = null;
-
             switch (traversalNumber)
             {
                 case 0:
