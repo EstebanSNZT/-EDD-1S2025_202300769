@@ -143,6 +143,7 @@ namespace Interface
             }
 
             User newUser = new User(id, namesEntry.Text, lastNamesEntry.Text, emailEntry.Text, age, passwordEntry.Text);
+            newUser.HashPassword();
             GlobalStructures.UsersBlockchain.AddBlock(newUser);
 
             Login.ShowDialog(this, MessageType.Info, "Usuario insertado con éxito.");

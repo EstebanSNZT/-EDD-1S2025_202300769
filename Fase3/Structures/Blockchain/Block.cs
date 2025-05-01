@@ -55,7 +55,7 @@ namespace Structures
 
         public void MineBlock()
         {
-            while (!Hash.StartsWith("00"))
+            while (!Hash.StartsWith("0000"))
             {
                 Nonce++;
                 Hash = CalculateHash();

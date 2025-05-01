@@ -158,7 +158,7 @@ namespace Structures
 
             while (current != null)
             {
-                if (!current.Hash.StartsWith("00"))
+                if (!current.Hash.StartsWith("0000"))
                 {
                     Console.WriteLine($"El bloque {current.Index} no cumple con la prueba de trabajo.");
                     return false;
