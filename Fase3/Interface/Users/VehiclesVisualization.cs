@@ -20,18 +20,17 @@ namespace Interface
 
         private void InitializeComponents()
         {
-            SetSizeRequest(440, 416); //(ancho, alto)
+            SetSizeRequest(600, 416); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
             menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Visualización de Vehículos</span>";
-            fixedContainer.Put(menuLabel, 43, 15);
+            fixedContainer.Put(menuLabel, 78, 15);
 
-            ScrolledWindow scrolledWindow = new ScrolledWindow();
             ScrolledWindow scrollWindow = new ScrolledWindow();
-            scrollWindow.SetSizeRequest(360, 265);
+            scrollWindow.SetSizeRequest(520, 265);
             scrollWindow.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             fixedContainer.Put(scrollWindow, 40, 70);
 

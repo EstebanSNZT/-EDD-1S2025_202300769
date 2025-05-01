@@ -17,7 +17,7 @@ namespace Classes
 
         public override string ToString()
         {
-            return $"ID: {Id}, Repuesto: {Spare}, Detalles: {Details}, Costo: ${Cost}";
+            return $"{Id},{Spare},{Details},{Cost}";
         }
     }
 }

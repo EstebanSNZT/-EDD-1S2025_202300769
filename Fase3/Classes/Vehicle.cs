@@ -19,7 +19,7 @@ namespace Classes
 
         public override string ToString()
         {
-            return $"ID: {Id}, ID_Usuario: {UserId}, Marca: {Brand}, Modelo: {Model}, Placa: {Plate}";
+            return $"{Id},{UserId},{Brand},{Model},{Plate}";
         }
     }
 }

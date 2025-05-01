@@ -20,18 +20,17 @@ namespace Interface
 
         private void InitializeComponents()
         {
-            SetSizeRequest(440, 416); //(ancho, alto)
+            SetSizeRequest(540, 416); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
             menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Visualización de Facturas</span>";
-            fixedContainer.Put(menuLabel, 50, 15);
+            fixedContainer.Put(menuLabel, 80, 15);
 
-            ScrolledWindow scrolledWindow = new ScrolledWindow();
             ScrolledWindow scrollWindow = new ScrolledWindow();
-            scrollWindow.SetSizeRequest(360, 265);
+            scrollWindow.SetSizeRequest(460, 265);
             scrollWindow.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             fixedContainer.Put(scrollWindow, 40, 70);
 

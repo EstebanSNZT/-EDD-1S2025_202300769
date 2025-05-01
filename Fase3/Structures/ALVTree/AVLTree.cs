@@ -115,7 +115,7 @@ namespace Structures
         {
             return Get(id) != null;
         }
-        
+
         public bool IsEmpty()
         {
             return root == null;
@@ -131,7 +131,7 @@ namespace Structures
         private void PreOrderRecursive(AVLNode node, ListStore result)
         {
             if (node == null) return;
-            
+
             SparePart sparePart = node.Data;
             result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
             PreOrderRecursive(node.Left, result);
@@ -148,7 +148,7 @@ namespace Structures
         private void InOrderRecursive(AVLNode node, ListStore result)
         {
             if (node == null) return;
-            
+
             SparePart sparePart = node.Data;
             InOrderRecursive(node.Left, result);
             result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
@@ -165,11 +165,78 @@ namespace Structures
         private void PostOrderRecursive(AVLNode node, ListStore result)
         {
             if (node == null) return;
-            
+
             SparePart sparePart = node.Data;
             PostOrderRecursive(node.Left, result);
             PostOrderRecursive(node.Right, result);
             result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
+        }
+
+        public string PlainText()
+        {
+            StringBuilder text = new StringBuilder();
+            PlainTextRecursive(root, text);
+            Console.WriteLine($"Árbol AVL en Texto Plano:\n{text}");
+            return text.ToString();
+        }
+
+        public void LoadPlainText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Console.WriteLine("El texto proporcionado está vacío.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Console.WriteLine("El texto proporcionado está vacío.");
+                return;
+            }
+
+            string[] lines = text.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries);
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                string[] parts = line.Split(',');
+
+                if (parts.Length != 4)
+                {
+                    Console.WriteLine($"Línea ignorada (formato incorrecto): {line}");
+                    continue;
+                }
+
+                if (!int.TryParse(parts[0], out int id) || !double.TryParse(parts[3], out double cost))
+                {
+                    Console.WriteLine($"Línea ignorada (datos numéricos inválidos): {line}");
+                    continue;
+                }
+
+                string spare = parts[1];
+                string details = parts[2];
+
+                if (Contains(id))
+                {
+                    Console.WriteLine($"Línea ignorada (ID ya existe): {line}");
+                    continue;
+                }
+                else
+                {
+                    SparePart sparePart = new SparePart(id, spare, details, cost);
+                    Add(sparePart);
+                }
+            }
+        }
+
+        public void PlainTextRecursive(AVLNode node, StringBuilder text)
+        {
+            if (node == null) return;
+
+            PlainTextRecursive(node.Left, text);
+            text.AppendLine(node.Data.ToString());
+            PlainTextRecursive(node.Right, text);
         }
 
         public string GenerateDot()
@@ -182,7 +249,7 @@ namespace Structures
             sb.AppendLine("        label = \"Árbol AVL\";");
             GenerateDotNodes(root, sb);
             GenerateDotConnections(root, sb);
-            sb.AppendLine("    }"); 
+            sb.AppendLine("    }");
             sb.AppendLine("}");
             return sb.ToString();
         }

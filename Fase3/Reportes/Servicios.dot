@@ -1,0 +1,47 @@
+digraph BinaryTree {
+    node [shape=box];
+    rankdir=TB;
+    subgraph cluster_0 {
+        label = "Árbol Binario";
+
+        "10" [label="ID: 10\nId_Repuesto: 1\nId_Vehículo: 1\nDetalles: Cambio de batería\nCosto: 150"];
+        "5" [label="ID: 5\nId_Repuesto: 2\nId_Vehículo: 2\nDetalles: Cambio de filtro de aceite\nCosto: 50"];
+        "3" [label="ID: 3\nId_Repuesto: 4\nId_Vehículo: 4\nDetalles: Instalación de radiador nuevo\nCosto: 130"];
+        "2" [label="ID: 2\nId_Repuesto: 8\nId_Vehículo: 8\nDetalles: Cambio de discos de freno\nCosto: 100"];
+        "1" [label="ID: 1\nId_Repuesto: 6\nId_Vehículo: 7\nDetalles: Cambio de amortiguadores\nCosto: 95"];
+        "4" [label="ID: 4\nId_Repuesto: 9\nId_Vehículo: 9\nDetalles: Cambio de correa de distribución\nCosto: 60"];
+        "7" [label="ID: 7\nId_Repuesto: 5\nId_Vehículo: 5\nDetalles: Cambio de filtro de aire\nCosto: 35"];
+        "6" [label="ID: 6\nId_Repuesto: 10\nId_Vehículo: 10\nDetalles: Reemplazo de bomba de agua\nCosto: 85"];
+        "8" [label="ID: 8\nId_Repuesto: 1\nId_Vehículo: 2\nDetalles: Cambio de faros delanteros\nCosto: 120"];
+        "9" [label="ID: 9\nId_Repuesto: 7\nId_Vehículo: 8\nDetalles: Instalación de sensor de oxígeno\nCosto: 90"];
+        "15" [label="ID: 15\nId_Repuesto: 3\nId_Vehículo: 3\nDetalles: Reemplazo de pastillas de freno\nCosto: 70"];
+        "13" [label="ID: 13\nId_Repuesto: 6\nId_Vehículo: 6\nDetalles: Reemplazo de bujías\nCosto: 40"];
+        "12" [label="ID: 12\nId_Repuesto: 2\nId_Vehículo: 3\nDetalles: Cambio de aceite de motor\nCosto: 65"];
+        "11" [label="ID: 11\nId_Repuesto: 8\nId_Vehículo: 9\nDetalles: Cambio de filtro de combustible\nCosto: 40"];
+        "14" [label="ID: 14\nId_Repuesto: 3\nId_Vehículo: 4\nDetalles: Reemplazo de termostato\nCosto: 45"];
+        "17" [label="ID: 17\nId_Repuesto: 7\nId_Vehículo: 7\nDetalles: Cambio de llantas\nCosto: 160"];
+        "16" [label="ID: 16\nId_Repuesto: 4\nId_Vehículo: 5\nDetalles: Cambio de alternador\nCosto: 210"];
+        "18" [label="ID: 18\nId_Repuesto: 5\nId_Vehículo: 6\nDetalles: Reemplazo de embrague\nCosto: 190"];
+        "20" [label="ID: 20\nId_Repuesto: 9\nId_Vehículo: 10\nDetalles: Reemplazo de bobina de encendido\nCosto: 70"];
+        "19" [label="ID: 19\nId_Repuesto: 10\nId_Vehículo: 1\nDetalles: Cambio de escobillas limpiaparabrisas\nCosto: 25"];
+        "10" -> "5";
+        "10" -> "15";
+        "5" -> "3";
+        "5" -> "7";
+        "3" -> "2";
+        "3" -> "4";
+        "2" -> "1";
+        "7" -> "6";
+        "7" -> "8";
+        "8" -> "9";
+        "15" -> "13";
+        "15" -> "17";
+        "13" -> "12";
+        "13" -> "14";
+        "12" -> "11";
+        "17" -> "16";
+        "17" -> "18";
+        "18" -> "20";
+        "20" -> "19";
+    }
+}

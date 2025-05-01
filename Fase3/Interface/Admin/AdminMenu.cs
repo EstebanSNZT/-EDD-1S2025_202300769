@@ -1,6 +1,7 @@
 using Gtk;
 using Global;
 using Utilities;
+using Structures;
 
 namespace Interface
 {
@@ -138,12 +139,12 @@ namespace Interface
 
         private void OnGenerateReportsButtonButtonClicked(object sender, EventArgs e)
         {
-            // if (!GlobalStructures.UsersBlockchain.IsEmpty())
-            // {
-            //     string linkedListDot = GlobalStructures.UsersBlockchain.GenerateDot();
-            //     Utility.GenerateDotFile("Usuarios", linkedListDot);
-            //     Utility.ConvertDotToImage("Usuarios.dot");
-            // }
+            if (!GlobalStructures.UsersBlockchain.IsEmpty())
+            {
+                string blockchainDot = GlobalStructures.UsersBlockchain.GenerateDot();
+                Utility.GenerateDotFile("Usuarios", blockchainDot);
+                Utility.ConvertDotToImage("Usuarios.dot");
+            }
 
             if (!GlobalStructures.VehiclesList.IsEmpty())
             {
@@ -173,23 +174,93 @@ namespace Interface
                 Utility.ConvertDotToImage("Grafo.dot");
             }
 
-            // if (!GlobalStructures.InvoicesTree.IsEmpty())
-            // {
-            //     string bTreeDot = GlobalStructures.InvoicesTree.GenerateDot();
-            //     Utility.GenerateDotFile("Facturas", bTreeDot);
-            //     Utility.ConvertDotToImage("Facturas.dot");
-            // }
+            if (!GlobalStructures.InvoicesTree.IsEmpty())
+            {
+                string bTreeDot = GlobalStructures.InvoicesTree.GenerateDot();
+                Utility.GenerateDotFile("Facturas", bTreeDot);
+                Utility.ConvertDotToImage("Facturas.dot");
+            }
 
             Login.ShowDialog(this, MessageType.Info, "Los reportes han sido generados con éxito en la carpeta Reportes.");
         }
 
         private void OnGenerateBackupButtonClicked(object sender, EventArgs e)
         {
+            HuffmanCompressor huffmanCompressor = new HuffmanCompressor();
+
+            if (!GlobalStructures.UsersBlockchain.IsEmpty())
+            {
+                string blockchainJson = GlobalStructures.UsersBlockchain.GenerateJson();
+                Utility.GenerateJsonFile("Blocks", blockchainJson, "Backup");
+            }
+
+            if (!GlobalStructures.VehiclesList.IsEmpty())
+            {
+                string vehicleText = GlobalStructures.VehiclesList.PlainText();
+                huffmanCompressor.Compress(vehicleText, "Vehicles");
+            }
+
+            if (!GlobalStructures.SparePartsTree.IsEmpty())
+            {
+                string sparePartsText = GlobalStructures.SparePartsTree.PlainText();
+                huffmanCompressor.Compress(sparePartsText, "SpareParts");
+            }
+
             Login.ShowDialog(this, MessageType.Info, "El backup ha sido creado con éxito en la carpeta Backup.");
         }
 
         private void OnLoadBackupButtonClicked(object sender, EventArgs e)
         {
+            string BlocksJson = Utility.LoadJsonFile("Blocks", "Backup");
+
+            if (!string.IsNullOrEmpty(BlocksJson))
+            {
+                Blockchain blockchain = new Blockchain();
+                blockchain.LoadJson(BlocksJson);
+                if (blockchain.AnalyzeBlockchain())
+                {
+                    GlobalStructures.UsersBlockchain = blockchain;
+                    Console.WriteLine("Blockchain cargado desde el backup.\n");
+                }
+                else
+                {
+                    Console.WriteLine("El backup del blockchain es inválido.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Error al cargar el backup del blockchain.");
+                Console.WriteLine("Asegúrese de que Blocks.json exista.");
+            }
+
+            HuffmanCompressor huffmanCompressor = new HuffmanCompressor();
+            string vehiclesText = huffmanCompressor.Decompress("Vehicles");
+
+            if (!string.IsNullOrEmpty(vehiclesText))
+            {
+                GlobalStructures.VehiclesList.LoadPlainText(vehiclesText);
+                Console.WriteLine("Vehículos cargados desde el backup.\n");
+            }
+            else
+            {
+                Console.WriteLine("Error al cargar el backup de vehículos.");
+                Console.WriteLine("Asegúrese de que Vehicles.edd y VehiclesHuffmanTree.json existan.");
+            }
+
+            string sparePartsText = huffmanCompressor.Decompress("SpareParts");
+
+            if (!string.IsNullOrEmpty(sparePartsText))
+            {
+                GlobalStructures.SparePartsTree.LoadPlainText(sparePartsText);
+                Console.WriteLine("Repuestos cargados desde el backup.\n");
+            }
+            else
+            {
+                Console.WriteLine("Error al cargar el backup de repuestos.");
+                Console.WriteLine("Asegúrese de que SpareParts.edd y SparePartsHuffmanTree.json existan.");
+            }
+
             Login.ShowDialog(this, MessageType.Info, "El backup ha sido cargado con éxito desde la carpeta Backup.");
         }
 

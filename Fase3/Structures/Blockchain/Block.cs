@@ -26,7 +26,19 @@ namespace Structures
             Next = null;
         }
 
-        private string CalculateHash()
+        [JsonConstructor]
+        public Block(int index, string timestamp, string data, int nonce, string previousHash, string hash)
+        {
+            Index = index;
+            Timestamp = timestamp;
+            Data = data;
+            Nonce = nonce;
+            PreviousHash = previousHash;
+            Hash = hash;
+            Next = null;
+        }
+
+        public string CalculateHash()
         {
             using (SHA256 sha256 = SHA256.Create())
             {
@@ -62,6 +74,15 @@ namespace Structures
             sb.AppendLine($"Hash: {Hash}");
             sb.AppendLine($"-----------------------------------");
             return sb.ToString();
+        }
+
+        public string ToDotNode()
+        {
+            string hashDisplay = Hash.Length > 16 ? Hash.Substring(0, 16) + "..." : Hash;
+            string prevHashDisplay = PreviousHash.Length > 16 ? PreviousHash.Substring(0, 16) + "..." : PreviousHash;
+            string escapedData = Data.Replace("\"", "").Replace("{", "\\{").Replace("}", "\\}").Replace(":", ": ").Replace(",", ", ");
+            string nodeLabel = $"\"{{<data> INDEX: {Index} \\n TIMESTAMP: {Timestamp} \\n DATA: {escapedData} \\n NONCE: {Nonce} \\n PREVIOUS HASH: {prevHashDisplay} \\n HASH: {hashDisplay}}}\"";
+            return $"block{Index} [label = {nodeLabel}];";
         }
     }
 }

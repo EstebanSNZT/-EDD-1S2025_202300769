@@ -86,7 +86,7 @@ namespace Interface
             {
                 User user = GlobalStructures.UsersBlockchain.GetByEmail(email);
 
-                if (user == null || !user.Password.Equals(password))
+                if (user == null || !user.ComparePassword(password))
                 {
                     ShowDialog(this, MessageType.Error, "Correo o contraseña incorrectos.");
                     return;

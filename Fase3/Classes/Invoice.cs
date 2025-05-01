@@ -18,7 +18,7 @@ namespace Classes
             ServiceId = serviceId;
             Total = total;
             PaymentMethod = paymentMethod;
-            Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+            Date = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         public string GetHash()

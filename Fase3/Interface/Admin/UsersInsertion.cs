@@ -136,6 +136,12 @@ namespace Interface
                 return;
             }
 
+            if (GlobalStructures.UsersBlockchain.ContainsByEmail(emailEntry.Text))
+            {
+                Login.ShowDialog(this, MessageType.Error, "Ya existe un usuario con ese correo. Ingrese un correo diferente.");
+                return;
+            }
+
             User newUser = new User(id, namesEntry.Text, lastNamesEntry.Text, emailEntry.Text, age, passwordEntry.Text);
             GlobalStructures.UsersBlockchain.AddBlock(newUser);
 

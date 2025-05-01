@@ -8,6 +8,8 @@ namespace Interface
     public class BulkUpload : Window
     {
         private ComboBoxText comboBox = new ComboBoxText();
+        private static readonly string[] PaymentMethods = ["Efectivo", "Tarjeta de Débito", "Tarjeta de Crédito", "Transferencia"];
+        private static readonly Random Random = new Random();
 
         public BulkUpload() : base("AutoGest Pro - Carga Masiva")
         {
@@ -33,6 +35,7 @@ namespace Interface
             comboBox.AppendText("Usuarios");
             comboBox.AppendText("Vehículos");
             comboBox.AppendText("Repuestos");
+            comboBox.AppendText("Servicios");
             comboBox.Active = 0;
             comboBox.SetSizeRequest(280, 35);
             fixedContainer.Put(comboBox, 35, 75);
@@ -94,7 +97,20 @@ namespace Interface
                     {
                         foreach (var localUser in localUsers)
                         {
+                            if (GlobalStructures.UsersBlockchain.Contains(localUser.ID))
+                            {
+                                Console.WriteLine($"El usuario con ID {localUser.ID} no cargado dado que un usuario con ese ID ya existe.");
+                                continue;
+                            }
+
+                            if (GlobalStructures.UsersBlockchain.ContainsByEmail(localUser.Correo))
+                            {
+                                Console.WriteLine($"El usuario con correo {localUser.Correo} no cargado dado que un usuario con ese correo ya existe.");
+                                continue;
+                            }
+
                             User newUser = new User(localUser.ID, localUser.Nombres, localUser.Apellidos, localUser.Correo, localUser.Edad, localUser.Contrasenia);
+                            newUser.HashPassword();
                             GlobalStructures.UsersBlockchain.AddBlock(newUser);
                         }
                         GlobalStructures.UsersBlockchain.ViewAllBlocks();
@@ -108,23 +124,29 @@ namespace Interface
                     {
                         foreach (var localVehicle in localVehicles)
                         {
-                            if (GlobalStructures.UsersBlockchain.Contains(localVehicle.ID_Usuario))
+                            if (GlobalStructures.VehiclesList.Contains(localVehicle.ID))
                             {
-                                if (GlobalStructures.VehiclesList.Contains(localVehicle.ID))
-                                {
-                                    Console.WriteLine($"El vehiculo con ID {localVehicle.ID} no cargado dado que un vehículo con ese ID ya existe.");
-                                }
-                                else
-                                {
-                                    Vehicle newVehicle = new Vehicle(localVehicle.ID, localVehicle.ID_Usuario, localVehicle.Marca, localVehicle.Modelo, localVehicle.Placa);
-                                    GlobalStructures.VehiclesList.Add(newVehicle);
-                                }
-
+                                Console.WriteLine($"El vehiculo con ID {localVehicle.ID} no cargado dado que un vehículo con ese ID ya existe.");
                             }
                             else
                             {
-                                Console.WriteLine($"Vehiculo con ID {localVehicle.ID} no cargado dado que el usuario con ID {localVehicle.ID_Usuario} no existe.");
-                                continue;
+                                if (GlobalStructures.UsersBlockchain.Contains(localVehicle.ID_Usuario))
+                                {
+                                    Vehicle newVehicle = new Vehicle(
+                                        localVehicle.ID,
+                                        localVehicle.ID_Usuario,
+                                        localVehicle.Marca,
+                                        localVehicle.Modelo,
+                                        localVehicle.Placa
+                                    );
+                                    GlobalStructures.VehiclesList.Add(newVehicle);
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Vehiculo con ID {localVehicle.ID} no cargado dado que el usuario con ID {localVehicle.ID_Usuario} no existe.");
+                                    continue;
+                                }
+
                             }
                         }
                     }
@@ -142,11 +164,66 @@ namespace Interface
                             }
                             else
                             {
-                                SparePart newSparePart = new SparePart(localSparePart.ID, localSparePart.Repuesto, localSparePart.Detalles, localSparePart.Costo);
+                                SparePart newSparePart = new SparePart(
+                                    localSparePart.ID,
+                                    localSparePart.Repuesto,
+                                    localSparePart.Detalles,
+                                    localSparePart.Costo
+                                );
                                 GlobalStructures.SparePartsTree.Add(newSparePart);
                             }
                         }
 
+                    }
+                }
+                else if (selectedText == "Servicios")
+                {
+                    var localServices = JsonConvert.DeserializeObject<LocalServices[]>(jsonContent);
+                    if (localServices != null)
+                    {
+                        foreach (var localService in localServices)
+                        {
+                            if (!GlobalStructures.VehiclesList.Contains(localService.Id_Vehiculo))
+                            {
+                                Console.WriteLine($"El servicio con ID {localService.Id} no cargado dado que el vehiculo con ID {localService.Id_Vehiculo} no existe.");
+                                continue;
+                            }
+
+                            SparePart sparePart = GlobalStructures.SparePartsTree.Get(localService.Id_Repuesto);
+
+                            if (sparePart == null)
+                            {
+                                Console.WriteLine($"El servicio con ID {localService.Id} no cargado dado que el repuesto con ID {localService.Id_Repuesto} no existe.");
+                                continue;
+                            }
+
+                            if (GlobalStructures.ServicesTree.Contains(localService.Id))
+                            {
+                                Console.WriteLine($"El servicio con ID {localService.Id} no cargado dado que un servicio con ese ID ya existe.");
+                                continue;
+                            }
+
+                            Service newService = new Service(
+                                localService.Id, localService.Id_Repuesto,
+                                localService.Id_Vehiculo,
+                                localService.Detalles,
+                                localService.Costo
+                            );
+                            GlobalStructures.ServicesTree.Add(newService);
+
+                            GlobalStructures.Graph.AddEdge($"V{newService.VehicleId}", $"R{newService.SparePartId}");
+                            double total = newService.Cost + sparePart.Cost;
+                            string paymentMethod = GetRandomPaymentMethod();
+
+                            Invoice newInvoice = new Invoice(
+                                GlobalStructures.invoiceId,
+                                newService.Id,
+                                total,
+                                paymentMethod
+                            );
+                            GlobalStructures.InvoicesTree.Add(newInvoice);
+                            GlobalStructures.invoiceId++;
+                        }
                     }
                 }
                 Login.ShowDialog(this, MessageType.Info, "Archivo JSON cargado correctamente.");
@@ -162,6 +239,12 @@ namespace Interface
             comboBox.Active = 0;
             GlobalWindows.adminMenu.ShowAll();
             Hide();
+        }
+
+        public static string GetRandomPaymentMethod()
+        {
+            int index = Random.Next(PaymentMethods.Length);
+            return PaymentMethods[index];
         }
     }
 
@@ -188,6 +271,16 @@ namespace Interface
     {
         public int ID { get; set; }
         public string Repuesto { get; set; }
+        public string Detalles { get; set; }
+        public double Costo { get; set; }
+    }
+
+    public class LocalServices
+    {
+        public int Id { get; set; }
+        public int Id_Repuesto { get; set; }
+
+        public int Id_Vehiculo { get; set; }
         public string Detalles { get; set; }
         public double Costo { get; set; }
     }

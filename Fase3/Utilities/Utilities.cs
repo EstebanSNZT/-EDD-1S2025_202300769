@@ -114,5 +114,28 @@ namespace Utilities
                 Console.WriteLine($"Error al crear el archivo JSON: {ex.Message}");
             }
         }
+
+        public static string LoadJsonFile(string fileName, string folderName)
+        {
+            try
+            {
+                string folder = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                string filePath = Path.Combine(folder, $"{fileName}.json");
+
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine($"El archivo {fileName}.json no existe en la carpeta {folderName}.");
+                    return string.Empty;
+                }
+
+                string jsonContent = File.ReadAllText(filePath);
+                return jsonContent;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al cargar el archivo JSON: {ex.Message}");
+                return string.Empty;
+            }
+        }
     }
 }

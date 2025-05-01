@@ -41,5 +41,13 @@ namespace Structures
                 return builder.ToString();
             }
         }
+
+        public string ToDotNode()
+        {
+            string hashDisplay = Hash.Length > 16 ? Hash.Substring(0, 16) + "..." : Hash;
+
+            if (Data != null) return $"[label=\"ID: {Data.Id}\\nID_Servicio: {Data.ServiceId}\\nTotal: {Data.Total}\\nFecha: {Data.Date}\\nHash: {hashDisplay}\"]";
+            else return $"[label=\"Hash: {hashDisplay}\"]";
+        }
     }
 }

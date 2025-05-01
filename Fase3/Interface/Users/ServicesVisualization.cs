@@ -23,14 +23,14 @@ namespace Interface
 
         private void InitializeComponents()
         {
-            SetSizeRequest(680, 496); //(ancho, alto)
+            SetSizeRequest(600, 496); //(ancho, alto)
             SetPosition(WindowPosition.Center);
 
             Fixed fixedContainer = new Fixed();
 
             Label menuLabel = new Label();
             menuLabel.Markup = "<span font='Arial 22' weight='bold' foreground='blue'>Visualización de Servicios</span>";
-            fixedContainer.Put(menuLabel, 156, 15);
+            fixedContainer.Put(menuLabel, 131, 15);
 
             comboBox.AppendText("Pre-Orden");
             comboBox.AppendText("In-Orden");
@@ -38,10 +38,10 @@ namespace Interface
             comboBox.Active = 0;
             comboBox.SetSizeRequest(280, 35);
             comboBox.Changed += OnComboBoxChanged;
-            fixedContainer.Put(comboBox, 200, 70);
+            fixedContainer.Put(comboBox, 160, 70);
 
             ScrolledWindow scrollWindow = new ScrolledWindow();
-            scrollWindow.SetSizeRequest(600, 285);
+            scrollWindow.SetSizeRequest(520, 285);
             scrollWindow.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             fixedContainer.Put(scrollWindow, 40, 130);
 

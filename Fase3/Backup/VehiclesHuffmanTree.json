@@ -1,0 +1,476 @@
+{
+  "Character": "\u0000",
+  "Frequency": 813,
+  "Left": {
+    "Character": "\u0000",
+    "Frequency": 325,
+    "Left": {
+      "Character": "\u0000",
+      "Frequency": 160,
+      "Left": {
+        "Character": "e",
+        "Frequency": 80,
+        "Left": null,
+        "Right": null
+      },
+      "Right": {
+        "Character": ",",
+        "Frequency": 80,
+        "Left": null,
+        "Right": null
+      }
+    },
+    "Right": {
+      "Character": "\u0000",
+      "Frequency": 165,
+      "Left": {
+        "Character": "\u0000",
+        "Frequency": 80,
+        "Left": {
+          "Character": "\u0000",
+          "Frequency": 40,
+          "Left": {
+            "Character": "-",
+            "Frequency": 20,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
+            "Character": "z",
+            "Frequency": 20,
+            "Left": null,
+            "Right": null
+          }
+        },
+        "Right": {
+          "Character": "\u0000",
+          "Frequency": 40,
+          "Left": {
+            "Character": "\u0000",
+            "Frequency": 20,
+            "Left": {
+              "Character": "7",
+              "Frequency": 10,
+              "Left": null,
+              "Right": null
+            },
+            "Right": {
+              "Character": "6",
+              "Frequency": 10,
+              "Left": null,
+              "Right": null
+            }
+          },
+          "Right": {
+            "Character": "r",
+            "Frequency": 20,
+            "Left": null,
+            "Right": null
+          }
+        }
+      },
+      "Right": {
+        "Character": "\u0000",
+        "Frequency": 85,
+        "Left": {
+          "Character": "\u0000",
+          "Frequency": 40,
+          "Left": {
+            "Character": "\n",
+            "Frequency": 20,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
+            "Character": "c",
+            "Frequency": 20,
+            "Left": null,
+            "Right": null
+          }
+        },
+        "Right": {
+          "Character": "\u0000",
+          "Frequency": 45,
+          "Left": {
+            "Character": "\u0000",
+            "Frequency": 21,
+            "Left": {
+              "Character": "\u0000",
+              "Frequency": 10,
+              "Left": {
+                "Character": "J",
+                "Frequency": 4,
+                "Left": null,
+                "Right": null
+              },
+              "Right": {
+                "Character": "\u0000",
+                "Frequency": 6,
+                "Left": {
+                  "Character": "Y",
+                  "Frequency": 3,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "Z",
+                  "Frequency": 3,
+                  "Left": null,
+                  "Right": null
+                }
+              }
+            },
+            "Right": {
+              "Character": "9",
+              "Frequency": 11,
+              "Left": null,
+              "Right": null
+            }
+          },
+          "Right": {
+            "Character": "C",
+            "Frequency": 24,
+            "Left": null,
+            "Right": null
+          }
+        }
+      }
+    }
+  },
+  "Right": {
+    "Character": "\u0000",
+    "Frequency": 488,
+    "Left": {
+      "Character": "\u0000",
+      "Frequency": 205,
+      "Left": {
+        "Character": "\u0000",
+        "Frequency": 96,
+        "Left": {
+          "Character": "\u0000",
+          "Frequency": 48,
+          "Left": {
+            "Character": "M",
+            "Frequency": 24,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
+            "Character": "L",
+            "Frequency": 24,
+            "Left": null,
+            "Right": null
+          }
+        },
+        "Right": {
+          "Character": "\u0000",
+          "Frequency": 48,
+          "Left": {
+            "Character": "A",
+            "Frequency": 24,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
+            "Character": "B",
+            "Frequency": 24,
+            "Left": null,
+            "Right": null
+          }
+        }
+      },
+      "Right": {
+        "Character": "\u0000",
+        "Frequency": 109,
+        "Left": {
+          "Character": "2",
+          "Frequency": 52,
+          "Left": null,
+          "Right": null
+        },
+        "Right": {
+          "Character": "\u0000",
+          "Frequency": 57,
+          "Left": {
+            "Character": "\u0000",
+            "Frequency": 27,
+            "Left": {
+              "Character": "3",
+              "Frequency": 13,
+              "Left": null,
+              "Right": null
+            },
+            "Right": {
+              "Character": "\u0000",
+              "Frequency": 14,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 6,
+                "Left": {
+                  "Character": "W",
+                  "Frequency": 3,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "X",
+                  "Frequency": 3,
+                  "Left": null,
+                  "Right": null
+                }
+              },
+              "Right": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "R",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "K",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              }
+            }
+          },
+          "Right": {
+            "Character": "\u0000",
+            "Frequency": 30,
+            "Left": {
+              "Character": "5",
+              "Frequency": 15,
+              "Left": null,
+              "Right": null
+            },
+            "Right": {
+              "Character": "8",
+              "Frequency": 15,
+              "Left": null,
+              "Right": null
+            }
+          }
+        }
+      }
+    },
+    "Right": {
+      "Character": "\u0000",
+      "Frequency": 283,
+      "Left": {
+        "Character": "\u0000",
+        "Frequency": 125,
+        "Left": {
+          "Character": "0",
+          "Frequency": 61,
+          "Left": null,
+          "Right": null
+        },
+        "Right": {
+          "Character": "\u0000",
+          "Frequency": 64,
+          "Left": {
+            "Character": "\u0000",
+            "Frequency": 32,
+            "Left": {
+              "Character": "\u0000",
+              "Frequency": 16,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "N",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "O",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              },
+              "Right": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "P",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "Q",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              }
+            },
+            "Right": {
+              "Character": "\u0000",
+              "Frequency": 16,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "U",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "D",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              },
+              "Right": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "S",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "T",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              }
+            }
+          },
+          "Right": {
+            "Character": "\u0000",
+            "Frequency": 32,
+            "Left": {
+              "Character": "\u0000",
+              "Frequency": 16,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "F",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "G",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              },
+              "Right": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "H",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "I",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              }
+            },
+            "Right": {
+              "Character": "\u0000",
+              "Frequency": 16,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "V",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "E",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              },
+              "Right": {
+                "Character": "4",
+                "Frequency": 8,
+                "Left": null,
+                "Right": null
+              }
+            }
+          }
+        }
+      },
+      "Right": {
+        "Character": "\u0000",
+        "Frequency": 158,
+        "Left": {
+          "Character": "\u0000",
+          "Frequency": 78,
+          "Left": {
+            "Character": "1",
+            "Frequency": 38,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
+            "Character": "\u0000",
+            "Frequency": 40,
+            "Left": {
+              "Character": "d",
+              "Frequency": 20,
+              "Left": null,
+              "Right": null
+            },
+            "Right": {
+              "Character": "s",
+              "Frequency": 20,
+              "Left": null,
+              "Right": null
+            }
+          }
+        },
+        "Right": {
+          "Character": "\u0000",
+          "Frequency": 80,
+          "Left": {
+            "Character": " ",
+            "Frequency": 40,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
+            "Character": "\u0000",
+            "Frequency": 40,
+            "Left": {
+              "Character": "\r",
+              "Frequency": 20,
+              "Left": null,
+              "Right": null
+            },
+            "Right": {
+              "Character": "n",
+              "Frequency": 20,
+              "Left": null,
+              "Right": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

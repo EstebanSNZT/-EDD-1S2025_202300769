@@ -12,7 +12,6 @@ namespace Interface
         private Entry detailsEntry = new Entry();
         private ComboBoxText paymentMethodComboBox = new ComboBoxText();
         private Entry costEntry = new Entry();
-        private int invoiceId = 1;
 
         public GenerateService() : base("AutoGest Pro - Generar Servicio")
         {
@@ -70,6 +69,7 @@ namespace Interface
             paymentMethodComboBox.AppendText("Efectivo");
             paymentMethodComboBox.AppendText("Tarjeta de Débito");
             paymentMethodComboBox.AppendText("Tarjeta de Crédito");
+            paymentMethodComboBox.AppendText("Transferencia");
             paymentMethodComboBox.Active = -1;
             paymentMethodComboBox.SetSizeRequest(168, 35);
             fixedContainer.Put(paymentMethodComboBox, 212, 296);            
@@ -169,9 +169,9 @@ namespace Interface
             double total = newService.Cost + sparePart.Cost;
             string paymentMethod = paymentMethodComboBox.ActiveText;
 
-            Invoice newInvoice = new Invoice(invoiceId, newService.Id, total, paymentMethod);
+            Invoice newInvoice = new Invoice(GlobalStructures.invoiceId, newService.Id, total, paymentMethod);
             GlobalStructures.InvoicesTree.Add(newInvoice);
-            invoiceId++;
+            GlobalStructures.invoiceId++;
 
             Login.ShowDialog(this, MessageType.Info, "Servicio y factura generados con éxito.");
             CleanEntrys();

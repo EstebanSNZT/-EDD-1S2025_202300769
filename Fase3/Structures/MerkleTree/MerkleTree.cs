@@ -1,3 +1,4 @@
+using System.Text;
 using Classes;
 using Global;
 using Gtk;
@@ -49,7 +50,7 @@ namespace Structures
 
             root = currentLevel[0];
         }
-        
+
         public bool IsEmpty()
         {
             return leaves.Count == 0;
@@ -74,6 +75,62 @@ namespace Structures
             }
 
             return result;
+        }
+
+        public string GenerateDot()
+        {
+            StringBuilder dot = new StringBuilder();
+            dot.AppendLine("digraph MerkleTree {");
+            dot.AppendLine("    node [shape=record];");
+            dot.AppendLine("    rankdir=BT;");
+            dot.AppendLine("    subgraph cluster_0 {");
+            dot.AppendLine("        label = \"Facturas\";");
+            if (IsEmpty()) dot.AppendLine("        empty [label=\"Arbol vacío\"];");
+            else
+            {
+                Dictionary<string, int> nodeIds = new Dictionary<string, int>();
+                int idCounter = 0;
+                GenerateDotNodes(root, dot, nodeIds, ref idCounter);
+                GenerateDotConnections(root, dot, nodeIds);
+            }
+            dot.AppendLine("    }");
+            dot.AppendLine("}");
+            return dot.ToString();
+        }
+
+        private void GenerateDotNodes(MerkleNode node, StringBuilder dot, Dictionary<string, int> nodeIds, ref int idCounter)
+        {
+            if (node == null) return;
+
+            if (!nodeIds.ContainsKey(node.Hash)) nodeIds[node.Hash] = idCounter++;
+            int nodeId = nodeIds[node.Hash];
+
+            dot.AppendLine($"        node{nodeId} {node.ToDotNode()};");
+
+            GenerateDotNodes(node.Left, dot, nodeIds, ref idCounter);
+            GenerateDotNodes(node.Right, dot, nodeIds, ref idCounter);
+        }
+
+        private void GenerateDotConnections(MerkleNode node, StringBuilder dot, Dictionary<string, int> nodeIds)
+        {
+            if (node == null) return;
+
+            int nodeId = nodeIds[node.Hash];
+
+            if (node.Left != null)
+            {
+                int leftId = nodeIds[node.Left.Hash];
+                dot.AppendLine($"        node{leftId} -> node{nodeId};");
+            }
+
+            if (node.Right != null)
+            {
+                int rightId = nodeIds[node.Right.Hash];
+                dot.AppendLine($"        node{rightId} -> node{nodeId};");
+            }
+
+            GenerateDotConnections(node.Left, dot, nodeIds);
+            GenerateDotConnections(node.Right, dot, nodeIds);
         }
     }
 }

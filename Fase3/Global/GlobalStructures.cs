@@ -10,5 +10,6 @@ namespace Global
         public static BinaryTree ServicesTree = new BinaryTree();
         public static UndirectedGraph Graph = new UndirectedGraph();
         public static MerkleTree InvoicesTree = new MerkleTree();
+        public static int invoiceId = 1;
     }
 }
