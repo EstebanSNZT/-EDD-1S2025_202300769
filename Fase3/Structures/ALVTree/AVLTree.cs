@@ -180,6 +180,15 @@ namespace Structures
             return text.ToString();
         }
 
+        public void PlainTextRecursive(AVLNode node, StringBuilder text)
+        {
+            if (node == null) return;
+
+            PlainTextRecursive(node.Left, text);
+            text.AppendLine(node.Data.ToString());
+            PlainTextRecursive(node.Right, text);
+        }
+
         public void LoadPlainText(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -230,47 +239,38 @@ namespace Structures
             }
         }
 
-        public void PlainTextRecursive(AVLNode node, StringBuilder text)
-        {
-            if (node == null) return;
-
-            PlainTextRecursive(node.Left, text);
-            text.AppendLine(node.Data.ToString());
-            PlainTextRecursive(node.Right, text);
-        }
-
         public string GenerateDot()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("digraph ALVTree {");
-            sb.AppendLine("    node [shape=box];");
-            sb.AppendLine("    rankdir=TB;");
-            sb.AppendLine("    subgraph cluster_0 {");
-            sb.AppendLine("        label = \"Árbol AVL\";");
-            GenerateDotNodes(root, sb);
-            GenerateDotConnections(root, sb);
-            sb.AppendLine("    }");
-            sb.AppendLine("}");
-            return sb.ToString();
+            StringBuilder graph = new StringBuilder();
+            graph.AppendLine("digraph ALVTree {");
+            graph.AppendLine("    node [shape=box];");
+            graph.AppendLine("    rankdir=TB;");
+            graph.AppendLine("    subgraph cluster_0 {");
+            graph.AppendLine("        label = \"Árbol AVL\";");
+            GenerateDotNodes(root, graph);
+            GenerateDotConnections(root, graph);
+            graph.AppendLine("    }");
+            graph.AppendLine("}");
+            return graph.ToString();
         }
 
-        public void GenerateDotNodes(AVLNode node, StringBuilder sb)
+        public void GenerateDotNodes(AVLNode node, StringBuilder graph)
         {
             if (node == null) return;
-            sb.Append("        ").Append(node.ToDotNode()).AppendLine();
-            GenerateDotNodes(node.Left, sb);
-            GenerateDotNodes(node.Right, sb);
+            graph.Append("        ").Append(node.ToDotNode()).AppendLine();
+            GenerateDotNodes(node.Left, graph);
+            GenerateDotNodes(node.Right, graph);
         }
 
-        public void GenerateDotConnections(AVLNode node, StringBuilder sb)
+        public void GenerateDotConnections(AVLNode node, StringBuilder graph)
         {
             if (node == null) return;
             if (node.Left != null)
-                sb.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Left.Data.Id}\";");
+                graph.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Left.Data.Id}\";");
             if (node.Right != null)
-                sb.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Right.Data.Id}\";");
-            GenerateDotConnections(node.Left, sb);
-            GenerateDotConnections(node.Right, sb);
+                graph.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Right.Data.Id}\";");
+            GenerateDotConnections(node.Left, graph);
+            GenerateDotConnections(node.Right, graph);
         }
     }
 }

@@ -128,6 +128,7 @@ namespace Structures
                 Console.WriteLine(current.Data.ToString());
                 current = current.Next;
             }
+            Console.WriteLine();
         }
 
         public string PlainText()

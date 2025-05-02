@@ -241,6 +241,7 @@ namespace Interface
             {
                 GlobalStructures.VehiclesList.LoadPlainText(vehiclesText);
                 Console.WriteLine("Vehículos cargados desde el backup.\n");
+                GlobalStructures.VehiclesList.Print();
             }
             else
             {
