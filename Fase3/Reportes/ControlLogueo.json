@@ -1,7 +1,17 @@
 [
   {
     "usuario": "admin@usac.com",
-    "entrada": "2025-04-14 00:46:00.07",
-    "salida": "2025-04-14 00:46:09.18"
+    "entrada": "2025-05-02 16:21:12.08",
+    "salida": "2025-05-02 16:50:58.35"
+  },
+  {
+    "usuario": "ximena.marisol@usac.com",
+    "entrada": "2025-05-02 16:51:40.13",
+    "salida": "2025-05-02 17:04:15.79"
+  },
+  {
+    "usuario": "esteban07sánchez@usac.com",
+    "entrada": "2025-05-02 17:05:38.02",
+    "salida": "2025-05-02 17:05:41.69"
   }
 ]

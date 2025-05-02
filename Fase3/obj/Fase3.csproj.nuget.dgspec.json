@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase3\\Fase3.csproj": {}
+    "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase3/Fase3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase3\\Fase3.csproj": {
+    "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase3/Fase3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase3\\Fase3.csproj",
+        "projectUniqueName": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase3/Fase3.csproj",
         "projectName": "Fase3",
-        "projectPath": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase3\\Fase3.csproj",
-        "packagesPath": "C:\\Users\\Esteban Sánchez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esteban Sánchez\\Documents\\GitHub\\EDD\\-EDD-1S2025_202300769\\Fase3\\obj\\",
+        "projectPath": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase3/Fase3.csproj",
+        "packagesPath": "/home/esteban/.nuget/packages/",
+        "outputPath": "/home/esteban/Documents/Github/-EDD-1S2025_202300769/Fase3/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Esteban Sánchez\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/esteban/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -69,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

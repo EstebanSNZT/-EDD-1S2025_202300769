@@ -2,7 +2,7 @@ graph UndirectedGraph {
     node [shape=ellipse];
     rankdir=TB;
     subgraph cluster_0 {
-        label = "Esteban Sánchez - 202300769";
+        label = "Grafo No Dirigido";
         V1 [label="V1"];
         R1 [label="R1"];
         V2 [label="V2"];

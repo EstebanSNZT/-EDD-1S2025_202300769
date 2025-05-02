@@ -1,9 +1,9 @@
 {
   "Character": "\u0000",
-  "Frequency": 1239,
+  "Frequency": 1219,
   "Left": {
     "Character": "\u0000",
-    "Frequency": 506,
+    "Frequency": 500,
     "Left": {
       "Character": "\u0000",
       "Frequency": 240,
@@ -32,30 +32,20 @@
     },
     "Right": {
       "Character": "\u0000",
-      "Frequency": 266,
+      "Frequency": 260,
       "Left": {
         "Character": "\u0000",
-        "Frequency": 130,
-        "Left": {
-          "Character": "i",
-          "Frequency": 64,
-          "Left": null,
-          "Right": null
-        },
-        "Right": {
-          "Character": "o",
-          "Frequency": 66,
-          "Left": null,
-          "Right": null
-        }
-      },
-      "Right": {
-        "Character": "\u0000",
-        "Frequency": 136,
+        "Frequency": 124,
         "Left": {
           "Character": "\u0000",
-          "Frequency": 66,
+          "Frequency": 60,
           "Left": {
+            "Character": "m",
+            "Frequency": 29,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
             "Character": "\u0000",
             "Frequency": 31,
             "Left": {
@@ -71,35 +61,9 @@
                 "Character": "\u0000",
                 "Frequency": 8,
                 "Left": {
-                  "Character": "ó",
-                  "Frequency": 4,
-                  "Left": null,
-                  "Right": null
-                },
-                "Right": {
-                  "Character": "z",
-                  "Frequency": 4,
-                  "Left": null,
-                  "Right": null
-                }
-              }
-            },
-            "Right": {
-              "Character": "\u0000",
-              "Frequency": 16,
-              "Left": {
-                "Character": "\u0000",
-                "Frequency": 8,
-                "Left": {
                   "Character": "\u0000",
                   "Frequency": 4,
                   "Left": {
-                    "Character": "x",
-                    "Frequency": 2,
-                    "Left": null,
-                    "Right": null
-                  },
-                  "Right": {
                     "Character": "\u0000",
                     "Frequency": 2,
                     "Left": {
@@ -114,22 +78,8 @@
                       "Left": null,
                       "Right": null
                     }
-                  }
-                },
-                "Right": {
-                  "Character": "L",
-                  "Frequency": 4,
-                  "Left": null,
-                  "Right": null
-                }
-              },
-              "Right": {
-                "Character": "\u0000",
-                "Frequency": 8,
-                "Left": {
-                  "Character": "\u0000",
-                  "Frequency": 4,
-                  "Left": {
+                  },
+                  "Right": {
                     "Character": "\u0000",
                     "Frequency": 2,
                     "Left": {
@@ -144,57 +94,7 @@
                       "Left": null,
                       "Right": null
                     }
-                  },
-                  "Right": {
-                    "Character": "\u0000",
-                    "Frequency": 2,
-                    "Left": {
-                      "Character": "é",
-                      "Frequency": 1,
-                      "Left": null,
-                      "Right": null
-                    },
-                    "Right": {
-                      "Character": "á",
-                      "Frequency": 1,
-                      "Left": null,
-                      "Right": null
-                    }
                   }
-                },
-                "Right": {
-                  "Character": "\u0000",
-                  "Frequency": 4,
-                  "Left": {
-                    "Character": "h",
-                    "Frequency": 2,
-                    "Left": null,
-                    "Right": null
-                  },
-                  "Right": {
-                    "Character": "G",
-                    "Frequency": 2,
-                    "Left": null,
-                    "Right": null
-                  }
-                }
-              }
-            }
-          },
-          "Right": {
-            "Character": "\u0000",
-            "Frequency": 35,
-            "Left": {
-              "Character": "\u0000",
-              "Frequency": 17,
-              "Left": {
-                "Character": "\u0000",
-                "Frequency": 8,
-                "Left": {
-                  "Character": "A",
-                  "Frequency": 4,
-                  "Left": null,
-                  "Right": null
                 },
                 "Right": {
                   "Character": "\u0000",
@@ -212,21 +112,71 @@
                     "Right": null
                   }
                 }
-              },
-              "Right": {
-                "Character": "v",
-                "Frequency": 9,
-                "Left": null,
-                "Right": null
               }
             },
             "Right": {
-              "Character": "b",
-              "Frequency": 18,
-              "Left": null,
-              "Right": null
+              "Character": "\u0000",
+              "Frequency": 16,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "A",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "z",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              },
+              "Right": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "\u0000",
+                  "Frequency": 4,
+                  "Left": {
+                    "Character": "h",
+                    "Frequency": 2,
+                    "Left": null,
+                    "Right": null
+                  },
+                  "Right": {
+                    "Character": "G",
+                    "Frequency": 2,
+                    "Left": null,
+                    "Right": null
+                  }
+                },
+                "Right": {
+                  "Character": "B",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                }
+              }
             }
           }
+        },
+        "Right": {
+          "Character": "i",
+          "Frequency": 64,
+          "Left": null,
+          "Right": null
+        }
+      },
+      "Right": {
+        "Character": "\u0000",
+        "Frequency": 136,
+        "Left": {
+          "Character": "o",
+          "Frequency": 66,
+          "Left": null,
+          "Right": null
         },
         "Right": {
           "Character": "\u0000",
@@ -249,23 +199,73 @@
   },
   "Right": {
     "Character": "\u0000",
-    "Frequency": 733,
+    "Frequency": 719,
     "Left": {
       "Character": "\u0000",
-      "Frequency": 323,
+      "Frequency": 316,
       "Left": {
         "Character": "\u0000",
-        "Frequency": 155,
+        "Frequency": 150,
         "Left": {
-          "Character": "r",
-          "Frequency": 76,
-          "Left": null,
-          "Right": null
-        },
-        "Right": {
           "Character": "\u0000",
-          "Frequency": 79,
+          "Frequency": 74,
           "Left": {
+            "Character": "\u0000",
+            "Frequency": 35,
+            "Left": {
+              "Character": "\u0000",
+              "Frequency": 17,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 8,
+                "Left": {
+                  "Character": "ó",
+                  "Frequency": 4,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "\u0000",
+                  "Frequency": 4,
+                  "Left": {
+                    "Character": "x",
+                    "Frequency": 2,
+                    "Left": null,
+                    "Right": null
+                  },
+                  "Right": {
+                    "Character": "\u0000",
+                    "Frequency": 2,
+                    "Left": {
+                      "Character": "é",
+                      "Frequency": 1,
+                      "Left": null,
+                      "Right": null
+                    },
+                    "Right": {
+                      "Character": "á",
+                      "Frequency": 1,
+                      "Left": null,
+                      "Right": null
+                    }
+                  }
+                }
+              },
+              "Right": {
+                "Character": "v",
+                "Frequency": 9,
+                "Left": null,
+                "Right": null
+              }
+            },
+            "Right": {
+              "Character": "b",
+              "Frequency": 18,
+              "Left": null,
+              "Right": null
+            }
+          },
+          "Right": {
             "Character": "\u0000",
             "Frequency": 39,
             "Left": {
@@ -275,13 +275,13 @@
                 "Character": "\u0000",
                 "Frequency": 9,
                 "Left": {
-                  "Character": "B",
+                  "Character": "L",
                   "Frequency": 4,
                   "Left": null,
                   "Right": null
                 },
                 "Right": {
-                  "Character": "3",
+                  "Character": "6",
                   "Frequency": 5,
                   "Left": null,
                   "Right": null
@@ -291,13 +291,13 @@
                 "Character": "\u0000",
                 "Frequency": 10,
                 "Left": {
-                  "Character": "9",
+                  "Character": "y",
                   "Frequency": 5,
                   "Left": null,
                   "Right": null
                 },
                 "Right": {
-                  "Character": "y",
+                  "Character": "7",
                   "Frequency": 5,
                   "Left": null,
                   "Right": null
@@ -305,6 +305,36 @@
               }
             },
             "Right": {
+              "Character": "p",
+              "Frequency": 20,
+              "Left": null,
+              "Right": null
+            }
+          }
+        },
+        "Right": {
+          "Character": "r",
+          "Frequency": 76,
+          "Left": null,
+          "Right": null
+        }
+      },
+      "Right": {
+        "Character": "\u0000",
+        "Frequency": 166,
+        "Left": {
+          "Character": "\u0000",
+          "Frequency": 80,
+          "Left": {
+            "Character": "d",
+            "Frequency": 40,
+            "Left": null,
+            "Right": null
+          },
+          "Right": {
+            "Character": "\u0000",
+            "Frequency": 40,
+            "Left": {
               "Character": "\u0000",
               "Frequency": 20,
               "Left": {
@@ -323,22 +353,12 @@
                   "Right": null
                 },
                 "Right": {
-                  "Character": "6",
+                  "Character": "9",
                   "Frequency": 5,
                   "Left": null,
                   "Right": null
                 }
               }
-            }
-          },
-          "Right": {
-            "Character": "\u0000",
-            "Frequency": 40,
-            "Left": {
-              "Character": "p",
-              "Frequency": 20,
-              "Left": null,
-              "Right": null
             },
             "Right": {
               "Character": "\n",
@@ -347,23 +367,13 @@
               "Right": null
             }
           }
-        }
-      },
-      "Right": {
-        "Character": "\u0000",
-        "Frequency": 168,
-        "Left": {
+        },
+        "Right": {
           "Character": "\u0000",
-          "Frequency": 80,
+          "Frequency": 86,
           "Left": {
-            "Character": "d",
-            "Frequency": 40,
-            "Left": null,
-            "Right": null
-          },
-          "Right": {
             "Character": "\u0000",
-            "Frequency": 40,
+            "Frequency": 41,
             "Left": {
               "Character": "5",
               "Frequency": 20,
@@ -371,50 +381,10 @@
               "Right": null
             },
             "Right": {
-              "Character": "\r",
-              "Frequency": 20,
-              "Left": null,
-              "Right": null
-            }
-          }
-        },
-        "Right": {
-          "Character": "\u0000",
-          "Frequency": 88,
-          "Left": {
-            "Character": "\u0000",
-            "Frequency": 43,
-            "Left": {
               "Character": "1",
               "Frequency": 21,
               "Left": null,
               "Right": null
-            },
-            "Right": {
-              "Character": "\u0000",
-              "Frequency": 22,
-              "Left": {
-                "Character": "2",
-                "Frequency": 11,
-                "Left": null,
-                "Right": null
-              },
-              "Right": {
-                "Character": "\u0000",
-                "Frequency": 11,
-                "Left": {
-                  "Character": "7",
-                  "Frequency": 5,
-                  "Left": null,
-                  "Right": null
-                },
-                "Right": {
-                  "Character": "F",
-                  "Frequency": 6,
-                  "Left": null,
-                  "Right": null
-                }
-              }
             }
           },
           "Right": {
@@ -428,23 +398,43 @@
     },
     "Right": {
       "Character": "\u0000",
-      "Frequency": 410,
+      "Frequency": 403,
       "Left": {
         "Character": "\u0000",
-        "Frequency": 193,
+        "Frequency": 190,
         "Left": {
           "Character": "\u0000",
-          "Frequency": 94,
+          "Frequency": 92,
           "Left": {
-            "Character": "s",
-            "Frequency": 47,
-            "Left": null,
-            "Right": null
-          },
-          "Right": {
             "Character": "\u0000",
-            "Frequency": 47,
+            "Frequency": 45,
             "Left": {
+              "Character": "\u0000",
+              "Frequency": 22,
+              "Left": {
+                "Character": "\u0000",
+                "Frequency": 11,
+                "Left": {
+                  "Character": "3",
+                  "Frequency": 5,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "4",
+                  "Frequency": 6,
+                  "Left": null,
+                  "Right": null
+                }
+              },
+              "Right": {
+                "Character": "2",
+                "Frequency": 11,
+                "Left": null,
+                "Right": null
+              }
+            },
+            "Right": {
               "Character": "\u0000",
               "Frequency": 23,
               "Left": {
@@ -454,23 +444,23 @@
                 "Right": null
               },
               "Right": {
-                "Character": "g",
-                "Frequency": 12,
-                "Left": null,
-                "Right": null
-              }
-            },
-            "Right": {
-              "Character": "\u0000",
-              "Frequency": 24,
-              "Left": {
                 "Character": "\u0000",
                 "Frequency": 12,
                 "Left": {
-                  "Character": "4",
+                  "Character": "\u0000",
                   "Frequency": 6,
-                  "Left": null,
-                  "Right": null
+                  "Left": {
+                    "Character": "j",
+                    "Frequency": 3,
+                    "Left": null,
+                    "Right": null
+                  },
+                  "Right": {
+                    "Character": "P",
+                    "Frequency": 3,
+                    "Left": null,
+                    "Right": null
+                  }
                 },
                 "Right": {
                   "Character": "\u0000",
@@ -488,71 +478,71 @@
                     "Right": null
                   }
                 }
-              },
-              "Right": {
-                "Character": "\u0000",
-                "Frequency": 12,
-                "Left": {
-                  "Character": "8",
-                  "Frequency": 6,
-                  "Left": null,
-                  "Right": null
-                },
-                "Right": {
-                  "Character": "\u0000",
-                  "Frequency": 6,
-                  "Left": {
-                    "Character": "j",
-                    "Frequency": 3,
-                    "Left": null,
-                    "Right": null
-                  },
-                  "Right": {
-                    "Character": "P",
-                    "Frequency": 3,
-                    "Left": null,
-                    "Right": null
-                  }
-                }
               }
             }
+          },
+          "Right": {
+            "Character": "n",
+            "Frequency": 47,
+            "Left": null,
+            "Right": null
           }
         },
         "Right": {
-          "Character": "a",
-          "Frequency": 99,
-          "Left": null,
-          "Right": null
-        }
-      },
-      "Right": {
-        "Character": "\u0000",
-        "Frequency": 217,
-        "Left": {
           "Character": "\u0000",
-          "Frequency": 103,
+          "Frequency": 98,
           "Left": {
-            "Character": "n",
+            "Character": "s",
             "Frequency": 47,
             "Left": null,
             "Right": null
           },
           "Right": {
             "Character": "\u0000",
-            "Frequency": 56,
+            "Frequency": 51,
             "Left": {
+              "Character": "\u0000",
+              "Frequency": 24,
+              "Left": {
+                "Character": "g",
+                "Frequency": 12,
+                "Left": null,
+                "Right": null
+              },
+              "Right": {
+                "Character": "\u0000",
+                "Frequency": 12,
+                "Left": {
+                  "Character": "F",
+                  "Frequency": 6,
+                  "Left": null,
+                  "Right": null
+                },
+                "Right": {
+                  "Character": "8",
+                  "Frequency": 6,
+                  "Left": null,
+                  "Right": null
+                }
+              }
+            },
+            "Right": {
               "Character": "u",
               "Frequency": 27,
               "Left": null,
               "Right": null
-            },
-            "Right": {
-              "Character": "m",
-              "Frequency": 29,
-              "Left": null,
-              "Right": null
             }
           }
+        }
+      },
+      "Right": {
+        "Character": "\u0000",
+        "Frequency": 213,
+        "Left": {
+          "Character": "a",
+          "Frequency": 99,
+          "Left": null,
+          "Right": null
         },
         "Right": {
           "Character": "e",

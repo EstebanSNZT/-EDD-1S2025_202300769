@@ -3,26 +3,26 @@ digraph DoublyLinkedList {
     rankdir=LR;
     subgraph cluster_0 {
         label = "Lista Doblemente Enlazada";
-        n0 [label = "{<data> ID: 1 \n ID_Usuario: 1 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2018 \n Placa: ABC1D2E}"];
-        n1 [label = "{<data> ID: 2 \n ID_Usuario: 1 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2020 \n Placa: FGH3I4J}"];
-        n2 [label = "{<data> ID: 3 \n ID_Usuario: 2 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2017 \n Placa: KLM5N6O}"];
-        n3 [label = "{<data> ID: 4 \n ID_Usuario: 2 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2019 \n Placa: PQR7S8T}"];
-        n4 [label = "{<data> ID: 5 \n ID_Usuario: 3 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2016 \n Placa: UVW9X0Y}"];
-        n5 [label = "{<data> ID: 6 \n ID_Usuario: 3 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2021 \n Placa: ZAB1C2D}"];
-        n6 [label = "{<data> ID: 7 \n ID_Usuario: 4 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2015 \n Placa: EFG3H4I}"];
-        n7 [label = "{<data> ID: 8 \n ID_Usuario: 4 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2022 \n Placa: JKL5M6N}"];
-        n8 [label = "{<data> ID: 9 \n ID_Usuario: 5 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2019 \n Placa: OPQ7R8S}"];
-        n9 [label = "{<data> ID: 10 \n ID_Usuario: 5 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2020 \n Placa: TUV9W0X}"];
-        n10 [label = "{<data> ID: 11 \n ID_Usuario: 6 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2018 \n Placa: YZA1B2C}"];
-        n11 [label = "{<data> ID: 12 \n ID_Usuario: 6 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2021 \n Placa: DEF3G4H}"];
-        n12 [label = "{<data> ID: 13 \n ID_Usuario: 7 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2017 \n Placa: IJK5L6M}"];
-        n13 [label = "{<data> ID: 14 \n ID_Usuario: 7 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2023 \n Placa: NOP7Q8R}"];
-        n14 [label = "{<data> ID: 15 \n ID_Usuario: 8 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2016 \n Placa: STU9V0W}"];
-        n15 [label = "{<data> ID: 16 \n ID_Usuario: 8 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2019 \n Placa: XYZ1A2B}"];
-        n16 [label = "{<data> ID: 17 \n ID_Usuario: 9 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2020 \n Placa: CDE3F4G}"];
-        n17 [label = "{<data> ID: 18 \n ID_Usuario: 9 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2022 \n Placa: HIJ5K6L}"];
-        n18 [label = "{<data> ID: 19 \n ID_Usuario: 10 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2018 \n Placa: MNO7P8Q}"];
-        n19 [label = "{<data> ID: 20 \n ID_Usuario: 10 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2021 \n Placa: RST9U0V}"];
+        n0 [label = "{<data> ID: 1 \n ID_Usuario: 1 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2018 \n Placa: ABC1D2E}"];
+        n1 [label = "{<data> ID: 2 \n ID_Usuario: 1 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2020 \n Placa: FGH3I4J}"];
+        n2 [label = "{<data> ID: 3 \n ID_Usuario: 2 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2017 \n Placa: KLM5N6O}"];
+        n3 [label = "{<data> ID: 4 \n ID_Usuario: 2 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2019 \n Placa: PQR7S8T}"];
+        n4 [label = "{<data> ID: 5 \n ID_Usuario: 3 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2016 \n Placa: UVW9X0Y}"];
+        n5 [label = "{<data> ID: 6 \n ID_Usuario: 3 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2021 \n Placa: ZAB1C2D}"];
+        n6 [label = "{<data> ID: 7 \n ID_Usuario: 4 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2015 \n Placa: EFG3H4I}"];
+        n7 [label = "{<data> ID: 8 \n ID_Usuario: 4 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2022 \n Placa: JKL5M6N}"];
+        n8 [label = "{<data> ID: 9 \n ID_Usuario: 5 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2019 \n Placa: OPQ7R8S}"];
+        n9 [label = "{<data> ID: 10 \n ID_Usuario: 5 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2020 \n Placa: TUV9W0X}"];
+        n10 [label = "{<data> ID: 11 \n ID_Usuario: 6 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2018 \n Placa: YZA1B2C}"];
+        n11 [label = "{<data> ID: 12 \n ID_Usuario: 6 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2021 \n Placa: DEF3G4H}"];
+        n12 [label = "{<data> ID: 13 \n ID_Usuario: 7 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2017 \n Placa: IJK5L6M}"];
+        n13 [label = "{<data> ID: 14 \n ID_Usuario: 7 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2023 \n Placa: NOP7Q8R}"];
+        n14 [label = "{<data> ID: 15 \n ID_Usuario: 8 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2016 \n Placa: STU9V0W}"];
+        n15 [label = "{<data> ID: 16 \n ID_Usuario: 8 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2019 \n Placa: XYZ1A2B}"];
+        n16 [label = "{<data> ID: 17 \n ID_Usuario: 9 \n Marca: Mercedes-Benz CLA 300 \n Modelo: 2020 \n Placa: CDE3F4G}"];
+        n17 [label = "{<data> ID: 18 \n ID_Usuario: 9 \n Marca: Mercedes-Benz CLA 200 \n Modelo: 2022 \n Placa: HIJ5K6L}"];
+        n18 [label = "{<data> ID: 19 \n ID_Usuario: 10 \n Marca: Mercedes-Benz CLA 250 \n Modelo: 2018 \n Placa: MNO7P8Q}"];
+        n19 [label = "{<data> ID: 20 \n ID_Usuario: 10 \n Marca: Mercedes-Benz CLA 180 \n Modelo: 2021 \n Placa: RST9U0V}"];
         n0 -> n1;
         n1 -> n2;
         n1 -> n0;

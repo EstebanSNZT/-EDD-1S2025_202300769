@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Structures
 {
     public class UndirectedGraph
@@ -36,15 +38,16 @@ namespace Structures
 
         public string GenerateDot()
         {
-            var graph = "graph UndirectedGraph {\n";
-            graph += "    node [shape=ellipse];\n";
-            graph += "    rankdir=TB;\n";
-            graph += "    subgraph cluster_0 {\n";
-            graph += "        label = \"Esteban Sánchez - 202300769\";\n";
+            StringBuilder graph = new StringBuilder();
+            graph.AppendLine("graph UndirectedGraph {");
+            graph.AppendLine("    node [shape=ellipse];");
+            graph.AppendLine("    rankdir=TB;");
+            graph.AppendLine("    subgraph cluster_0 {");
+            graph.AppendLine("        label = \"Grafo No Dirigido\";");
             foreach (var node in adjacencyList)
             {
                 string currentId = node.Key;
-                graph += $"        {currentId} [label=\"{currentId}\"];\n";
+                graph.AppendLine($"        {currentId} [label=\"{currentId}\"];");
             }
 
             foreach (var node in adjacencyList.Where(node => node.Key.StartsWith("V")))
@@ -56,20 +59,20 @@ namespace Structures
                 {
                     if (connection.StartsWith("R"))
                     {
-                        graph += $"        {currentId} -- {connection};\n";
+                        graph.AppendLine($"        {currentId} -- {connection};");
                     }
                 }
             }
 
             if(!IsEmpty())
             {
-                graph += $"        {RankSameNodes("V")}";
-                graph += $"        {RankSameNodes("R")}";
+                graph.AppendLine($"        {RankSameNodes("V")}");
+                graph.AppendLine($"        {RankSameNodes("R")}");
             }
 
-            graph += "    }\n";
-            graph += "}\n";
-            return graph;
+            graph.AppendLine("    }");
+            graph.AppendLine("}");
+            return graph.ToString();
         }
 
         private string RankSameNodes(string start)
@@ -79,7 +82,7 @@ namespace Structures
             {
                 rank += $"{id}; ";
             }
-            rank += "};\n";
+            rank += "};";
             return rank;
         }
     }
