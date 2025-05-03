@@ -78,11 +78,34 @@ namespace Structures
 
         public string ToDotNode()
         {
+            User userData = JsonConvert.DeserializeObject<User>(Data);
+
+            var dataFormatted = new
+            {
+                ID = userData.Id,
+                Nombres = userData.Names,
+                Apellidos = userData.LastNames,
+                Correo = userData.Email,
+                Edad = userData.Age,
+                Contraseña = userData.Password.Length > 16 ? 
+                            userData.Password.Substring(0, 16) + "..." : 
+                            userData.Password
+            };
+
+            string jsonFormatted = JsonConvert.SerializeObject(dataFormatted, Formatting.Indented);
+
+            string escapedData = jsonFormatted
+                .Replace("\"", "")
+                .Replace("{", "\\{")
+                .Replace("}", "\\}")
+                .Replace(":", ": ")
+                .Replace(",", ", ");
+
             string hashDisplay = Hash.Length > 16 ? Hash.Substring(0, 16) + "..." : Hash;
             string prevHashDisplay = PreviousHash.Length > 16 ? PreviousHash.Substring(0, 16) + "..." : PreviousHash;
-            string escapedData = Data.Replace("\"", "").Replace("{", "\\{").Replace("}", "\\}").Replace(":", ": ").Replace(",", ", ");
-            string nodeLabel = $"\"{{<data> INDEX: {Index} \\n TIMESTAMP: {Timestamp} \\n DATA: {escapedData} \\n NONCE: {Nonce} \\n PREVIOUS HASH: {prevHashDisplay} \\n HASH: {hashDisplay}}}\"";
-            return $"block{Index} [label = {nodeLabel}];";
+            
+            string nodeLabel = $"\"{{<data> INDEX: {Index} \\n TIMESTAMP: {Timestamp} \\n DATA: {escapedData} \\n NONCE: {Nonce} \\n PREVIOUS HASH: {prevHashDisplay} \\n HASH: {hashDisplay}}}\"".Trim();
+            return $"block{Index} [label = {nodeLabel}];".Trim();
         }
     }
 }

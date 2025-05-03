@@ -1,20 +1,20 @@
 # Manual Técnico
 
 ## Introducción
-Este manual tiene el propósito de orientar a quienes estén interesados en comprender el funcionamiento interno del programa para la gestión de un taller AutoGest Pro, así como proporcionar las clase y estructuras abstractas utilizadas en su desarrollo. Con esto, buscamos proporcionar orientación a la gente en el desarrollo de sus propias aplicaciones o simplemente acercar a nuevas personas al mundo de la programación con C# y creación de interfaces gráficas con la libreria para interfaces en linux GTK. Comprender el funcionamiento interno del programa AutoGest Pro permitirá a los desarrolladores aprender buenas prácticas de programación y mejorar su capacidad para crear software eficiente y confiable en C#.
+Este manual tiene el propósito de orientar a quienes estén interesados en comprender el funcionamiento interno del programa para la gestión de un taller AutoGest Pro Fase 3, así como proporcionar las clase y estructuras abstractas utilizadas en su desarrollo. Con esto, buscamos proporcionar orientación a la gente en el desarrollo de sus propias aplicaciones o simplemente acercar a nuevas personas al mundo de la programación con C# y creación de interfaces gráficas con la libreria para interfaces en linux GTK. Comprender el funcionamiento interno del programa AutoGest Pro permitirá a los desarrolladores aprender buenas prácticas de programación y mejorar su capacidad para crear software eficiente y confiable en C#.
 
 ## Objetivos
 
 ### General
-Proporcionar orientación a aquellos interesados en el funcionamiento interno del programa AutoGest Pro, ofreciendo una descripción detallada de su estructura y su elaboración.
+Proporcionar orientación a aquellos interesados en el funcionamiento interno del programa AutoGest Pro Fase 3, ofreciendo una descripción detallada de su estructura y su elaboración.
 
 ### Específicos
-- Proporcionar una detallada inspección del código del programa AutoGest Pro, destacando las variables, módulos, funciones y subrutinas clave utilizados en su desarrollo.
+- Proporcionar una detallada inspección del código del programa AutoGest Pro, destacando las clases, funciones y procedimientos clave utilizados en su desarrollo.
 
 - Facilitar la comprensión y aplicación del código para los desarrolladores en sus futuros proyectos.
 
 ### Alcances del sistema
-El propósito de este manual es las principales estructuras abstractas utilizadas en el programa AutoGest Por. Su objetivo es orientar a aquellos interesados en el desarrollo de este programa, brindándoles una comprensión completa de su estructura y funcionamiento interno, para que puedan aplicarlos en sus futuros proyectos. Este manual es una herramienta esencial tanto para desarrolladores novatos como para aquellos con experiencia que deseen profundizar en el funcionamiento del programa AutoGest Pro.
+El propósito de este manual es las principales estructuras abstractas utilizadas en el programa AutoGest Pro Fase3. Su objetivo es orientar a aquellos interesados en el desarrollo de este programa, brindándoles una comprensión completa de su estructura y funcionamiento interno, para que puedan aplicarlos en sus futuros proyectos. Este manual es una herramienta esencial tanto para desarrolladores novatos como para aquellos con experiencia que deseen profundizar en el funcionamiento del programa AutoGest Pro Fase 3.
 
 ### Especificación técnica
 
@@ -43,97 +43,81 @@ AutoGest pro es un programa de con interfaz grafica diseñado con el lenguaje de
 
 Para la interfaz gráfica se utilizo la libreria para interfaces en linux GTK.
 
-Para almacenar los datos en memoria se utilizaron estructuras de datos abstractas. Se utilizo la lista simple para almacenar los usuarios, la lista doblemente enlazada para los vehículos, el árbol AVL para los repuestos, el árbol binario de búsqueda para los servicios y el árbol B para las facturas.
+En esta fase se tuvo un enfoque mayor el la seguridad de nuestro usuarios
 
-El software fue diseñado para simplificar y optimizar las tareas de gestión para un taller de vehiculos. Siendo administrador se permite realizar cargas masivas, de usuarios, vehiculos y repuestos asi como administrar los dos primeros. Puede actualizar los repuestos, ver los repuesto en distinto recorridos como tambien puede generar servicios, generar reporte del login y reportes graficos de las estructuras. Como usuario de la aplicación puedes insertar vehiculos, ver tus servicios en diferentes recoridos y facturas pendientes. Las facturas puedes cancelarlas.
+Para almacenar los datos en memoria se utilizaron estructuras de datos abstractas tanto las comunes como estructuras más seguras. Se utilizo blockchain para almacenar los usuarios, la lista doblemente enlazada para los vehículos, el árbol AVL para los repuestos, el árbol binario de búsqueda para los servicios y el árbol de merkle para las facturas. Además se utilizo un grafo no dirigido para mapear las relaciones entre vehiculos y repuestos.
+
+El software fue diseñado para simplificar y optimizar las tareas de gestión para un taller de vehiculos. Siendo administrador en el programa se permite realizar cargas masivas, de usuarios, vehiculos, repuestos y para esta tercera fase se permitio la carga masiva de servicios. Puede actualizar los repuestos, ver los repuesto en distinto recorridos como tambien puede generar servicios, generar reporte del login y reportes graficos de las estructuras. Como usuario de la aplicación puedes insertar vehiculos, ver tus servicios en diferentes recorrido y ver tus facturas por cancelar. En esta fase se volvió a agregar la opción de inserción y visualización de usuarios.
 
 
 ## Lógica del programa
 
-## Lista Enlazada (LinkedList)
+## BlockChain
 
-Las lista enlazada es muy sencilla de manejar al contar solo con un apuntador. La típica, muy sencilla y simple pero muy util. En este proyecto se uso menos pero aun así se le saco el uso necesario.
+El blockchain fue la estructura central de esta fase. Es una estructura realmente segura. Pero sacrifica seguridad por rendimiento. El calculo del nonce correcto para insertar un bloque, a pesar de que en este proyecto fueron solo 4 ceros de prueba de trabajo, requeria de muchas iteraciones. Es una estructura utilizada para cosas que requieran mucha proteccion como cosas relacionadas con dinero o documentos importantes.
 
-### Lista
+### Estructura
 
 ```csharp
 using Classes;
+using Newtonsoft.Json;
 
 namespace Structures
 {
-    public class LinkedList
+    public class Blockchain
     {
-        private LinkedNode head;
+        private Block head;
 
-        public LinkedList()
+        public Blockchain()
         {
             head = null;
         }
 
-        public void Insert(User user)
+        public void AddBlock(User user)
         {
-            LinkedNode newNode = new LinkedNode(user);
-
             if (head == null)
             {
-                head = newNode;
-            }
-            else
-            {
-                LinkedNode current = head;
-                while (current.Next != null)
-                {
-                    current = current.Next;
-                }
-                current.Next = newNode;
-            }
-        }
-
-        public bool Delete(int id)
-        {
-            if (head == null) return false;
-
-            if (head.Data.Id == id)
-            {
-                head = head.Next;
-                return true;
+                Block firstBlock = new Block(0, user, "0000");
+                firstBlock.MineBlock();
+                head = firstBlock;
+                return;
             }
 
-            LinkedNode current = head;
-
-            while (current.Next != null && !(current.Next.Data.Id == id))
+            Block current = head;
+            while (current.Next != null)
             {
                 current = current.Next;
             }
-
-            if (current.Next != null)
-            {
-                current.Next = current.Next.Next;
-                return true;
-            }
-
-            return false;
+            Block newBlock = new Block(current.Index + 1, user, current.Hash);
+            newBlock.MineBlock();
+            current.Next = newBlock;
         }
 
-        public void Print()
+        private void AddExistingBlock(Block block)
         {
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            LinkedNode current = head;
-            while (current != null)
+            if (head == null)
             {
-                Console.WriteLine(current.Data.ToString());
+                head = block;
+                return;
+            }
+
+            Block current = head;
+            while (current.Next != null)
+            {
                 current = current.Next;
             }
+            current.Next = block;
         }
 
         public User Get(int id)
         {
-            LinkedNode current = head;
+            Block current = head;
             while (current != null)
             {
-                if (current.Data.Id == id)
+                User user = JsonConvert.DeserializeObject<User>(current.Data);
+                if (user.Id == id)
                 {
-                    return current.Data;
+                    return user;
                 }
                 current = current.Next;
             }
@@ -142,22 +126,27 @@ namespace Structures
 
         public User GetByEmail(string email)
         {
-            LinkedNode current = head;
+            Block current = head;
             while (current != null)
             {
-                if (current.Data.Email.Equals(email))
+                User user = JsonConvert.DeserializeObject<User>(current.Data);
+                if (user.Email.Equals(email))
                 {
-                    return current.Data;
+                    return user;
                 }
                 current = current.Next;
             }
             return null;
         }
 
-
         public bool Contains(int id)
         {
             return Get(id) != null;
+        }
+
+        public bool ContainsByEmail(string email)
+        {
+            return GetByEmail(email) != null;
         }
 
         public bool IsEmpty()
@@ -165,52 +154,270 @@ namespace Structures
             return head == null;
         }
 
-        public string GenerateDot()
+        public string GenerateJson()
         {
-            var graph = "digraph LinkedList {\n";
-            graph += "    node [shape=record];\n";
-            graph += "    rankdir=LR;\n";
-            graph += "    subgraph cluster_0 {\n";
-            graph += "        label = \"Lista Simple Enlazada\";\n";
+            if (head == null) return "[]";
 
-            LinkedNode current = head;
-            int index = 0;
+            List<object> blocks = new List<object>();
+            Block current = head;
 
             while (current != null)
             {
-                graph += $"        n{index} {current.Data.ToDotNode()}\n";
+                blocks.Add(new
+                {
+                    Index = current.Index,
+                    Timestamp = current.Timestamp,
+                    Data = current.Data,
+                    Nonce = current.Nonce,
+                    PreviousHash = current.PreviousHash,
+                    Hash = current.Hash
+                });
                 current = current.Next;
-                index++;
             }
 
-            for (int i = 0; i < index - 1; i++)
+            return JsonConvert.SerializeObject(blocks, Formatting.Indented);
+        }
+
+        public void LoadJson(string json)
+        {
+            if (string.IsNullOrWhiteSpace(json))
             {
-                graph += $"        n{i} -> n{i + 1};\n";
+                Console.WriteLine("El JSON está vacío o es nulo.");
+                return;
             }
 
+            var settings = new JsonSerializerSettings
+            {
+                ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+            };
+
+
+            var blocks = JsonConvert.DeserializeObject<List<Block>>(json, settings);
+
+            if (blocks == null || blocks.Count == 0)
+            {
+                Console.WriteLine("JSON no contiene bloques válidos.");
+                return;
+            }
+
+            foreach (var block in blocks)
+            {
+                AddExistingBlock(block);
+            }
+        }
+
+        public bool AnalyzeBlockchain()
+        {
+            if (head == null)
+            {
+                Console.WriteLine("El blockchain está vacío.");
+                return false;
+            }
+
+            Block current = head;
+            Block previous = null;
+
+            while (current != null)
+            {
+                if (!current.Hash.StartsWith("0000"))
+                {
+                    Console.WriteLine($"El bloque {current.Index} no cumple con la prueba de trabajo.");
+                    return false;
+                }
+
+                if (previous != null && current.PreviousHash != previous.Hash)
+                {
+                    Console.WriteLine($"El PreviousHash del bloque {current.Index} no coincide con el hash del bloque {previous.Index}. Ha sido alterado.");
+                    return false;
+                }
+
+                if (current.Hash != current.CalculateHash())
+                {
+                    Console.WriteLine($"El hash del bloque {current.Index} es inválido. Ha sido alterado.");
+                    return false;
+                }
+
+                previous = current;
+                current = current.Next;
+            }
+
+            Console.WriteLine("El blockchain es válido y no ha sido alterado.");
+            return true;
+        }
+
+        public void ViewAllBlocks()
+        {
+            Block current = head;
+            while (current != null)
+            {
+                Console.WriteLine(current.ToString());
+                current = current.Next;
+            }
+        }
+
+        public void ViewBlock(int index)
+        {
+            Block current = head;
+            while (current != null)
+            {
+                if (current.Index == index)
+                {
+                    Console.WriteLine(current.ToString());
+                    return;
+                }
+                current = current.Next;
+            }
+            Console.WriteLine($"Bloque con índice {index} no encontrado.");
+        }
+
+        public string GenerateDot()
+        {
+            var graph = "digraph Blockchain {\n";
+            graph += "    node [shape=record];\n";
+            graph += "    rankdir=LR;\n";
+            graph += "    subgraph cluster_0 {\n";
+            graph += "        label = \"Usuarios\";\n";
+            if (head == null) graph += "        empty [label=\"Cadena vacía\"];\n";
+            else
+            {
+                Block current = head;
+                while (current != null)
+                {
+                    graph += $"        {current.ToDotNode()}\n";
+                    current = current.Next;
+                }
+
+                current = head;
+
+                while (current != null)
+                {
+                    if (current.Next != null)
+                    {
+                        graph += $"        block{current.Index} -> block{current.Next.Index};\n";
+                    }
+                    current = current.Next;
+                }
+
+            }
             graph += "    }\n";
             graph += "}\n";
             return graph;
         }
     }
 }
+
 ```
 
-### Nodo (LinkedNode)
+### Bloque (Block)
 ```csharp
+using System.Security.Cryptography;
+using System.Text;
 using Classes;
+using Newtonsoft.Json;
 
 namespace Structures
 {
-    public class LinkedNode
+    public class Block
     {
-        public User Data { get; set; }
-        public LinkedNode Next { get; set; }
+        public int Index { get; set; }
+        public string Timestamp { get; set; }
+        public string Data { get; set; }
+        public int Nonce { get; set; }
+        public string PreviousHash { get; set; }
+        public string Hash { get; set; }
+        public Block Next { get; set; }
 
-        public LinkedNode(User data)
+        public Block(int index, User data, string previousHash)
         {
-            Data = data;
+            Index = index;
+            Timestamp = DateTime.Now.ToString("yyyy-MM-dd::HH:mm:ss.ff");
+            Data = JsonConvert.SerializeObject(data);
+            Nonce = 0;
+            PreviousHash = previousHash;
+            Hash = CalculateHash();
             Next = null;
+        }
+
+        [JsonConstructor]
+        public Block(int index, string timestamp, string data, int nonce, string previousHash, string hash)
+        {
+            Index = index;
+            Timestamp = timestamp;
+            Data = data;
+            Nonce = nonce;
+            PreviousHash = previousHash;
+            Hash = hash;
+            Next = null;
+        }
+
+        public string CalculateHash()
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                string raw = Index + Timestamp + Data + Nonce + PreviousHash;
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(raw));
+                StringBuilder hash = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    hash.Append(b.ToString("x2"));
+                }
+                return hash.ToString();
+            }
+        }
+
+        public void MineBlock()
+        {
+            while (!Hash.StartsWith("0000"))
+            {
+                Nonce++;
+                Hash = CalculateHash();
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"-----------Block {Index}-----------");
+            sb.AppendLine($"Index: {Index}");
+            sb.AppendLine($"Timestamp: {Timestamp}");
+            sb.AppendLine($"Data: {Data}");
+            sb.AppendLine($"Nonce: {Nonce}");
+            sb.AppendLine($"PreviousHash: {PreviousHash}");
+            sb.AppendLine($"Hash: {Hash}");
+            sb.AppendLine($"-----------------------------------");
+            return sb.ToString();
+        }
+
+        public string ToDotNode()
+        {
+            User userData = JsonConvert.DeserializeObject<User>(Data);
+
+            var dataFormatted = new
+            {
+                ID = userData.Id,
+                Nombres = userData.Names,
+                Apellidos = userData.LastNames,
+                Correo = userData.Email,
+                Edad = userData.Age,
+                Contraseña = userData.Password.Length > 16 ? 
+                            userData.Password.Substring(0, 16) + "..." : 
+                            userData.Password
+            };
+
+            string jsonFormatted = JsonConvert.SerializeObject(dataFormatted, Formatting.Indented);
+
+            string escapedData = jsonFormatted
+                .Replace("\"", "")
+                .Replace("{", "\\{")
+                .Replace("}", "\\}")
+                .Replace(":", ": ")
+                .Replace(",", ", ");
+
+            string hashDisplay = Hash.Length > 16 ? Hash.Substring(0, 16) + "..." : Hash;
+            string prevHashDisplay = PreviousHash.Length > 16 ? PreviousHash.Substring(0, 16) + "..." : PreviousHash;
+            
+            string nodeLabel = $"\"{{<data> INDEX: {Index} \\n TIMESTAMP: {Timestamp} \\n DATA: {escapedData} \\n NONCE: {Nonce} \\n PREVIOUS HASH: {prevHashDisplay} \\n HASH: {hashDisplay}}}\"".Trim();
+            return $"block{Index} [label = {nodeLabel}];".Trim();
         }
     }
 }
@@ -219,13 +426,15 @@ namespace Structures
 
 # Lista Doblemente Enlazada (DoublyLinkedList)
 
-En este proyecto fue una lista menos utiliza que en el pasado pero aun asi de gran importancia. Es para mi de las listas la mejor por su facilidad de uso.
-Es de mis estructuras favoritas.
+La lista doblemente enlazada es basica pero muy útil, por algo se mantuvo en las tre fases de este proyecto. En esta ocasion se requirió un poco mas de se uso ya que debia de generar su contenido en texto plano y de esta modo cargarlo. También era necesario obtener los vehículos para cada usuario. Es una muy buena estructura.
 
 ### Lista
 
 ```csharp
+using System.Text;
 using Classes;
+using Gtk;
+using Global;
 
 namespace Structures
 {
@@ -240,7 +449,7 @@ namespace Structures
             tail = null;
         }
 
-        public void Insert(Vehicle data)
+        public void Add(Vehicle data)
         {
             DoublyLinkedNode newNode = new DoublyLinkedNode(data);
 
@@ -315,6 +524,24 @@ namespace Structures
             return null;
         }
 
+        public ListStore GetUserVehicles(int userId)
+        {
+            ListStore result = new ListStore(typeof(int), typeof(int), typeof(string), typeof(int), typeof(string));
+            DoublyLinkedNode current = head;
+
+            while (current != null)
+            {
+                Vehicle vehicle = current.Data;
+                if (vehicle.UserId == userId)
+                {
+                    result.AppendValues(vehicle.Id, vehicle.UserId, vehicle.Brand, vehicle.Model, vehicle.Plate);
+                }
+                current = current.Next;
+            }
+
+            return result;
+        }
+
         public bool IsEmpty()
         {
             return head == null;
@@ -334,21 +561,93 @@ namespace Structures
                 Console.WriteLine(current.Data.ToString());
                 current = current.Next;
             }
+            Console.WriteLine();
+        }
+
+        public string PlainText()
+        {
+            StringBuilder text = new StringBuilder();
+
+            DoublyLinkedNode current = head;
+
+            while (current != null)
+            {
+                text.AppendLine(current.Data.ToString());
+                current = current.Next;
+            }
+
+            Console.WriteLine($"Lista Doblemente Enlazada en Texto Plano:\n{text}");
+
+            return text.ToString();
+        }
+
+        public void LoadPlainText(string text)
+        {
+
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Console.WriteLine("El texto proporcionado está vacío.");
+                return;
+            }
+
+            string[] lines = text.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries);
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                string[] parts = line.Split(',');
+
+                if (parts.Length != 5)
+                {
+                    Console.WriteLine($"Línea ignorada (formato incorrecto): {line}");
+                    continue;
+                }
+
+                if (!int.TryParse(parts[0], out int id) ||
+                    !int.TryParse(parts[1], out int userId) ||
+                    !int.TryParse(parts[3], out int model))
+                {
+                    Console.WriteLine($"Línea ignorada (datos numéricos inválidos): {line}");
+                    continue;
+                }
+
+                string brand = parts[2];
+                string plate = parts[4];
+
+                if (Contains(id))
+                {
+                    Console.WriteLine($"Línea ignorada (ID ya existe): {line}");
+                }
+                else
+                {
+                    if (GlobalStructures.UsersBlockchain.Contains(userId))
+                    {
+                        Vehicle vehicle = new Vehicle(id, userId, brand, model, plate);
+                        Add(vehicle);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Línea ignorada (ID de usuario no encontrado): {line}");
+                    }
+                }
+            }
         }
 
         public string GenerateDot()
         {
-            var graph = "digraph DoublyLinkedList {\n";
-            graph += "    node [shape=record];\n";
-            graph += "    rankdir=LR;\n";
-            graph += "    subgraph cluster_0 {\n";
-            graph += "        label = \"Lista Doblemente Enlazada\";\n";
+            StringBuilder graph = new StringBuilder();
+            graph.AppendLine("digraph DoublyLinkedList {");
+            graph.AppendLine("    node [shape=record];");
+            graph.AppendLine("    rankdir=LR;");
+            graph.AppendLine("    subgraph cluster_0 {");
+            graph.AppendLine("        label = \"Lista Doblemente Enlazada\";");
             DoublyLinkedNode current = head;
             int index = 0;
 
             while (current != null)
             {
-                graph += $"        n{index} {current.Data.ToDotNode()}\n";
+                graph.AppendLine($"        n{index} {current.ToDotNode()}");
                 current = current.Next;
                 index++;
             }
@@ -357,17 +656,17 @@ namespace Structures
             {
                 if (i < index - 1)
                 {
-                    graph += $"        n{i} -> n{i + 1};\n";
+                    graph.AppendLine($"        n{i} -> n{i + 1};");
                 }
                 if (i > 0)
                 {
-                    graph += $"        n{i} -> n{i - 1};\n";
+                    graph.AppendLine($"        n{i} -> n{i - 1};");
                 }
             }
 
-            graph += "    }\n";
-            graph += "}\n";
-            return graph;
+            graph.AppendLine("    }");
+            graph.AppendLine("}");
+            return graph.ToString();
         }
     }
 }
@@ -390,13 +689,18 @@ namespace Structures
             Data = data;
             Next = null;
         }
+
+        public string ToDotNode()
+        {
+            return $"[label = \"{{<data> ID: {Data.Id} \\n ID_Usuario: {Data.UserId} \\n Marca: {Data.Brand} \\n Modelo: {Data.Model} \\n Placa: {Data.Plate}}}\"];";
+        }
     }
 }
 ```
 
 ## Árbol AVL (AVLTree)
 
-En un principio me costo comprender sus rotaciones pero es una estructura muy buen. Puede parecesr complicada pero es fácil de comprender a la larga. Me gusto bastente comprender sus rotaciones y como se ordena y acomoda sola. Se convirtio en una de mis estructuras favoritas.
+El arból AVL en esta ocasión se agrego el devolver sus datos en texto plano y cargar esos datos en texto plano. Muy útil, creo que el balanceo automatico fue lo que más me gusto de esta estructura. La búsqueda es muy eficiente por lo que lo hace una estructura que pienso que podria seguir viendo o utilizando a futuro.
 
 ### Árbol
 ```csharp
@@ -451,19 +755,19 @@ namespace Structures
             return y;
         }
 
-        public void Insert(SparePart data)
+        public void Add(SparePart data)
         {
-            root = InsertRecursive(root, data);
+            root = AddRecursive(root, data);
         }
 
-        private AVLNode InsertRecursive(AVLNode node, SparePart data)
+        private AVLNode AddRecursive(AVLNode node, SparePart data)
         {
             if (node == null) return new AVLNode(data);
 
             if (data.Id < node.Data.Id)
-                node.Left = InsertRecursive(node.Left, data);
+                node.Left = AddRecursive(node.Left, data);
             else if (data.Id > node.Data.Id)
-                node.Right = InsertRecursive(node.Right, data);
+                node.Right = AddRecursive(node.Right, data);
             else
                 return node;
 
@@ -512,7 +816,12 @@ namespace Structures
             else
                 return node.Data;
         }
-        
+
+        public bool Contains(int id)
+        {
+            return Get(id) != null;
+        }
+
         public bool IsEmpty()
         {
             return root == null;
@@ -528,7 +837,7 @@ namespace Structures
         private void PreOrderRecursive(AVLNode node, ListStore result)
         {
             if (node == null) return;
-            
+
             SparePart sparePart = node.Data;
             result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
             PreOrderRecursive(node.Left, result);
@@ -545,7 +854,7 @@ namespace Structures
         private void InOrderRecursive(AVLNode node, ListStore result)
         {
             if (node == null) return;
-            
+
             SparePart sparePart = node.Data;
             InOrderRecursive(node.Left, result);
             result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
@@ -562,49 +871,115 @@ namespace Structures
         private void PostOrderRecursive(AVLNode node, ListStore result)
         {
             if (node == null) return;
-            
+
             SparePart sparePart = node.Data;
             PostOrderRecursive(node.Left, result);
             PostOrderRecursive(node.Right, result);
             result.AppendValues(sparePart.Id, sparePart.Spare, sparePart.Details, sparePart.Cost.ToString("F2"));
         }
 
-        public string GenerateDot()
+        public string PlainText()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("digraph ALVTree {");
-            sb.AppendLine("    node [shape=box];");
-            sb.AppendLine("    rankdir=TB;");
-            sb.AppendLine("    subgraph cluster_0 {");
-            sb.AppendLine("        label = \"Árbol AVL\";");
-            GenerateDotNodes(root, sb);
-            GenerateDotConnections(root, sb);
-            sb.AppendLine("    }"); 
-            sb.AppendLine("}");
-            return sb.ToString();
+            StringBuilder text = new StringBuilder();
+            PlainTextRecursive(root, text);
+            Console.WriteLine($"Árbol AVL en Texto Plano:\n{text}");
+            return text.ToString();
         }
 
-        public void GenerateDotNodes(AVLNode node, StringBuilder sb)
+        public void PlainTextRecursive(AVLNode node, StringBuilder text)
         {
             if (node == null) return;
-            sb.Append("        ").Append(node.Data.ToDotNode()).AppendLine();
-            GenerateDotNodes(node.Left, sb);
-            GenerateDotNodes(node.Right, sb);
+
+            PlainTextRecursive(node.Left, text);
+            text.AppendLine(node.Data.ToString());
+            PlainTextRecursive(node.Right, text);
         }
 
-        public void GenerateDotConnections(AVLNode node, StringBuilder sb)
+        public void LoadPlainText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Console.WriteLine("El texto proporcionado está vacío.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Console.WriteLine("El texto proporcionado está vacío.");
+                return;
+            }
+
+            string[] lines = text.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries);
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                string[] parts = line.Split(',');
+
+                if (parts.Length != 4)
+                {
+                    Console.WriteLine($"Línea ignorada (formato incorrecto): {line}");
+                    continue;
+                }
+
+                if (!int.TryParse(parts[0], out int id) || !double.TryParse(parts[3], out double cost))
+                {
+                    Console.WriteLine($"Línea ignorada (datos numéricos inválidos): {line}");
+                    continue;
+                }
+
+                string spare = parts[1];
+                string details = parts[2];
+
+                if (Contains(id))
+                {
+                    Console.WriteLine($"Línea ignorada (ID ya existe): {line}");
+                    continue;
+                }
+                else
+                {
+                    SparePart sparePart = new SparePart(id, spare, details, cost);
+                    Add(sparePart);
+                }
+            }
+        }
+
+        public string GenerateDot()
+        {
+            StringBuilder graph = new StringBuilder();
+            graph.AppendLine("digraph ALVTree {");
+            graph.AppendLine("    node [shape=box];");
+            graph.AppendLine("    rankdir=TB;");
+            graph.AppendLine("    subgraph cluster_0 {");
+            graph.AppendLine("        label = \"Árbol AVL\";");
+            GenerateDotNodes(root, graph);
+            GenerateDotConnections(root, graph);
+            graph.AppendLine("    }");
+            graph.AppendLine("}");
+            return graph.ToString();
+        }
+
+        public void GenerateDotNodes(AVLNode node, StringBuilder graph)
+        {
+            if (node == null) return;
+            graph.Append("        ").Append(node.ToDotNode()).AppendLine();
+            GenerateDotNodes(node.Left, graph);
+            GenerateDotNodes(node.Right, graph);
+        }
+
+        public void GenerateDotConnections(AVLNode node, StringBuilder graph)
         {
             if (node == null) return;
             if (node.Left != null)
-                sb.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Left.Data.Id}\";");
+                graph.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Left.Data.Id}\";");
             if (node.Right != null)
-                sb.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Right.Data.Id}\";");
-            GenerateDotConnections(node.Left, sb);
-            GenerateDotConnections(node.Right, sb);
+                graph.AppendLine($"        \"{node.Data.Id}\" -> \"{node.Right.Data.Id}\";");
+            GenerateDotConnections(node.Left, graph);
+            GenerateDotConnections(node.Right, graph);
         }
     }
 }
-
 ```
 
 ### Nodo (AVLNode)
@@ -627,13 +1002,18 @@ namespace Structures
             Right = null;
             Height = 1;
         }
+
+        public string ToDotNode()
+        {
+            return $"\"{Data.Id}\" [label=\"ID: {Data.Id}\\nRepuesto: {Data.Spare}\\nDetalles: {Data.Details}\\nCosto: {Data.Cost}\"];";
+        }
     }
 }
 ```
 
 ## Árbol Binario (BinaryTree)
 
-Me gustó pero no como el árbol AVL. Sigue siendo util para buscar pero como se desacomoda el O(n) aumenta por lo que no me parece tan util como el AVL.
+El arból binario es una estructara buena. Puede que no tenga el mejor acceso pero tiene una mejor inserción que el árbol AVL. Creo que es bastante básico pero muy útil en este proyecto. En esta fase no se agregó nada extra relevante a su clase.
 
 ### Árbol
 ```csharp
@@ -653,29 +1033,29 @@ namespace Structures
             root = null;
         }
 
-        public void Insert(Service data)
+        public void Add(Service data)
         {
             if (root == null)
                 root = new BinaryNode(data);
             else
-                InsertRecursive(root, data);
+                AddRecursive(root, data);
         }
 
-        private void InsertRecursive(BinaryNode node, Service data)
+        private void AddRecursive(BinaryNode node, Service data)
         {
             if (data.Id < node.Data.Id)
             {
                 if (node.Left == null)
                     node.Left = new BinaryNode(data);
                 else
-                    InsertRecursive(node.Left, data);
+                    AddRecursive(node.Left, data);
             }
             else if (data.Id > node.Data.Id)
             {
                 if (node.Right == null)
                     node.Right = new BinaryNode(data);
                 else
-                    InsertRecursive(node.Right, data);
+                    AddRecursive(node.Right, data);
             }
             else
                 return;
@@ -787,7 +1167,7 @@ namespace Structures
         public void GenerateDotNodes(BinaryNode node, StringBuilder sb)
         {
             if (node == null) return;
-            sb.Append("        ").Append(node.Data.ToDotNode()).AppendLine();
+            sb.Append("        ").Append(node.ToDotNode()).AppendLine();
             GenerateDotNodes(node.Left, sb);
             GenerateDotNodes(node.Right, sb);
         }
@@ -804,7 +1184,6 @@ namespace Structures
         }
     }
 }
-
 ```
 
 ### Nodo (BinaryNode)
@@ -825,455 +1204,311 @@ namespace Structures
             Left = null;
             Right = null;
         }
+
+        public string ToDotNode()
+        {
+            return $"\"{Data.Id}\" [label=\"ID: {Data.Id}\\nId_Repuesto: {Data.SparePartId}\\nId_Vehículo: {Data.VehicleId}\\nDetalles: {Data.Details}\\nCosto: {Data.Cost}\"];";
+        }
     }
 }
 
 ```
 
-## Árbol B
+## Árbol de Merkle (MerkleTree)
 
-Es al momento la estrutura de datos más complicada que me ha tocado ver y hacer. Es tan complicada que para mi no merece la pena tanto. Puede tener sus beneficios pero no creo que los valga.
+El árbol de merkle es una estructura que en este caso no sacrifica rendemiento por seguridad porque el arból de merkle es más para verificar la integridad de grandes cantidades de datos de forma eficiente, sin necesidad de revisar cada elemento. Realmente es más para verificaciones que para accesos de datos y sus verificaciones al estar en forma de arbol son más rápidas.
 
 ### Árbol
 ```csharp
-using Classes;
-using Gtk;
-using Global;
 using System.Text;
+using Classes;
+using Global;
+using Gtk;
 
 namespace Structures
 {
-    public class BTree
+    public class MerkleTree
     {
-        private BNode root;
-        private readonly int order;
-        private readonly int maxKeys;
-        private readonly int minKeys;
+        private MerkleNode root;
+        private List<MerkleNode> leaves;
 
-        public BTree(int order)
+        public MerkleTree()
         {
-            this.order = order;
-            maxKeys = order - 1;
-            minKeys = (order / 2) - 1;
-            root = new BNode(order, maxKeys, minKeys);
+            root = null;
+            leaves = new List<MerkleNode>();
         }
 
-        public void Insert(Invoice invoice)
+        public void Add(Invoice data)
         {
-            if (root.IsFull())
-            {
-                BNode newRoot = new BNode(order, maxKeys, minKeys);
-                newRoot.IsLeaf = false;
-                newRoot.Children.Add(root);
-                SplitChild(newRoot, 0);
-                root = newRoot;
-            }
-
-            InsertNotFilled(root, invoice);
+            MerkleNode newLeaf = new MerkleNode(data);
+            leaves.Add(newLeaf);
+            BuildTree();
         }
 
-        private void SplitChild(BNode father, int index)
+        private void BuildTree()
         {
-            BNode child = father.Children[index];
-            BNode newChild = new BNode(order, maxKeys, minKeys);
-            newChild.IsLeaf = child.IsLeaf;
-            Invoice middleInvoice = child.Keys[minKeys];
-
-            for (int i = minKeys + 1; i < maxKeys; i++)
+            if (IsEmpty())
             {
-                newChild.Keys.Add(child.Keys[i]);
+                root = null;
+                return;
             }
 
-            if (!child.IsLeaf)
+            List<MerkleNode> currentLevel = new List<MerkleNode>(leaves);
+
+            while (currentLevel.Count > 1)
             {
-                for (int i = minKeys + 1; i < order; i++)
+                List<MerkleNode> nextLevel = new List<MerkleNode>();
+
+                for (int i = 0; i < currentLevel.Count; i += 2)
                 {
-                    newChild.Children.Add(child.Children[i]);
-                }
-                child.Keys.RemoveRange(minKeys + 1, child.Children.Count - (minKeys + 1));
-            }
-
-            child.Keys.RemoveRange(minKeys, child.Keys.Count - minKeys);
-
-            father.Children.Insert(index + 1, newChild);
-
-            father.InsertInvoice(middleInvoice);
-        }
-
-        public void InsertNotFilled(BNode node, Invoice invoice)
-        {
-            if (node.IsLeaf)
-            {
-                node.InsertInvoice(invoice);
-            }
-            else
-            {
-                int i = node.GetInsertIndex(invoice.Id);
-
-                if (node.Children[i].IsFull())
-                {
-                    SplitChild(node, i);
-
-                    if (invoice.Id > node.Keys[i].Id)
-                    {
-                        i++;
-                    }
+                    MerkleNode left = currentLevel[i];
+                    MerkleNode right = (i + 1 < currentLevel.Count) ? currentLevel[i + 1] : null;
+                    MerkleNode parent = new MerkleNode(left, right);
+                    nextLevel.Add(parent);
                 }
 
-                InsertNotFilled(node.Children[i], invoice);
-            }
-        }
-
-        public Invoice Get(int id)
-        {
-            return GetRecursive(root, id);
-        }
-
-        public Invoice GetRecursive(BNode node, int id)
-        {
-            int i = node.GetSearchIndex(id);
-
-            if (i < node.Keys.Count && id == node.Keys[i].Id)
-            {
-                return node.Keys[i];
+                currentLevel = nextLevel;
             }
 
-            if (node.IsLeaf)
-            {
-                return null;
-            }
-
-            return GetRecursive(node.Children[i], id);
-        }
-
-        public ListStore GetUserInvoices(int userId)
-        {
-            ListStore result = new ListStore(typeof(int), typeof(int), typeof(string));
-            GetUserInvoicesRecursive(root, result, userId);
-            return result;
-        }
-
-        public void GetUserInvoicesRecursive(BNode node, ListStore result, int userId)
-        {
-            if (node == null) return;
-
-            foreach (var invoice in node.Keys)
-            {
-                Service service = GlobalStructures.ServicesTree.Get(invoice.ServiceId);
-                if (service != null)
-                {
-                    Vehicle vehicle = GlobalStructures.VehiclesList.Get(service.VehicleId);
-                    if (vehicle != null && vehicle.UserId == userId)
-                        result.AppendValues(invoice.Id, invoice.ServiceId, invoice.Total.ToString("F2"));
-                }
-            }
-
-            if (!node.IsLeaf)
-            {
-                foreach (var child in node.Children)
-                {
-                    GetUserInvoicesRecursive(child, result, userId);
-                }
-            }
-        }
-
-        public void Delete(int id)
-        {
-            DeleteRecursive(root, id);
-
-            if (root.Keys.Count == 0 && !root.IsLeaf)
-            {
-                BNode oldRoot = root;
-                root = root.Children[0];
-            }
-        }
-
-        private void DeleteRecursive(BNode node, int id)
-        {
-            int index = node.GetSearchIndex(id);
-
-            if (index < node.Keys.Count && node.Keys[index].Id == id)
-            {
-                if (node.IsLeaf)
-                {
-                    node.Keys.RemoveAt(index);
-                }
-                else
-                {
-                    DeleteInternalNode(node, index);
-                }
-            }
-            else
-            {
-                if (node.IsLeaf)
-                {
-                    return;
-                }
-
-                bool lastChild = index == node.Keys.Count;
-
-                if (node.Children[index].IsUnderflow())
-                {
-                    FillChild(node, index);
-                }
-
-                if (lastChild && index > node.Children.Count - 1)
-                {
-                    DeleteRecursive(node.Children[index - 1], id);
-                }
-                else
-                {
-                    DeleteRecursive(node.Children[index], id);
-                }
-            }
-        }
-
-        private void DeleteInternalNode(BNode node, int index)
-        {
-            Invoice invoice = node.Keys[index];
-
-            if (node.Children[index].Keys.Count > minKeys)
-            {
-                Invoice predecessor = GetPredecessor(node, index);
-                node.Keys[index] = predecessor;
-                DeleteRecursive(node.Children[index], predecessor.Id);
-            }
-            else if (node.Children[index + 1].Keys.Count > minKeys)
-            {
-                Invoice successor = GetSuccessor(node, index);
-                node.Keys[index] = successor;
-                DeleteRecursive(node.Children[index + 1], successor.Id);
-            }
-            else
-            {
-                MergeNodes(node, index);
-                DeleteRecursive(node.Children[index], invoice.Id);
-            }
-        }
-
-        private Invoice GetPredecessor(BNode node, int index)
-        {
-            BNode current = node.Children[index];
-            while (!current.IsLeaf)
-            {
-                current = current.Children[current.Keys.Count];
-            }
-            return current.Keys[current.Keys.Count - 1];
-        }
-
-        private Invoice GetSuccessor(BNode node, int index)
-        {
-            BNode current = node.Children[index + 1];
-            while (!current.IsLeaf)
-            {
-                current = current.Children[0];
-            }
-            return current.Keys[0];
-        }
-
-        private void FillChild(BNode node, int index)
-        {
-            if (index > 0 && node.Children[index - 1].Keys.Count > minKeys)
-            {
-                BorrowFromPrevious(node, index);
-            }
-            else if (index < node.Keys.Count && node.Children[index + 1].Keys.Count > minKeys)
-            {
-                BorrowFromNext(node, index);
-            }
-            else
-            {
-                if (index < node.Keys.Count)
-                {
-                    MergeNodes(node, index);
-                }
-                else
-                {
-                    MergeNodes(node, index - 1);
-                }
-            }
-        }
-
-        private void MergeNodes(BNode node, int index)
-        {
-            BNode child = node.Children[index];
-            BNode sibling = node.Children[index + 1];
-
-            child.Keys.Add(node.Keys[index]);
-
-            for (int i = 0; i < sibling.Keys.Count; i++)
-            {
-                child.Keys.Add(sibling.Keys[i]);
-            }
-
-            if (!child.IsLeaf)
-            {
-                for (int i = 0; i < sibling.Children.Count; i++)
-                {
-                    child.Children.Add(sibling.Children[i]);
-                }
-            }
-
-            node.Keys.RemoveAt(index);
-            node.Children.RemoveAt(index + 1);
-        }
-
-        private void BorrowFromPrevious(BNode node, int index)
-        {
-            BNode child = node.Children[index];
-            BNode sibling = node.Children[index - 1];
-
-            child.Keys.Insert(0, node.Keys[index - 1]);
-
-            if (!child.IsLeaf)
-            {
-                child.Children.Insert(0, sibling.Children[sibling.Keys.Count]);
-                sibling.Children.RemoveAt(sibling.Keys.Count);
-            }
-
-            node.Keys[index - 1] = sibling.Keys[sibling.Keys.Count - 1];
-            sibling.Keys.RemoveAt(sibling.Keys.Count - 1);
-        }
-
-        private void BorrowFromNext(BNode node, int index)
-        {
-            BNode child = node.Children[index];
-            BNode sibling = node.Children[index + 1];
-
-            child.Keys.Add(node.Keys[index]);
-
-            if (!child.IsLeaf)
-            {
-                child.Children.Add(sibling.Children[0]);
-                sibling.Children.RemoveAt(0);
-            }
-
-            node.Keys[index] = sibling.Keys[0];
-            sibling.Keys.RemoveAt(0);
+            root = currentLevel[0];
         }
 
         public bool IsEmpty()
         {
-            return root.Keys.Count == 0;
+            return leaves.Count == 0;
+        }
+
+        public ListStore GetUserInvoices(int userId)
+        {
+            ListStore result = new ListStore(typeof(int), typeof(int), typeof(string), typeof(string), typeof(string));
+
+            foreach (var leaf in leaves)
+            {
+                Invoice invoice = leaf.Data;
+
+                Service service = GlobalStructures.ServicesTree.Get(invoice.ServiceId);
+
+                if (service != null)
+                {
+                    Vehicle vehicle = GlobalStructures.VehiclesList.Get(service.VehicleId);
+                    if (vehicle != null && vehicle.UserId == userId)
+                        result.AppendValues(invoice.Id, service.Id, invoice.Total.ToString("F2"), invoice.PaymentMethod, invoice.Date);
+                }
+            }
+
+            return result;
         }
 
         public string GenerateDot()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("digraph BTree {");
-            sb.AppendLine("    node [shape=record];");
-            sb.AppendLine("    rankdir=TB;");
-            sb.AppendLine("    subgraph cluster_0 {");
-            sb.AppendLine("        label = \"Árbol B\";");
-
-            int nodeCounter = 0;
-            GenerateDotRecursive(root, sb, ref nodeCounter);
-
-            sb.AppendLine("    }");
-            sb.AppendLine("}");
-            return sb.ToString();
+            StringBuilder dot = new StringBuilder();
+            dot.AppendLine("digraph MerkleTree {");
+            dot.AppendLine("    node [shape=record];");
+            dot.AppendLine("    rankdir=BT;");
+            dot.AppendLine("    subgraph cluster_0 {");
+            dot.AppendLine("        label = \"Facturas\";");
+            if (IsEmpty()) dot.AppendLine("        empty [label=\"Arbol vacío\"];");
+            else
+            {
+                Dictionary<string, int> nodeIds = new Dictionary<string, int>();
+                int idCounter = 0;
+                GenerateDotNodes(root, dot, nodeIds, ref idCounter);
+                GenerateDotConnections(root, dot, nodeIds);
+            }
+            dot.AppendLine("    }");
+            dot.AppendLine("}");
+            return dot.ToString();
         }
 
-        private void GenerateDotRecursive(BNode node, StringBuilder sb, ref int nodeCounter)
+        private void GenerateDotNodes(MerkleNode node, StringBuilder dot, Dictionary<string, int> nodeIds, ref int idCounter)
         {
-            if (node == null)
-                return;
+            if (node == null) return;
 
-            int currentNode = nodeCounter++;
+            if (!nodeIds.ContainsKey(node.Hash)) nodeIds[node.Hash] = idCounter++;
+            int nodeId = nodeIds[node.Hash];
 
-            StringBuilder nodeLabel = new StringBuilder();
-            nodeLabel.Append($"        n{currentNode} [label=\"");
+            dot.AppendLine($"        node{nodeId} {node.ToDotNode()};");
 
-            for (int i = 0; i < node.Keys.Count; i++)
+            GenerateDotNodes(node.Left, dot, nodeIds, ref idCounter);
+            GenerateDotNodes(node.Right, dot, nodeIds, ref idCounter);
+        }
+
+        private void GenerateDotConnections(MerkleNode node, StringBuilder dot, Dictionary<string, int> nodeIds)
+        {
+            if (node == null) return;
+
+            int nodeId = nodeIds[node.Hash];
+
+            if (node.Left != null)
             {
-                if (i > 0)
-                    nodeLabel.Append("|");
-                nodeLabel.Append($"<f{i}> |Id: {node.Keys[i].Id}, Orden: {node.Keys[i].ServiceId}, Total: {node.Keys[i].Total}|");
+                int leftId = nodeIds[node.Left.Hash];
+                dot.AppendLine($"        node{leftId} -> node{nodeId};");
             }
 
-            if (node.Keys.Count > 0)
-                nodeLabel.Append($"<f{node.Keys.Count}>");
-
-            nodeLabel.Append("\"];");
-            sb.AppendLine(nodeLabel.ToString());
-
-            if (!node.IsLeaf)
+            if (node.Right != null)
             {
-                for (int i = 0; i <= node.Keys.Count; i++)
+                int rightId = nodeIds[node.Right.Hash];
+                dot.AppendLine($"        node{rightId} -> node{nodeId};");
+            }
+
+            GenerateDotConnections(node.Left, dot, nodeIds);
+            GenerateDotConnections(node.Right, dot, nodeIds);
+        }
+    }
+}
+
+```
+
+### Nodo (MerkleNode)
+```csharp
+using System.Security.Cryptography;
+using System.Text;
+using Classes;
+
+namespace Structures
+{
+    public class MerkleNode
+    {
+        public Invoice Data { get; set; }
+        public MerkleNode Left { get; set; }
+        public MerkleNode Right { get; set; }
+        public string Hash { get; set; }
+
+        public MerkleNode(Invoice data)
+        {
+            Data = data;
+            Left = null;
+            Right = null;
+            Hash = Data.GetHash();
+        }
+
+        public MerkleNode(MerkleNode left, MerkleNode right)
+        {
+            Data = null;
+            Left = left;
+            Right = right;
+            Hash = CalculateHash(left.Hash, right?.Hash);
+        }
+
+        private string CalculateHash(string leftHash, string rightHash)
+        {
+            string combinedHash = leftHash + (rightHash ?? leftHash);
+            using (SHA256 hash = SHA256.Create())
+            {
+                byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(combinedHash));
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
                 {
-                    int childPosition = nodeCounter;
-                    GenerateDotRecursive(node.Children[i], sb, ref nodeCounter);
-                    sb.AppendLine($"        n{currentNode}:f{i} -> n{childPosition};");
+                    builder.Append(b.ToString("x2"));
                 }
+                return builder.ToString();
             }
+        }
+
+        public string ToDotNode()
+        {
+            string hashDisplay = Hash.Length > 16 ? Hash.Substring(0, 16) + "..." : Hash;
+
+            if (Data != null) return $"[label=\"ID: {Data.Id}\\nID_Servicio: {Data.ServiceId}\\nTotal: {Data.Total}\\nMétodo de pago: {Data.PaymentMethod}\\nFecha: {Data.Date}\\nHash: {hashDisplay}\"]";
+            else return $"[label=\"Hash: {hashDisplay}\"]";
         }
     }
 }
 ```
 
-### Nodo (BNode)
+## Grafo no dirigido
+
+El grafo no dirigido es una estructura que sirve para modelar relaciones bidireccionales entre elementos, donde las conexiones no tienen una dirección específica. Esta estructura a mi parecer quedo desaprovechada en este proyecto, dado que tiene aplicaciones más relevantes como redes de transporte, asi como algoritmos utiles como dijkstra para encontrar caminos más cortos y eficientes.
+
+### Estructura
 ```csharp
-using Classes;
+using System.Text;
 
 namespace Structures
 {
-    public class BNode
+    public class UndirectedGraph
     {
-        public List<Invoice> Keys { get; set; }
-        public List<BNode> Children { get; set; }
-        public bool IsLeaf { get; set; }
-        private int maxKeys;
-        private int minKeys;
+        private readonly Dictionary<string, List<string>> adjacencyList;
 
-        public BNode(int order, int maxKeys, int minKeys)
+        public UndirectedGraph()
         {
-            Keys = new List<Invoice>(maxKeys);
-            Children = new List<BNode>(order);
-            IsLeaf = true;
-            this.maxKeys = maxKeys;
-            this.minKeys = minKeys;
+            adjacencyList = new Dictionary<string, List<string>>();
         }
 
-        public void InsertInvoice(Invoice invoice)
+        public void AddEdge(string nodeVehicle, string nodeSparePart)
         {
-            Keys.Insert(GetInsertIndex(invoice.Id), invoice);
-        }
-
-        public int GetInsertIndex(int id)
-        {
-            int i = Keys.Count - 1;
-
-            while (i >= 0 && id < Keys[i].Id)
+            if (string.IsNullOrEmpty(nodeVehicle) || string.IsNullOrEmpty(nodeSparePart))
             {
-                i--;
+                throw new ArgumentException("Los nombres de los nodos no pueden ser nulos o vacíos.");
             }
 
-            return i + 1;
+            ConnectNode(nodeVehicle, nodeSparePart);
+            ConnectNode(nodeSparePart, nodeVehicle);
         }
 
-        public int GetSearchIndex(int id)
+        private void ConnectNode(string nodeA, string nodeB)
         {
-            int i = 0;
+            if(!adjacencyList.ContainsKey(nodeA))
+                adjacencyList[nodeA] = new List<string>();
+            
+            if(!adjacencyList[nodeA].Contains(nodeB))
+                adjacencyList[nodeA].Add(nodeB);
+        }
 
-            while (i < Keys.Count && id > Keys[i].Id)
+        public bool IsEmpty()
+        {
+            return adjacencyList.Count == 0;
+        }
+
+        public string GenerateDot()
+        {
+            StringBuilder graph = new StringBuilder();
+            graph.AppendLine("graph UndirectedGraph {");
+            graph.AppendLine("    node [shape=ellipse];");
+            graph.AppendLine("    rankdir=TB;");
+            graph.AppendLine("    subgraph cluster_0 {");
+            graph.AppendLine("        label = \"Grafo No Dirigido\";");
+            foreach (var node in adjacencyList)
             {
-                i++;
+                string currentId = node.Key;
+                graph.AppendLine($"        {currentId} [label=\"{currentId}\"];");
             }
 
-            return i;
+            foreach (var node in adjacencyList.Where(node => node.Key.StartsWith("V")))
+            {
+                string currentId = node.Key;
+                List<string> nodeConnections = node.Value;
+
+                foreach (var connection in nodeConnections)
+                {
+                    if (connection.StartsWith("R"))
+                    {
+                        graph.AppendLine($"        {currentId} -- {connection};");
+                    }
+                }
+            }
+
+            if(!IsEmpty())
+            {
+                graph.AppendLine($"        {RankSameNodes("V")}");
+                graph.AppendLine($"        {RankSameNodes("R")}");
+            }
+
+            graph.AppendLine("    }");
+            graph.AppendLine("}");
+            return graph.ToString();
         }
 
-        public bool IsFull()
+        private string RankSameNodes(string start)
         {
-            return Keys.Count == maxKeys;
+            var rank = "{ rank=same; ";
+            foreach (var id in adjacencyList.Keys.Where(id => id.StartsWith(start)))
+            {
+                rank += $"{id}; ";
+            }
+            rank += "};";
+            return rank;
         }
-
-        public bool IsUnderflow()
-        {
-            return Keys.Count < minKeys;
-        }
-
     }
 }
-
 ```

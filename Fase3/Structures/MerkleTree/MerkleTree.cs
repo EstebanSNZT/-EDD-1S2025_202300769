@@ -84,7 +84,7 @@ namespace Structures
             dot.AppendLine("    node [shape=record];");
             dot.AppendLine("    rankdir=BT;");
             dot.AppendLine("    subgraph cluster_0 {");
-            dot.AppendLine("        label = \"Facturas\";");
+            dot.AppendLine("        label = \"Árbol de Merkle\";");
             if (IsEmpty()) dot.AppendLine("        empty [label=\"Arbol vacío\"];");
             else
             {

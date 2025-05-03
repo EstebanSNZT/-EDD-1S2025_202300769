@@ -3,16 +3,86 @@ digraph Blockchain {
     rankdir=LR;
     subgraph cluster_0 {
         label = "Usuarios";
-        block0 [label = "{<data> INDEX: 0 \n TIMESTAMP: 2025-05-01::16:47:48.26 \n DATA: \{Id: 1, Names: Efraín Josué, LastNames: Cuxum Pérez, Email: efrain.josue@usac.com, Age: 19, Password: 2a4c907c8bcc582969efe847d52e9ff6364704f6b1fc1bdf5fb381e9ae8fee6d\} \n NONCE: 28383 \n PREVIOUS HASH: 0000 \n HASH: 000069d1e51a90d2...}"];
-        block1 [label = "{<data> INDEX: 1 \n TIMESTAMP: 2025-05-01::16:47:48.44 \n DATA: \{Id: 2, Names: Ximena Marisol, LastNames: Quixchán Rojas, Email: ximena.marisol@usac.com, Age: 21, Password: 883caeabaf519b4540e52bee0549fee9a8a8136d449609596c9f7609fb8836c2\} \n NONCE: 100242 \n PREVIOUS HASH: 000069d1e51a90d2... \n HASH: 0000d06c0069a08f...}"];
-        block2 [label = "{<data> INDEX: 2 \n TIMESTAMP: 2025-05-01::16:47:49.11 \n DATA: \{Id: 3, Names: Brayan Estuardo, LastNames: Tumax García, Email: brayan.estuardo@usac.com, Age: 22, Password: 911e9a1439fe027adf891bb39071ffd6282fbba3cbd806ce9526941af0fd6a9d\} \n NONCE: 118004 \n PREVIOUS HASH: 0000d06c0069a08f... \n HASH: 0000da698658e12b...}"];
-        block3 [label = "{<data> INDEX: 3 \n TIMESTAMP: 2025-05-01::16:47:49.71 \n DATA: \{Id: 4, Names: Karla Lisseth, LastNames: Chocoy Méndez, Email: karla.lisseth@usac.com, Age: 20, Password: 598f38d325268c5b8cb39e9fe8756b6164376997c88a058649664efbaeaaf99a\} \n NONCE: 135205 \n PREVIOUS HASH: 0000da698658e12b... \n HASH: 0000948134c66165...}"];
-        block4 [label = "{<data> INDEX: 4 \n TIMESTAMP: 2025-05-01::16:47:50.31 \n DATA: \{Id: 5, Names: Steven Facundo, LastNames: Mejia Xolop, Email: steven.mejia@usac.com, Age: 23, Password: 8dcedf76e8949e11196ca55b5960960bf4688e94205e70d6baf0f9fdf8f943be\} \n NONCE: 10959 \n PREVIOUS HASH: 0000948134c66165... \n HASH: 0000652cce528c10...}"];
-        block5 [label = "{<data> INDEX: 5 \n TIMESTAMP: 2025-05-01::16:47:50.39 \n DATA: \{Id: 6, Names: Selvin Orlando, LastNames: Ajpacajá Ruiz, Email: selvin.orlando@usac.com, Age: 18, Password: d08b5086cb2463aa1028eae0bdfe565fc5e859ed8e3824346f3d0485552bb619\} \n NONCE: 13784 \n PREVIOUS HASH: 0000652cce528c10... \n HASH: 00008273ccd6b24e...}"];
-        block6 [label = "{<data> INDEX: 6 \n TIMESTAMP: 2025-05-01::16:47:50.49 \n DATA: \{Id: 7, Names: Mayra Alejandra, LastNames: Cojulún Díaz, Email: mayra.alejandra@usac.com, Age: 21, Password: 03142883967fadc48ec3c28557cad6b659683914cc6431c6f5d28de905eab60d\} \n NONCE: 13747 \n PREVIOUS HASH: 00008273ccd6b24e... \n HASH: 0000d742c3dcad96...}"];
-        block7 [label = "{<data> INDEX: 7 \n TIMESTAMP: 2025-05-01::16:47:50.54 \n DATA: \{Id: 8, Names: Noé Eliseo, LastNames: Sactic Vásquez, Email: noe.eliseo@usac.com, Age: 19, Password: cc235f8fdc8387a43a8b221d221af9d944ce2f1457ba3461b5d42d96aeaf469c\} \n NONCE: 589 \n PREVIOUS HASH: 0000d742c3dcad96... \n HASH: 00005c9caaee7824...}"];
-        block8 [label = "{<data> INDEX: 8 \n TIMESTAMP: 2025-05-01::16:47:50.54 \n DATA: \{Id: 9, Names: Dulce María, LastNames: Xolop Castillo, Email: dulce.maria@usac.com, Age: 20, Password: 575f89df9e69540ec3a9d6f237abfcfc2780ee519b8f5d5448b73f9105cf4f38\} \n NONCE: 71204 \n PREVIOUS HASH: 00005c9caaee7824... \n HASH: 00009e24bafc07e9...}"];
-        block9 [label = "{<data> INDEX: 9 \n TIMESTAMP: 2025-05-01::16:47:50.82 \n DATA: \{Id: 10, Names: Jairo Vinicio, LastNames: Camey Ortiz, Email: jairo.vinicio@usac.com, Age: 22, Password: fceb460773da1813df5bf53bd34d41650cf007c379415abc1d83d705233df607\} \n NONCE: 352169 \n PREVIOUS HASH: 00009e24bafc07e9... \n HASH: 0000d1808c76aea0...}"];
+        block0 [label = "{<data> INDEX: 0 \n TIMESTAMP: 2025-05-02::17:42:03.50 \n DATA: \{
+  ID:  1, 
+  Nombres:  Efraín Josué, 
+  Apellidos:  Cuxum Pérez, 
+  Correo:  efrain.josue@usac.com, 
+  Edad:  19, 
+  Contraseña:  2a4c907c8bcc5829...
+\} \n NONCE: 2562 \n PREVIOUS HASH: 0000 \n HASH: 0000e141887cd3ec...}"];
+        block1 [label = "{<data> INDEX: 1 \n TIMESTAMP: 2025-05-02::17:42:03.55 \n DATA: \{
+  ID:  2, 
+  Nombres:  Ximena Marisol, 
+  Apellidos:  Quixchán Rojas, 
+  Correo:  ximena.marisol@usac.com, 
+  Edad:  21, 
+  Contraseña:  883caeabaf519b45...
+\} \n NONCE: 110689 \n PREVIOUS HASH: 0000e141887cd3ec... \n HASH: 0000fc9e91a3d715...}"];
+        block2 [label = "{<data> INDEX: 2 \n TIMESTAMP: 2025-05-02::17:42:04.27 \n DATA: \{
+  ID:  3, 
+  Nombres:  Brayan Estuardo, 
+  Apellidos:  Tumax García, 
+  Correo:  brayan.estuardo@usac.com, 
+  Edad:  22, 
+  Contraseña:  911e9a1439fe027a...
+\} \n NONCE: 58800 \n PREVIOUS HASH: 0000fc9e91a3d715... \n HASH: 000041f42ea23e57...}"];
+        block3 [label = "{<data> INDEX: 3 \n TIMESTAMP: 2025-05-02::17:42:04.62 \n DATA: \{
+  ID:  4, 
+  Nombres:  Karla Lisseth, 
+  Apellidos:  Chocoy Méndez, 
+  Correo:  karla.lisseth@usac.com, 
+  Edad:  20, 
+  Contraseña:  598f38d325268c5b...
+\} \n NONCE: 26501 \n PREVIOUS HASH: 000041f42ea23e57... \n HASH: 000007f70aedb0f6...}"];
+        block4 [label = "{<data> INDEX: 4 \n TIMESTAMP: 2025-05-02::17:42:04.76 \n DATA: \{
+  ID:  5, 
+  Nombres:  Steven Facundo, 
+  Apellidos:  Mejia Xolop, 
+  Correo:  steven.mejia@usac.com, 
+  Edad:  23, 
+  Contraseña:  8dcedf76e8949e11...
+\} \n NONCE: 40665 \n PREVIOUS HASH: 000007f70aedb0f6... \n HASH: 00008728031f4175...}"];
+        block5 [label = "{<data> INDEX: 5 \n TIMESTAMP: 2025-05-02::17:42:04.95 \n DATA: \{
+  ID:  6, 
+  Nombres:  Selvin Orlando, 
+  Apellidos:  Ajpacajá Ruiz, 
+  Correo:  selvin.orlando@usac.com, 
+  Edad:  18, 
+  Contraseña:  d08b5086cb2463aa...
+\} \n NONCE: 72934 \n PREVIOUS HASH: 00008728031f4175... \n HASH: 000019d2297f337e...}"];
+        block6 [label = "{<data> INDEX: 6 \n TIMESTAMP: 2025-05-02::17:42:05.31 \n DATA: \{
+  ID:  7, 
+  Nombres:  Mayra Alejandra, 
+  Apellidos:  Cojulún Díaz, 
+  Correo:  mayra.alejandra@usac.com, 
+  Edad:  21, 
+  Contraseña:  03142883967fadc4...
+\} \n NONCE: 216053 \n PREVIOUS HASH: 000019d2297f337e... \n HASH: 0000af4d94ad831e...}"];
+        block7 [label = "{<data> INDEX: 7 \n TIMESTAMP: 2025-05-02::17:42:06.37 \n DATA: \{
+  ID:  8, 
+  Nombres:  Noé Eliseo, 
+  Apellidos:  Sactic Vásquez, 
+  Correo:  noe.eliseo@usac.com, 
+  Edad:  19, 
+  Contraseña:  cc235f8fdc8387a4...
+\} \n NONCE: 178414 \n PREVIOUS HASH: 0000af4d94ad831e... \n HASH: 0000edb442e33a45...}"];
+        block8 [label = "{<data> INDEX: 8 \n TIMESTAMP: 2025-05-02::17:42:07.22 \n DATA: \{
+  ID:  9, 
+  Nombres:  Dulce María, 
+  Apellidos:  Xolop Castillo, 
+  Correo:  dulce.maria@usac.com, 
+  Edad:  20, 
+  Contraseña:  575f89df9e69540e...
+\} \n NONCE: 93548 \n PREVIOUS HASH: 0000edb442e33a45... \n HASH: 0000fef16ba86a66...}"];
+        block9 [label = "{<data> INDEX: 9 \n TIMESTAMP: 2025-05-02::17:42:07.69 \n DATA: \{
+  ID:  10, 
+  Nombres:  Jairo Vinicio, 
+  Apellidos:  Camey Ortiz, 
+  Correo:  jairo.vinicio@usac.com, 
+  Edad:  22, 
+  Contraseña:  fceb460773da1813...
+\} \n NONCE: 99092 \n PREVIOUS HASH: 0000fef16ba86a66... \n HASH: 00001d5fb6f25fbb...}"];
         block0 -> block1;
         block1 -> block2;
         block2 -> block3;
